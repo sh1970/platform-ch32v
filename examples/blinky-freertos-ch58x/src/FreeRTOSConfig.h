@@ -71,7 +71,11 @@
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
 
+#if defined(CH58X)
 #include "CH58x_common.h"
+#elif defined(CH59X)
+#include "CH59x_common.h"
+#endif
 #include <stdio.h>
 
 /*-----------------------------------------------------------
@@ -100,7 +104,11 @@
 #define configTICK_RATE_HZ				( ( TickType_t ) 500 )
 #define configMAX_PRIORITIES			( 15 )
 #define configMINIMAL_STACK_SIZE		( ( unsigned short ) 128 ) /* Can be as low as 60 but some of the demo tasks that use this constant require it to be higher. */
+#if defined(CH58X)
 #define configTOTAL_HEAP_SIZE			( ( size_t ) ( 16 * 1024 ) )
+#elif defined(CH59X)
+#define configTOTAL_HEAP_SIZE			( ( size_t ) ( 8 * 1024 ) )
+#endif
 #define configMAX_TASK_NAME_LEN			( 16 )
 #define configUSE_TRACE_FACILITY		0
 #define configUSE_16_BIT_TICKS			0
@@ -125,7 +133,10 @@
 #define configTIMER_QUEUE_LENGTH		4
 #define configTIMER_TASK_STACK_DEPTH	( configMINIMAL_STACK_SIZE )
 
-
+/* ISR Config */
+#if defined(CH59X)
+#define configISR_STACK_SIZE_WORDS (500)
+#endif
 
 /* Set the following definitions to 1 to include the API function, or zero
 to exclude the API function. */

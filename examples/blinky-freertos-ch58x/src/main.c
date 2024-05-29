@@ -12,7 +12,11 @@
 
 /******************************************************************************/
 /* 头文件包含 */
+#if defined(CH58X)
 #include "CH58x_common.h"
+#elif defined(CH59X)
+#include "CH59x_common.h"
+#endif
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"
