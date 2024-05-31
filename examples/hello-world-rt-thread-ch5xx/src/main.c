@@ -10,7 +10,12 @@
  * SPDX-License-Identifier: Apache-2.0
  *******************************************************************************/
 
+
+#if defined(CH58X)
 #include "CH58x_common.h"
+#elif defined(CH59X)
+#include "CH59x_common.h"
+#endif
 #include <rtthread.h>
 
 ALIGN(RT_ALIGN_SIZE)
