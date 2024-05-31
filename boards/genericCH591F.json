@@ -22,7 +22,8 @@
   },
   "frameworks": [
     "noneos-sdk",
-    "freertos"
+    "freertos",
+    "rt-thread"
   ],
   "name": "Generic CH591F",
   "upload": {
