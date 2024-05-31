@@ -21,7 +21,8 @@
     "svd_path": "CH59Xxx.svd"
   },
   "frameworks": [
-    "noneos-sdk"
+    "noneos-sdk",
+    "freertos"
   ],
   "name": "Generic CH592X",
   "upload": {

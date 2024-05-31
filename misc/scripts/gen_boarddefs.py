@@ -290,6 +290,8 @@ def create_board_json(info: ChipInfo, board_name:str, output_path: str, patch_in
     if chip_l.startswith("ch58"):
         base_json["frameworks"].append("freertos")
         base_json["frameworks"].append("rt-thread")
+    if chip_l.startswith("ch59"):
+        base_json["frameworks"].append("freertos")
     if chip_l.startswith("ch32v003"):
         base_json["frameworks"].append("arduino")
         base_json["build"]["core"] = "ch32v003"
