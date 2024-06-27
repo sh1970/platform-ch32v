@@ -130,7 +130,7 @@ LITE_OS_SEC_TEXT_INIT int main(void)
 {
     unsigned int ret;
 
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
     SystemCoreClockUpdate();
     Delay_Init();
     USART_Printf_Init(115200);
