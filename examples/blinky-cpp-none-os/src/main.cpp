@@ -50,7 +50,7 @@ LEDBlinker blinker(BLINKY_GPIO_PORT, BLINKY_GPIO_PIN, BLINKY_CLOCK);
 
 int main(void)
 {
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
     SystemCoreClockUpdate();
     Delay_Init();
     
