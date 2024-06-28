@@ -272,7 +272,8 @@ def create_board_json(info: ChipInfo, board_name:str, output_path: str, patch_in
             "protocols": [
                 "wch-link",
                 "minichlink",
-                "isp"
+                "isp",
+                "wlink"
             ],
             "protocol": "wch-link"
         },

@@ -171,6 +171,13 @@ elif upload_protocol == "minichlink":
     )
     upload_target = target_bin
     upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
+elif upload_protocol == "wlink":
+    env.Replace(
+        UPLOADER="wlink",
+        UPLOADERFLAGS="",
+        UPLOADCMD="$UPLOADER $UPLOADERFLAGS flash $SOURCE",
+    )
+    upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
 # custom upload tool
 elif upload_protocol == "custom":
     upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
@@ -183,6 +190,15 @@ env.AddPlatformTarget("upload", upload_target, upload_actions, "Upload")
 #
 # Target: Disable / Enable / Check Code Read Protection, Erase
 #
+def generate_wlink_action(args: List[str], action_name:str):
+    wchisp_path = os.path.join(
+        platform.get_package_dir("tool-wlink") or "",
+        "wlink"
+    )
+    cmd = ["\"%s\"" % wchisp_path]
+    cmd.extend(args)
+    return env.VerboseAction(" ".join(cmd), action_name)
+
 def generate_wchisp_action(args: List[str], action_name:str):
     wchisp_path = os.path.join(
         platform.get_package_dir("tool-wchisp") or "",
@@ -293,6 +309,20 @@ elif upload_protocol == "isp":
             "reset"
         ], "Restting Device"),
         "Reset (ISP)"
+    )
+# Enable WLink options if tool installed or protocol selected.
+if upload_protocol == "wlink" or platform.get_package_dir("tool-wlink") != "":
+    env.AddPlatformTarget(
+        "sdi_printf", None, generate_wlink_action([
+            "sdi-print enable"
+        ], "Enabling SDI Printf"),
+        "Enable SDI Printf"
+    )
+    env.AddPlatformTarget(
+        "disable_sdi_printf", None, generate_wlink_action([
+            "sdi-print disable"
+        ], "Disabling SDI Printf"),
+        "Disable SDI Printf"
     )
 
 #

@@ -47,7 +47,8 @@
     "protocols": [
       "wch-link",
       "minichlink",
-      "isp"
+      "isp",
+      "wlink"
     ]
   },
   "url": "https://github.com/dragonlock2/kicadboards/tree/main/breakouts/usb_pdmon",

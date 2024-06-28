@@ -145,6 +145,12 @@
       "version": "https://github.com/Community-PIO-CH32V/tool-minichlink.git",
       "optional": true
     },
+    "tool-wlink": {
+      "type": "uploader",
+      "owner": "community-ch32v",
+      "version": "https://github.com/Community-PIO-CH32V/tool-wlink.git#windows",
+      "optional": false
+    },
     "tool-cmake": {
       "optional": true,
       "owner": "platformio",

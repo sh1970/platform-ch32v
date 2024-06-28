@@ -35,7 +35,8 @@
     "protocols": [
       "wch-link",
       "minichlink",
-      "isp"
+      "isp",
+      "wlink"
     ]
   },
   "url": "http://www.wch-ic.com/products/CH32V203.html",

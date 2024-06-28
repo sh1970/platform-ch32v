@@ -83,6 +83,19 @@ class Ch32vPlatform(PlatformBase):
                     self.packages["tool-openocd-riscv-wch"]["version"] = "https://github.com/Community-PIO-CH32V/tool-openocd-riscv-wch.git#darwin_arm"
                 else:
                     self.packages["tool-openocd-riscv-wch"]["version"] = "https://github.com/Community-PIO-CH32V/tool-openocd-riscv-wch.git#darwin_x64"
+        #elif variables.get("upload_protocol", default_protocol) == "wlink":
+        # Always update the link to the tool-wlink tool, because for all uploads we want to have the "Enable SDI Print" available
+        self.packages["tool-wlink"]["optional"] = False
+        sys_type = util.get_systype()
+        if IS_WINDOWS:
+            self.packages["tool-wlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-wlink.git#windows"
+        elif IS_LINUX:
+            self.packages["tool-wlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-wlink.git#linux"
+        else:
+            if sys_type == "darwin_arm64":
+                self.packages["tool-wlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-wlink.git#mac_arm64"
+            else:
+                self.packages["tool-wlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-wlink.git#mac_x64"
         frameworks = variables.get("pioframework", [])
         build_core = variables.get("board_build.core", board_config.get("build.core", "arduino"))
         if "arduino" in frameworks:

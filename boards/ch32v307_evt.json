@@ -44,7 +44,8 @@
     "protocols": [
       "wch-link",
       "minichlink",
-      "isp"
+      "isp",
+      "wlink"
     ]
   },
   "url": "https://www.aliexpress.com/item/1005004511264952.html",
