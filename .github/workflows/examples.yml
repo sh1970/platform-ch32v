@@ -26,6 +26,7 @@ jobs:
           - "examples/blinky-cpp-none-os"
           - "examples/baremetal-ch32v003"
           - "examples/sdi-printf-ch32v003"
+          - "examples/tinyusb-arduino"
           - "examples/usb-cdc-wch32v307-none-os"
           - "examples/ble-hid-ch32v208"
           - "examples/ble-usb-cdc-ch58x"
