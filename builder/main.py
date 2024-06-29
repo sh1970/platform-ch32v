@@ -165,9 +165,9 @@ elif upload_protocol == "minichlink":
     flash_start = board_config.get("upload.offset_address", "0x08000000")
     env.Replace(
         UPLOADER="minichlink",
-        UPLOADERFLAGS="-w", # write binary
+        UPLOADERFLAGS="", # write binary
         UPLOADERPOSTFLAGS="%s -b" % str(flash_start), # address, (re)boot from halt
-        UPLOADCMD="$UPLOADER $UPLOADERFLAGS $SOURCE $UPLOADERPOSTFLAGS",
+        UPLOADCMD="$UPLOADER $UPLOADERFLAGS -w $SOURCE $UPLOADERPOSTFLAGS",
     )
     upload_target = target_bin
     upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
@@ -190,6 +190,16 @@ env.AddPlatformTarget("upload", upload_target, upload_actions, "Upload")
 #
 # Target: Disable / Enable / Check Code Read Protection, Erase
 #
+def generate_minichlink_action(args: List[str], action_name:str):
+    wchisp_path = os.path.join(
+        platform.get_package_dir("tool-minichlink") or "",
+        "minichlink"
+    )
+    cmd = ["\"%s\"" % wchisp_path]
+    cmd.append("$UPLOADERFLAGS")
+    cmd.extend(args)
+    return env.VerboseAction(" ".join(cmd), action_name)
+
 def generate_wlink_action(args: List[str], action_name:str):
     wchisp_path = os.path.join(
         platform.get_package_dir("tool-wlink") or "",
@@ -247,7 +257,7 @@ def generate_openocd_action(args: List[str], action_name:str):
     return env.VerboseAction(" ".join(cmd), action_name)
 
 access_via_openocd = upload_protocol in debug_tools
-if access_via_openocd:
+if access_via_openocd and upload_protocol != "minichlink":
     env.AddPlatformTarget(
         "disable_flash_protection", None, generate_openocd_action([
             "-c", "\"flash probe 0\"",
@@ -310,6 +320,14 @@ elif upload_protocol == "isp":
         ], "Restting Device"),
         "Reset (ISP)"
     )
+if upload_protocol == "minichlink":
+    env.AddPlatformTarget(
+        "sdi_printf_monitor", None, generate_minichlink_action([
+            "-T"
+        ], "Starting SDI Printf Monitor"),
+        "Minichlink Monitor SDI Printf"
+    )
+
 # Enable WLink options if tool installed or protocol selected.
 if upload_protocol == "wlink" or platform.get_package_dir("tool-wlink") != "":
     env.AddPlatformTarget(
