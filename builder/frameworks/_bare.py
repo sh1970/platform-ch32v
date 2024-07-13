@@ -11,6 +11,10 @@ data_limit = 0 if mcu.startswith("ch32v0") else 8
 
 machine_arch = str(board.get("build.march"))
 
+default_c_standard = "gnu99"
+if "ch32v003fun" in env["FRAMEWORKS"]:
+    default_c_standard = "gnu11"
+
 env.Append(
     ASFLAGS=[
         "-march=%s" % machine_arch,
@@ -21,7 +25,7 @@ env.Append(
     ],
 
     CFLAGS=[
-        "-std=gnu99"
+        "-std=%s" % default_c_standard
     ],
 
     CXXFLAGS=[
