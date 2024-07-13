@@ -1,6 +1,6 @@
 {
   "build": {
-    "extra_flags": "-DCH32X033F8 -DCH32X03X -DCH32X033",
+    "extra_flags": "-DCH32X033F8 -DCH32X03X -DCH32X03x -DCH32X033",
     "f_cpu": "48000000L",
     "hwids": [
       [
@@ -25,7 +25,8 @@
     "freertos",
     "harmony-liteos",
     "rt-thread",
-    "tencent-os"
+    "tencent-os",
+    "ch32v003fun"
   ],
   "name": "Generic CH32X033F8P6",
   "upload": {

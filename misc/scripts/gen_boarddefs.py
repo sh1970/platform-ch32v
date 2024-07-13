@@ -307,6 +307,8 @@ def create_board_json(info: ChipInfo, board_name:str, output_path: str, patch_in
         # experiment
         base_json["frameworks"].append("zephyr")
         base_json["build"]["zephyr"] = {"variant": "usb_pdmon"}
+    if chip_l.startswith("ch32v") or chip_l.startswith("ch32x"):
+        base_json["frameworks"].append("ch32v003fun")
     add_openwch_arduino_info(base_json, patch_info, info, board_name)
 
     # add some classification macros
@@ -321,6 +323,7 @@ def create_board_json(info: ChipInfo, board_name:str, output_path: str, patch_in
     else:
         extra_flags += [
             f"-D{info.name[0:len('ch32vxx')]}X",
+            f"-D{info.name[0:len('ch32vxx')]}x",
             f"-D{info.name[0:len('ch32vxxx')]}",
         ]
     classification_macro = info.get_classification_macro()

@@ -60,6 +60,13 @@
       "homepage": "http://arduino.cc/en/Reference/HomePage",
       "title": "Arduino"
     },
+    "ch32v003fun": {
+      "package": "framework-ch32v003fun",
+      "script": "builder/frameworks/ch32v003fun.py",
+      "description": "Most leightweight framework for CH32V003, CH32V10x, CH32V30x, CH32X035",
+      "homepage": "https://github.com/cnlohr/ch32v003fun",
+      "title": "ch32v003fun"
+    },
     "zephyr": {
       "package": "framework-zephyr",
       "script": "builder/frameworks/zephyr.py",
@@ -116,6 +123,12 @@
       "optional": true,
       "owner": "platformio",
       "version": "https://github.com/Community-PIO-CH32V/arduino_core_ch32.git"
+    },
+    "framework-ch32v003fun": {
+      "type": "framework",
+      "optional": true,
+      "owner": "platformio",
+      "version": "https://github.com/Community-PIO-CH32V/ch32v003fun.git"
     },
     "framework-zephyr": {
       "type": "framework",

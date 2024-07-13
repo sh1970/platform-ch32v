@@ -1,6 +1,6 @@
 {
   "build": {
-    "extra_flags": "-DCH32V208WB -DCH32V20X -DCH32V208 -DCH32V20x_D8W",
+    "extra_flags": "-DCH32V208WB -DCH32V20X -DCH32V20x -DCH32V208 -DCH32V20x_D8W",
     "f_cpu": "144000000L",
     "hwids": [
       [
@@ -25,7 +25,8 @@
     "freertos",
     "harmony-liteos",
     "rt-thread",
-    "tencent-os"
+    "tencent-os",
+    "ch32v003fun"
   ],
   "name": "Generic CH32V208WBU6",
   "upload": {
