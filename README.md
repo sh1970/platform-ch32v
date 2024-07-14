@@ -78,11 +78,12 @@ If you use Mac, the usage of a Linux virtual machine may be required to run thes
     - [ ] GDB-UART stub for debug-probe-less debugging?
 - uploaders (no debugging)
   - [x] USB ISP bootloader (supported via [wchisp](https://github.com/ch32-rs/wchisp))
-# Installation
+# Installation (see [docs](https://pio-ch32v.readthedocs.io/en/latest/installation.html))
 
 1. [Install PlatformIO](https://platformio.org)
-2. Create PlatformIO project and configure a platform option in [platformio.ini](https://docs.platformio.org/page/projectconf.html) file:
-3. For Linux, add PlatformIO per [documentation](https://docs.platformio.org/en/latest/core/installation/udev-rules.html#platformio-udev-rules). Then, add WCH udev rules by appending the following content to `etc/udev/rules.d/99-platformio-udev.rules`.
+2. Install platform-ch32v via [PIO Core CLI](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-core-cli) --> `https://github.com/Community-PIO-CH32V/platform-ch32v.git`
+3. Create PlatformIO project and configure a platform option in [platformio.ini](https://docs.platformio.org/page/projectconf.html) file:
+4. For Linux, add PlatformIO per [documentation](https://docs.platformio.org/en/latest/core/installation/udev-rules.html#platformio-udev-rules). Then, add WCH udev rules by appending the following content to `etc/udev/rules.d/99-platformio-udev.rules`.
 
 ```
 SUBSYSTEM=="usb", ATTR{idVendor}="1a86", ATTR{idProduct}=="8010", GROUP="plugdev"
@@ -91,6 +92,16 @@ SUBSYSTEM=="usb", ATTR{idVendor}="1a86", ATTR{idProduct}=="8012", GROUP="plugdev
 ```
 
 **Without these udev rules or the missing group membership of the user in the plugdev group, accessing the WCH-Link(E) via OpenOCD or wchisp will not work!!**
+
+## Updating
+
+In case you are not seeing the latest features (e.g., available frameworks), please make sure that your platform version is up to date by either:
+1. [PIO Core CLI](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-core-cli) -> `pio pkg update -g -p "ch32v"`
+2. or, simply delete these folders and build your project again
+ `C:\Users\<user>\.platformio\platforms\ch32v*`
+ `C:\Users\<user>\.platformio\packages\framework-*ch*`
+ `C:\Users\<user>\.platformio\.cache`
+
 
 ## Development version
 
