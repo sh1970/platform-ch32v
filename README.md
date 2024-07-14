@@ -93,7 +93,7 @@ SUBSYSTEM=="usb", ATTR{idVendor}="1a86", ATTR{idProduct}=="8012", GROUP="plugdev
 
 **Without these udev rules or the missing group membership of the user in the plugdev group, accessing the WCH-Link(E) via OpenOCD or wchisp will not work!!**
 
-## Updating
+# Updating
 
 In case you are not seeing the latest features (e.g., available frameworks), please make sure that your platform version is up to date by either:
 1. [PIO Core CLI](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-core-cli) -> `pio pkg update -g -p "ch32v"`
