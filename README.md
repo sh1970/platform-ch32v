@@ -66,6 +66,7 @@ If you use Mac, the usage of a Linux virtual machine may be required to run thes
       - [x] for CH32V003 ([thanks to arduino-wch32v003](https://github.com/AlexanderMandera/arduino-wch32v003))
       - [x] for CH32V003, CH32V10x, CH32V20x, CH32V30x, CH32X035 ([thanks to openwch/arduino_core_ch32](https://github.com/openwch/arduino_core_ch32/))
       - [ ] for all else
+    - [x] ch32v003fun by CNLohr
     - [x] FreeRTOS
     - [x] (Huawei) Harmony LiteOS
     - [x] RT-Thread
