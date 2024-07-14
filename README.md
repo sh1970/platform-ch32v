@@ -81,7 +81,7 @@ If you use Mac, the usage of a Linux virtual machine may be required to run thes
 # Installation (see [docs](https://pio-ch32v.readthedocs.io/en/latest/installation.html))
 
 1. [Install PlatformIO](https://platformio.org)
-2. Install platform-ch32v via [PIO Core CLI](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-core-cli) --> `https://github.com/Community-PIO-CH32V/platform-ch32v.git`
+2. Install platform-ch32v via [PIO Core CLI](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-core-cli) --> `pio pkg install -g -p https://github.com/Community-PIO-CH32V/platform-ch32v.git`
 3. Create PlatformIO project and configure a platform option in [platformio.ini](https://docs.platformio.org/page/projectconf.html) file:
 4. For Linux, add PlatformIO per [documentation](https://docs.platformio.org/en/latest/core/installation/udev-rules.html#platformio-udev-rules). Then, add WCH udev rules by appending the following content to `etc/udev/rules.d/99-platformio-udev.rules`.
 
