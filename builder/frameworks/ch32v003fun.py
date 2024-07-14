@@ -11,6 +11,10 @@ chip_name = str(board.get("build.mcu", "")).lower()
 # import default build settings
 env.SConscript("_bare.py")
 
+# .. but change some settings
+if "-std=gnu99" in env["CFLAGS"]:
+    env["CFLAGS"].remove("-std=gnu99")
+
 # get framework directory
 FRAMEWORK_DIR = platform.get_package_dir("framework-ch32v003fun")
 
@@ -25,6 +29,9 @@ env.Append(
     CPPDEFINES=[
         # not yet used for anything, just identification
         "__PIO_BUILD_CH32V003FUN__"
+    ],
+    CFLAGS=[
+        "-std=gnu11"
     ],
     CCFLAGS=[
         "-flto",
