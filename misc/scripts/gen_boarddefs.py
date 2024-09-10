@@ -209,7 +209,8 @@ known_openwchcore_variants: List[OpenWCHVariant] = [
     OpenWCHVariant("ch32v203g8", "CH32V20x/CH32V203G8", "variant_CH32V203G8.h"),
     OpenWCHVariant("ch32v203rb", "CH32V20x/CH32V203RB", "variant_CH32V203RB.h"),
     OpenWCHVariant("ch32v307vct6", "CH32V30x/CH32V307VCT6", "variant_CH32V307VCT6.h", "-DCH32V30x_C"),
-    OpenWCHVariant("ch32x035g8u", "CH32X035/CH32X035G8U", "variant_CH32X035G8U.h")
+    OpenWCHVariant("ch32x035g8u", "CH32X035/CH32X035G8U", "variant_CH32X035G8U.h"),
+    OpenWCHVariant("ch32l103c8", "CH32L10x/CH32L103C8T6 EVT", "variant_CH32L103C8T6.h")
 ]
 
 def add_openwch_arduino_info(base_json: dict[str, Any], patch_info: dict[str, Any], info:ChipInfo, board_name: str):
