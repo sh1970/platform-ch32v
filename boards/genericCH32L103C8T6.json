@@ -2,7 +2,7 @@
   "build": {
     "arduino": {
       "openwch": {
-        "variant": "CH32L10x/CH32L103C8T6 EVT",
+        "variant": "CH32L10x/CH32L103C8T6",
         "variant_h": "variant_CH32L103C8T6.h"
       }
     },
