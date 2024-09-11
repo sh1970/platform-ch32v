@@ -122,7 +122,7 @@
       "type": "framework",
       "optional": true,
       "owner": "platformio",
-      "version": "https://github.com/21km43/arduino_core_ch32.git"
+      "version": "https://github.com/Community-PIO-CH32V/arduino_core_ch32.git"
     },
     "framework-ch32v003fun": {
       "type": "framework",
