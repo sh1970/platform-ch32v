@@ -196,6 +196,8 @@ known_boards: List[KnownBoard] = [
                "https://www.aliexpress.com/item/1005005793197807.html", "W.CH"),
     KnownBoard("usb_pdmon_ch32x035g8u6", "USB PDMon", get_chip("CH32X035G8U6"), 
                "https://github.com/dragonlock2/kicadboards/tree/main/breakouts/usb_pdmon", "Matthew Tran"),
+    KnownBoard("ch32l103c8t6_evt_r0", "CH32L103C8T6-EVT-R0", get_chip("CH32L103C8T6"), 
+               "https://ja.aliexpress.com/item/1005006671545123.html", "W.CH"),
 ]
 
 # Describe known OpenWCH Arduino variants so that we can auto-add them
@@ -309,6 +311,8 @@ def create_board_json(info: ChipInfo, board_name:str, output_path: str, patch_in
         base_json["frameworks"].append("arduino")
         base_json["build"]["core"] = "ch32v"
         base_json["build"]["variant"] = "ch32v307_evt"
+    if chip_l.startswith("ch32l103"):
+        base_json["build"]["variant"] = "ch32l103_evt"
     if board_name == "USB PDMon":
         # experiment
         base_json["frameworks"].append("zephyr")

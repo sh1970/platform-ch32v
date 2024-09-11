@@ -59,12 +59,13 @@ If you use Mac, the usage of a Linux virtual machine may be required to run thes
     - [x] CH32V003F4P6-EVT-R0 (official by W.CH)
     - [x] CH32V203C8T6-EVT-R0 (official by W.CH)
     - [x] CH32V307 EVT (by SCDZ, close to official W.CH board)
-    - [x] CH32X035C8T6-EVT-R0, CH32X035G8U6-EVT-R0, CH32X035F8U6-EVT-R0  (official by W.CH)
+    - [x] CH32X035C8T6-EVT-R0, CH32X035G8U6-EVT-R0, CH32X035F8U6-EVT-R0 (official by W.CH)
+    - [x] CH32L103C8T6-EVT-R0 (official by W.CH)
 - frameworks
     - [x] None OS ("Simple Peripheral Library" / native SDK)
     - [ ] Arduino
       - [x] for CH32V003 ([thanks to arduino-wch32v003](https://github.com/AlexanderMandera/arduino-wch32v003))
-      - [x] for CH32V003, CH32V10x, CH32V20x, CH32V30x, CH32X035 ([thanks to openwch/arduino_core_ch32](https://github.com/openwch/arduino_core_ch32/))
+      - [x] for CH32V003, CH32V10x, CH32V20x, CH32V30x, CH32X035, CH32L103 ([thanks to openwch/arduino_core_ch32](https://github.com/openwch/arduino_core_ch32/))
       - [ ] for all else
     - [x] ch32v003fun by CNLohr
     - [x] FreeRTOS
