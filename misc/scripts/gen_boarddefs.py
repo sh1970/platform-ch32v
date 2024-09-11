@@ -39,7 +39,8 @@ class ChipInfo:
                 name_upper.startswith("CH57"),
                 name_upper.startswith("CH58"),
                 name_upper.startswith("CH59"),
-                name_upper.startswith("CH32X03")
+                name_upper.startswith("CH32X03"),
+                name_upper.startswith("CH32L10")
                 ]):
             return None
         print("ERROR: UNKNOWN CHIP / NO CLASSIFICATION KNOWN FOR " + self.name)
@@ -48,7 +49,7 @@ class ChipInfo:
     def get_riscv_arch_and_abi(self) -> Tuple[str, str]:
         # ch32v30x is capable of rv32imafcxw
         # but SDK uses rv32imacxw (no floating point)
-        # ch32v208 is rv32imacxw (QingKe V4C)
+        # ch32v208 and ch32l103 is rv32imacxw (QingKe V4C)
         # other ch32v20x is rv32imacxw (QingKe V4B)
         # ch32v10x only rv32imac (RISC-V3A)
         # ch32v00x only rv32ecxw (RISC-V2A)
@@ -65,6 +66,8 @@ class ChipInfo:
         elif name_lower.startswith("ch5"):
             return ("rv32imac", "ilp32")
         elif name_lower.startswith("ch32x03"):
+            return ("rv32imacxw", "ilp32")
+        elif name_lower.startswith("ch32l1"):
             return ("rv32imacxw", "ilp32")
         else:
             print("ERROR: UNKNOWN CHIP ABI/ARCH FOR " + self.name)
@@ -152,6 +155,8 @@ chip_db: List[ChipInfo] = [
     ChipInfo("CH32X035F8U6", 62, 20, 48, "QFN20"),
     ChipInfo("CH32X035F7P6", 62, 20, 48, "TSSOP20"),
     ChipInfo("CH32X033F8P6", 62, 20, 48, "TSSOP20"),
+    # CH32L10x
+    ChipInfo("CH32L103C8T6", 64, 20, 64, "LQFP48"),
 ]
 
 def get_chip(name: str) -> Optional[ChipInfo]:
