@@ -156,7 +156,7 @@ chip_db: List[ChipInfo] = [
     ChipInfo("CH32X035F7P6", 62, 20, 48, "TSSOP20"),
     ChipInfo("CH32X033F8P6", 62, 20, 48, "TSSOP20"),
     # CH32L10x
-    ChipInfo("CH32L103C8T6", 64, 20, 64, "LQFP48"),
+    ChipInfo("CH32L103C8T6", 64, 20, 96, "LQFP48"),
 ]
 
 def get_chip(name: str) -> Optional[ChipInfo]:

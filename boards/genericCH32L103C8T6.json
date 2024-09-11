@@ -8,7 +8,7 @@
     },
     "core": "openwch",
     "extra_flags": "-DCH32L103C8 -DCH32L10X -DCH32L10x -DCH32L103",
-    "f_cpu": "144000000L",
+    "f_cpu": "96000000L",
     "hwids": [
       [
         "0x1A86",
