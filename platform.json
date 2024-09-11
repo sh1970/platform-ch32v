@@ -80,31 +80,31 @@
       "type": "framework",
       "optional": true,
       "owner": "platformio",
-      "version": "https://github.com/Community-PIO-CH32V/framework-wch-noneos-sdk.git"
+      "version": "https://github.com/21km43/framework-wch-noneos-sdk.git"
     },
     "framework-wch-freertos": {
       "type": "framework",
       "optional": true,
       "owner": "platformio",
-      "version": "https://github.com/Community-PIO-CH32V/framework-wch-freertos.git"
+      "version": "https://github.com/21km43/framework-wch-freertos.git"
     },
     "framework-wch-harmony-liteos": {
       "type": "framework",
       "optional": true,
       "owner": "platformio",
-      "version": "https://github.com/Community-PIO-CH32V/framework-wch-harmony-liteos.git"
+      "version": "https://github.com/21km43/framework-wch-harmony-liteos.git"
     },
     "framework-wch-rtthread": {
       "type": "framework",
       "optional": true,
       "owner": "platformio",
-      "version": "https://github.com/Community-PIO-CH32V/framework-wch-rtthread.git"
+      "version": "https://github.com/21km43/framework-wch-rtthread.git"
     },
     "framework-wch-tencentos": {
       "type": "framework",
       "optional": true,
       "owner": "platformio",
-      "version": "https://github.com/Community-PIO-CH32V/framework-wch-tencentos.git"
+      "version": "https://github.com/21km43/framework-wch-tencentos.git"
     },
     "framework-arduinoch32v003": {
       "type": "framework",

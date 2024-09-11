@@ -29,6 +29,11 @@
     "svd_path": "CH32L103xx.svd"
   },
   "frameworks": [
+    "noneos-sdk",
+    "freertos",
+    "harmony-liteos",
+    "rt-thread",
+    "tencent-os",
     "arduino"
   ],
   "name": "Generic CH32L103C8T6",
