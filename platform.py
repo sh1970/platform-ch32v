@@ -72,17 +72,6 @@ class Ch32vPlatform(PlatformBase):
                 self.packages["tool-minichlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-minichlink.git#linux"
             elif IS_MAC:
                 self.packages["tool-minichlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-minichlink.git#mac"
-        elif variables.get("upload_protocol", default_protocol) == "wch-link":
-            sys_type = util.get_systype()
-            if IS_WINDOWS:
-                self.packages["tool-openocd-riscv-wch"]["version"] = "https://github.com/Community-PIO-CH32V/tool-openocd-riscv-wch.git#main"
-            elif IS_LINUX:
-                self.packages["tool-openocd-riscv-wch"]["version"] = "https://github.com/Community-PIO-CH32V/tool-openocd-riscv-wch.git#linux"
-            else:
-                if sys_type == "darwin_arm64":
-                    self.packages["tool-openocd-riscv-wch"]["version"] = "https://github.com/Community-PIO-CH32V/tool-openocd-riscv-wch.git#darwin_arm"
-                else:
-                    self.packages["tool-openocd-riscv-wch"]["version"] = "https://github.com/Community-PIO-CH32V/tool-openocd-riscv-wch.git#darwin_x64"
         #elif variables.get("upload_protocol", default_protocol) == "wlink":
         # Always update the link to the tool-wlink tool, because for all uploads we want to have the "Enable SDI Print" available
         self.packages["tool-wlink"]["optional"] = False
