@@ -18,10 +18,55 @@ from platformio.public import PlatformBase
 from platformio import util
 
 IS_WINDOWS = sys.platform.startswith("win")
-IS_LINUX = sys.platform.startswith("linux")
-IS_MAC = sys.platform.startswith("darwin")
 
 class Ch32vPlatform(PlatformBase):
+    # ToDo: There's not toolchain for Linux ARM yet.
+    riscv_toolchain = {
+        # Windows
+        "windows_amd64": "https://github.com/Community-PIO-CH32V/toolchain-riscv-windows.git",
+        "windows_x86": "https://github.com/Community-PIO-CH32V/toolchain-riscv-windows.git",
+        # No Windows ARM64 or ARM32 builds.
+        # Linux
+        "linux_x86_64": "https://github.com/Community-PIO-CH32V/toolchain-riscv-linux.git",
+        #"linux_i686": "",
+        #"linux_aarch64": "",
+        #"linux_armv7l": "",
+        #"linux_armv6l": "",
+        # Mac (Intel and ARM are separate)
+        "darwin_x86_64": "https://github.com/Community-PIO-CH32V/toolchain-riscv-mac.git",
+        "darwin_arm64": "https://github.com/Community-PIO-CH32V/toolchain-riscv-mac.git"
+    }
+    minichlink_tool = {
+        # Windows
+        "windows_amd64": "https://github.com/Community-PIO-CH32V/tool-minichlink.git#windows",
+        "windows_x86": "https://github.com/Community-PIO-CH32V/tool-minichlink.git#windows",
+        # No Windows ARM64 or ARM32 builds.
+        # Linux
+        "linux_x86_64": "https://github.com/Community-PIO-CH32V/tool-minichlink.git#linux",
+        #"linux_i686": "",
+        #"linux_aarch64": "",
+        #"linux_armv7l": "",
+        #"linux_armv6l": "",
+        # Mac (Intel and ARM are separate)
+        "darwin_x86_64": "https://github.com/Community-PIO-CH32V/tool-minichlink.git#mac",
+        "darwin_arm64": "https://github.com/Community-PIO-CH32V/tool-minichlink.git#mac"
+    }
+    wlink_tool = {
+        # Windows
+        "windows_amd64": "https://github.com/Community-PIO-CH32V/tool-wlink.git#windows",
+        "windows_x86": "https://github.com/Community-PIO-CH32V/tool-wlink.git#windows",
+        # No Windows ARM64 or ARM32 builds.
+        # Linux
+        "linux_x86_64": "https://github.com/Community-PIO-CH32V/tool-wlink.git#linux",
+        #"linux_i686": "",
+        #"linux_aarch64": "",
+        #"linux_armv7l": "",
+        #"linux_armv6l": "",
+        # Mac (Intel and ARM are separate)
+        "darwin_x86_64": "https://github.com/Community-PIO-CH32V/tool-wlink.git#mac_x64",
+        "darwin_arm64": "https://github.com/Community-PIO-CH32V/tool-wlink.git#mac_arm64"
+    }
+
     def get_boards(self, id_=None):
         result = super().get_boards(id_)
         if not result:
@@ -34,6 +79,7 @@ class Ch32vPlatform(PlatformBase):
         return result
 
     def configure_default_packages(self, variables, targets):
+        sys_type = util.get_systype()
         # until toolchain is not yet approved in PIO registry: redirect packages at will here
         # (temporary)
         selected_frameworks = variables.get("pioframework", [])
@@ -45,12 +91,7 @@ class Ch32vPlatform(PlatformBase):
         if "arduino" in selected_frameworks or FORCE_DOWNGRADE_TO_GCC8:
             # we downgrade the GCC version to just 8 because with 12, there are build errors.
             gcc_branch = ""
-        if IS_LINUX:
-            self.packages["toolchain-riscv"]["version"] = "https://github.com/Community-PIO-CH32V/toolchain-riscv-linux.git%s" % gcc_branch
-        elif IS_MAC:
-            self.packages["toolchain-riscv"]["version"] = "https://github.com/Community-PIO-CH32V/toolchain-riscv-mac.git%s" % gcc_branch
-        else:
-            self.packages["toolchain-riscv"]["version"] = "https://github.com/Community-PIO-CH32V/toolchain-riscv-windows.git%s" % gcc_branch
+        self.packages["toolchain-riscv"]["version"] = Ch32vPlatform.riscv_toolchain[sys_type] + gcc_branch
         if not variables.get("board"):
             return super().configure_default_packages(variables, targets)
         # The FreeRTOS, Harmony LiteOS and RT-Thread package needs the 
@@ -66,25 +107,11 @@ class Ch32vPlatform(PlatformBase):
             self.packages["tool-wchisp"]["optional"] = False
         elif variables.get("upload_protocol", default_protocol) == "minichlink":
             self.packages["tool-minichlink"]["optional"] = False
-            if IS_WINDOWS:
-                self.packages["tool-minichlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-minichlink.git#windows"
-            elif IS_LINUX:
-                self.packages["tool-minichlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-minichlink.git#linux"
-            elif IS_MAC:
-                self.packages["tool-minichlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-minichlink.git#mac"
+            self.packages["tool-minichlink"]["version"] = Ch32vPlatform.minichlink_tool[sys_type]
         #elif variables.get("upload_protocol", default_protocol) == "wlink":
         # Always update the link to the tool-wlink tool, because for all uploads we want to have the "Enable SDI Print" available
-        self.packages["tool-wlink"]["optional"] = False
-        sys_type = util.get_systype()
-        if IS_WINDOWS:
-            self.packages["tool-wlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-wlink.git#windows"
-        elif IS_LINUX:
-            self.packages["tool-wlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-wlink.git#linux"
-        else:
-            if sys_type == "darwin_arm64":
-                self.packages["tool-wlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-wlink.git#mac_arm64"
-            else:
-                self.packages["tool-wlink"]["version"] = "https://github.com/Community-PIO-CH32V/tool-wlink.git#mac_x64"
+        self.packages["tool-wlink"]["optional"] = False        
+        self.packages["tool-wlink"]["version"] = Ch32vPlatform.wlink_tool[sys_type]
         frameworks = variables.get("pioframework", [])
         build_core = variables.get("board_build.core", board_config.get("build.core", "arduino"))
         if "arduino" in frameworks:
