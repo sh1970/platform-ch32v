@@ -49,10 +49,8 @@ ETH_DMADESCTypeDef *pDMARxSet;
 ETH_DMADESCTypeDef *pDMATxSet;
 
 u32 ChipId = 0;
-#if !LINK_STAT_ACQUISITION_METHOD
 u16 LastPhyStat = 0;
 u32 LastQueryPhyTime = 0;
-#endif
 /*********************************************************************
  * @fn      WCHNET_GetMacAddr
  *
@@ -63,7 +61,7 @@ u32 LastQueryPhyTime = 0;
 void WCHNET_GetMacAddr( uint8_t *p )
 {
     uint8_t i;
-    uint8_t *macaddr = (uint8_t *)(ROM_CFG_USERADR_ID+5);
+    uint8_t *macaddr=(uint8_t *)(ROM_CFG_USERADR_ID+5);
 
     for(i=0;i<6;i++)
     {
@@ -92,23 +90,17 @@ void WCHNET_TimeIsr( uint16_t timperiod )
  *
  * @return  none.
  */
-#if !LINK_STAT_ACQUISITION_METHOD
 void WCHNET_QueryPhySta(void)
 {
     u16 phy_stat;
     if(QUERY_STAT_FLAG){                                         /* Query the PHY link status every 1s */
         LastQueryPhyTime = LocalTime / 1000;
-        ETH_WritePHYRegister( PHY_ADDRESS, 0x1F, 0x0a43 );
-        /*In some cases the status is not updated in time,
-         * so read this register twice to get the correct status value.*/
-        ETH_ReadPHYRegister( PHY_ADDRESS, 0x1A);
-        phy_stat = ETH_ReadPHYRegister( PHY_ADDRESS, 0x1A) & 0x04;
+        phy_stat = ETH_ReadPHYRegister( PHY_ADDRESS, PHY_BSR );
         if(phy_stat != LastPhyStat){
             ETH_PHYLink();
         }
     }
 }
-#endif
 
 /*********************************************************************
  * @fn      WCHNET_MainTask
@@ -124,109 +116,44 @@ void WCHNET_MainTask(void)
     WCHNET_NetInput( );                     /* Ethernet data input */
     WCHNET_PeriodicHandle( );               /* Protocol stack time-related task processing */
 
-#if !LINK_STAT_ACQUISITION_METHOD
     WCHNET_QueryPhySta();                   /* Query external PHY status */
-#endif
 }
 
 /*********************************************************************
- * @fn      ETH_RGMIIPinInit
+ * @fn      ETH_MIIPinInit
  *
- * @brief   PHY RGMII interface GPIO initialization.
+ * @brief   PHY MII interface GPIO initialization.
  *
  * @param   none.
  *
  * @return  none.
  */
-void ETH_RGMIIPinInit(void)
+void ETH_MIIPinInit(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
 
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC, ENABLE);
-    GPIOB->CFGHR &= ~(0xff<<16);
-    GPIOB->CFGHR |= (0xbb<<16);
-    GPIOB->CFGLR &= ~(0xff<<4);
 
-    GPIO_Output(GPIOA, GPIO_Pin_2);
-    GPIO_Output(GPIOA, GPIO_Pin_3);
-    GPIO_Output(GPIOA, GPIO_Pin_7);
-    GPIO_Output(GPIOC, GPIO_Pin_4);
-    GPIO_Output(GPIOC, GPIO_Pin_5);
-    GPIO_Output(GPIOB, GPIO_Pin_0);
+    GPIO_Output(GPIOA, GPIO_Pin_2);                                                 /* MDIO */
+    GPIO_Output(GPIOC, GPIO_Pin_1);                                                 /* MDC */
 
-    GPIO_Input(GPIOC, GPIO_Pin_0);
-    GPIO_Input(GPIOC, GPIO_Pin_1);
-    GPIO_Input(GPIOC, GPIO_Pin_2);
-    GPIO_Input(GPIOC, GPIO_Pin_3);
-    GPIO_Input(GPIOA, GPIO_Pin_0);
-    GPIO_Input(GPIOA, GPIO_Pin_1);
+    GPIO_Input(GPIOC, GPIO_Pin_3);                                                  /* TXCLK */
+    GPIO_Output(GPIOB, GPIO_Pin_11);                                                /* TXEN */
+    GPIO_Output(GPIOB, GPIO_Pin_12);                                                /* TXD0 */
+    GPIO_Output(GPIOB, GPIO_Pin_13);                                                /* TXD1 */
+    GPIO_Output(GPIOC, GPIO_Pin_2);                                                 /* TXD2 */
+    GPIO_Output(GPIOB, GPIO_Pin_8);                                                 /* TXD3 */
+    GPIO_Input(GPIOA, GPIO_Pin_1);                                                  /* RXC */
+    GPIO_Input(GPIOA, GPIO_Pin_7);                                                  /* RXDV */
+    GPIO_Input(GPIOC, GPIO_Pin_4);                                                  /* RXD0 */
+    GPIO_Input(GPIOC, GPIO_Pin_5);                                                  /* RXD1 */
+    GPIO_Input(GPIOB, GPIO_Pin_0);                                                  /* RXD2 */
+    GPIO_Input(GPIOB, GPIO_Pin_1);                                                  /* RXD3 */
+    GPIO_Input(GPIOB, GPIO_Pin_10);                                                 /* RXER */
 
-    GPIO_Input(GPIOB, GPIO_Pin_1);                                 /* 125m in */
-    GPIO_Input(GPIOC, GPIO_Pin_7);                                 /* interrupt pin */
+    GPIO_Output(GPIOA, GPIO_Pin_0);                                                 /* CRS */
+    GPIO_Output(GPIOA, GPIO_Pin_3);                                                 /* COL */
 }
-
-#if LINK_STAT_ACQUISITION_METHOD
-/*********************************************************************
- * @fn      EXTI_Line_Init
- *
- * @brief   Configure EXTI Line7.
- *
- * @param   none.
- *
- * @return  none.
- */
-void EXTI_Line_Init(void)
-{
-    GPIO_InitTypeDef GPIO_InitStructure = {0};
-    EXTI_InitTypeDef EXTI_InitStructure = {0};
-    NVIC_InitTypeDef NVIC_InitStructure = {0};
-
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO | RCC_APB2Periph_GPIOC, ENABLE);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-    /* GPIOC 7 ----> EXTI_Line7 */
-    GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource7);
-    EXTI_InitStructure.EXTI_Line = EXTI_Line7;
-    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
-    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-    EXTI_Init(&EXTI_InitStructure);
-
-    NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&NVIC_InitStructure);
-}
-
-/*********************************************************************
- * @fn      PHY_InterruptInit
- *
- * @brief   Configure PHY interrupt function,Supported chip is:RTL8211FS
- *
- * @param   none.
- *
- * @return  none.
- */
-void PHY_InterruptInit(void)
-{
-    uint16_t RegValue;
-
-    ETH_WritePHYRegister(gPHYAddress, 0x1F, 0x0a42 );
-    RegValue = ETH_ReadPHYRegister(gPHYAddress, 0x12);
-    /* enable Link Status Change Interrupt and
-     * Auto-Negotiation Completed Interrupt*/
-    RegValue |= (1<<4)|(1<<3);
-    ETH_WritePHYRegister(gPHYAddress, 0x12, RegValue );
-    /* Clear the Interrupt status */
-    ETH_WritePHYRegister( gPHYAddress, 0x1F, 0x0a43 );
-    ETH_ReadPHYRegister( gPHYAddress, 0x1D);
-}
-#endif
 
 /*********************************************************************
  * @fn      ETH_PHYLink
@@ -241,43 +168,32 @@ void ETH_PHYLink( void )
 {
     u32 phy_stat;
 
-    ETH_WritePHYRegister( gPHYAddress, 0x1F, 0x0a43 );
-    /*In some cases the status is not updated in time,
-     * so read this register twice to get the correct status value.*/
-    ETH_ReadPHYRegister( gPHYAddress, 0x1A);
-    phy_stat = ETH_ReadPHYRegister( gPHYAddress, 0x1A);
-#if !LINK_STAT_ACQUISITION_METHOD
-    LastPhyStat = phy_stat & 0x04;
-#endif
+    phy_stat = ETH_ReadPHYRegister( PHY_ADDRESS, PHY_BSR );
+    LastPhyStat = phy_stat;
     WCHNET_PhyStatus( phy_stat );
-
-    if( phy_stat & 0x04 )
+    if( (phy_stat&PHY_Linked_Status) && (phy_stat&PHY_AutoNego_Complete) )
     {
-        if( phy_stat & 0x08 )
-        {
-            ETH->MACCR |= ETH_Mode_FullDuplex;
-        }
-        else
-        {
-            ETH->MACCR &= ~ETH_Mode_FullDuplex;
-        }
-        if( (phy_stat & 0x30) == 0x00 )
-        {
-            ETH->MACCR &= ~(ETH_Speed_100M|ETH_Speed_1000M);
-        }
-        else if( (phy_stat & 0x30) == 0x10 )
+        phy_stat = ETH_ReadPHYRegister( PHY_ADDRESS, PHY_BCR );
+        /* PHY negotiation result */
+        if(phy_stat & (1<<13))                                  /* 100M */
         {
             ETH->MACCR &= ~(ETH_Speed_100M|ETH_Speed_1000M);
             ETH->MACCR |= ETH_Speed_100M;
         }
-        else if( (phy_stat & 0x30) == 0x20 )
+        else                                                    /* 10M */
         {
             ETH->MACCR &= ~(ETH_Speed_100M|ETH_Speed_1000M);
-            ETH->MACCR |= ETH_Speed_1000M;
+        }
+        if(phy_stat & (1<<8))                                   /* full duplex */
+        {
+            ETH->MACCR |= ETH_Mode_FullDuplex;
+        }
+        else                                                    /* half duplex */
+        {
+            ETH->MACCR &= ~ETH_Mode_FullDuplex;
         }
         ETH_Start( );
     }
-    phy_stat = ETH_ReadPHYRegister( gPHYAddress, 0x1D);   /* Clear the Interrupt status */
 }
 
 /*********************************************************************
@@ -304,20 +220,13 @@ uint32_t ETH_RegInit( ETH_InitTypeDef* ETH_InitStruct, uint16_t PHYAddress )
     /*------------------------ MAC register configuration  ----------------------- --------------------*/
     tmpreg = ETH->MACCR;
     tmpreg &= MACCR_CLEAR_MASK;
-    tmpreg |= (uint32_t)(ETH_InitStruct->ETH_AutoNegotiation |
-                  ETH_InitStruct->ETH_Watchdog |
+    tmpreg |= (uint32_t)(ETH_InitStruct->ETH_Watchdog |
                   ETH_InitStruct->ETH_Jabber |
                   ETH_InitStruct->ETH_InterFrameGap |
-                  ETH_InitStruct->ETH_CarrierSense |
-                  ETH_InitStruct->ETH_Speed |
-                  ETH_InitStruct->ETH_ReceiveOwn |
-                  ETH_InitStruct->ETH_LoopbackMode |
-                  ETH_InitStruct->ETH_Mode |
                   ETH_InitStruct->ETH_ChecksumOffload |
-                  ETH_InitStruct->ETH_RetryTransmission |
                   ETH_InitStruct->ETH_AutomaticPadCRCStrip |
-                  ETH_InitStruct->ETH_BackOffLimit |
-                  ETH_InitStruct->ETH_DeferralCheck);
+                  ETH_InitStruct->ETH_DeferralCheck |
+                  (1 << 20));
     /* Write MAC Control Register */
     ETH->MACCR = (uint32_t)tmpreg;
     ETH->MACFFR = (uint32_t)(ETH_InitStruct->ETH_ReceiveAll |
@@ -339,8 +248,6 @@ uint32_t ETH_RegInit( ETH_InitTypeDef* ETH_InitStruct, uint16_t PHYAddress )
     /* Clear xx bits */
     tmpreg &= MACFCR_CLEAR_MASK;
     tmpreg |= (uint32_t)((ETH_InitStruct->ETH_PauseTime << 16) |
-                     ETH_InitStruct->ETH_ZeroQuantaPause |
-                     ETH_InitStruct->ETH_PauseLowThreshold |
                      ETH_InitStruct->ETH_UnicastPauseFrameDetect |
                      ETH_InitStruct->ETH_ReceiveFlowControl |
                      ETH_InitStruct->ETH_TransmitFlowControl);
@@ -352,14 +259,10 @@ uint32_t ETH_RegInit( ETH_InitTypeDef* ETH_InitStruct, uint16_t PHYAddress )
     tmpreg = ETH->DMAOMR;
     tmpreg &= DMAOMR_CLEAR_MASK;
     tmpreg |= (uint32_t)(ETH_InitStruct->ETH_DropTCPIPChecksumErrorFrame |
-                    ETH_InitStruct->ETH_ReceiveStoreForward |
                     ETH_InitStruct->ETH_FlushReceivedFrame |
                     ETH_InitStruct->ETH_TransmitStoreForward |
-                    ETH_InitStruct->ETH_TransmitThresholdControl |
                     ETH_InitStruct->ETH_ForwardErrorFrames |
-                    ETH_InitStruct->ETH_ForwardUndersizedGoodFrames |
-                    ETH_InitStruct->ETH_ReceiveThresholdControl |
-                    ETH_InitStruct->ETH_SecondFrameOperate);
+                    ETH_InitStruct->ETH_ForwardUndersizedGoodFrames);
     ETH->DMAOMR = (uint32_t)tmpreg;
 
     /* Reset the physical layer */
@@ -386,12 +289,8 @@ void ETH_Configuration( uint8_t *macAddr )
 
     gPHYAddress = PHY_ADDRESS;
 
-    /* Enable 1G MAC*/
-    EXTEN->EXTEN_CTR |= EXTEN_ETH_RGMII_SEL;
-    RCC_ETH1GCLKConfig(RCC_ETH1GCLKSource_PB1_IN);
-    RCC_ETH1G_125Mcmd(ENABLE);
-    /* Enable RGMII GPIO */
-    ETH_RGMIIPinInit();
+    /* Enable MII GPIO */
+    ETH_MIIPinInit( );
 
     /* Reset ETHERNET on AHB Bus */
     ETH_DeInit();
@@ -411,7 +310,7 @@ void ETH_Configuration( uint8_t *macAddr )
     /* Fill ETH_InitStructure parameters */
     /*------------------------   MAC   -----------------------------------*/
     ETH_InitStructure.ETH_Mode = ETH_Mode_FullDuplex;
-    ETH_InitStructure.ETH_Speed = ETH_Speed_1000M;
+    ETH_InitStructure.ETH_Speed = ETH_Speed_100M;
 #if HARDWARE_CHECKSUM_CONFIG
     ETH_InitStructure.ETH_ChecksumOffload = ETH_ChecksumOffload_Enable;
 #endif
@@ -430,11 +329,9 @@ void ETH_Configuration( uint8_t *macAddr )
     the store and forward guarantee that a whole frame is stored in the FIFO, so the MAC can insert/verify the checksum,
     if the checksum is OK the DMA can handle the frame otherwise the frame is dropped */
     ETH_InitStructure.ETH_DropTCPIPChecksumErrorFrame = ETH_DropTCPIPChecksumErrorFrame_Enable;
-    ETH_InitStructure.ETH_ReceiveStoreForward = ETH_ReceiveStoreForward_Enable;
     ETH_InitStructure.ETH_TransmitStoreForward = ETH_TransmitStoreForward_Enable;
     ETH_InitStructure.ETH_ForwardErrorFrames = ETH_ForwardErrorFrames_Enable;
     ETH_InitStructure.ETH_ForwardUndersizedGoodFrames = ETH_ForwardUndersizedGoodFrames_Enable;
-    ETH_InitStructure.ETH_SecondFrameOperate = ETH_SecondFrameOperate_Disable;
     /* Configure Ethernet */
     ETH_RegInit( &ETH_InitStructure, gPHYAddress );
 
@@ -454,15 +351,6 @@ void ETH_Configuration( uint8_t *macAddr )
                 ETH_DMA_IT_AIS |\
                 ETH_DMA_IT_RBU,\
                 ENABLE);
-
-    /* Configure the polarity and delay of TXC */
-    RGMII_TXC_Delay(0, 4);
-#if LINK_STAT_ACQUISITION_METHOD
-    /* Configure the PHY interrupt function, the supported chip is: RTL8211FS */
-    PHY_InterruptInit( );
-    /* Configure EXTI Line7. */
-    EXTI_Line_Init( );
-#endif
 }
 
 /*********************************************************************

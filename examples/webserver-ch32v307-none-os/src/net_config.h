@@ -26,7 +26,7 @@ extern "C" {
 
 #define WCHNET_NUM_TCP                3  /* Number of TCP connections */
 
-#define WCHNET_NUM_TCP_LISTEN         3  /* Number of TCP listening */
+#define WCHNET_NUM_TCP_LISTEN         2  /* Number of TCP listening */
 
 /* The number of sockets, the maximum is 31  */
 #define WCHNET_MAX_SOCKET_NUM         (WCHNET_NUM_IPRAW+WCHNET_NUM_UDP+WCHNET_NUM_TCP+WCHNET_NUM_TCP_LISTEN)
@@ -59,9 +59,9 @@ extern "C" {
 
 #define TCP_RETRY_PERIOD              10    /* TCP retransmission period, the default value is 10, the unit is 50ms */
 
-#define SOCKET_SEND_RETRY             2     /* Send failed retry configuration, 1: enable, 0: disable */
+#define SOCKET_SEND_RETRY             0     /* Send failed retry configuration, 1: enable, 0: disable */
 
-#define HARDWARE_CHECKSUM_CONFIG      1     /* Hardware checksum checking and insertion configuration, 1: enable, 0: disable */
+#define HARDWARE_CHECKSUM_CONFIG      0     /* Hardware checksum checking and insertion configuration, 1: enable, 0: disable */
 
 #define FINE_DHCP_PERIOD              8     /* Fine DHCP period, the default value is 8, the unit is 250ms */
 
@@ -73,7 +73,7 @@ extern "C" {
 
 #define CFG0_IP_REASS_PBUFS           0     /* Number of reassembled IP PBUFs  */
 
-#define CFG0_TCP_DEALY_ACK_DISABLE    0     /* 1: disable TCP delay ACK  0: enable TCP delay ACK */
+#define CFG0_TCP_DEALY_ACK_DISABLE    1     /* 1: disable TCP delay ACK  0: enable TCP delay ACK */
 
 /*********************************************************************
  *  Memory related configuration
