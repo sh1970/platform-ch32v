@@ -84,7 +84,11 @@ void TIM1_Init(u16 arr, u16 psc)
  */
 int main(void)
 {
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+    #ifdef NVIC_PriorityGroup_2
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+#else
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+#endif
     SystemCoreClockUpdate();
     Delay_Init();
     USART_Printf_Init(921600);
