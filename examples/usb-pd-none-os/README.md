@@ -8,7 +8,7 @@ How to build PlatformIO based project
 
 ```shell
 # Change directory to example
-$ cd platform-ch32v/examples/usb-pd-ch32x035
+$ cd platform-ch32v/examples/usb-pd-none-os
 
 # Build project
 $ pio run
