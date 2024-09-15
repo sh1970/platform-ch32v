@@ -156,10 +156,10 @@ chip_db: List[ChipInfo] = [
     ChipInfo("CH32X035F7P6", 62, 20, 48, "TSSOP20"),
     ChipInfo("CH32X033F8P6", 62, 20, 48, "TSSOP20"),
     # CH32L10x
-    ChipInfo("CH32L103F8P6", 64, 20, 96, "LQFP48"),
-    ChipInfo("CH32L103F8U6", 64, 20, 96, "LQFP48"),
-    ChipInfo("CH32L103G8R6", 64, 20, 96, "LQFP48"),
-    ChipInfo("CH32L103K8U6", 64, 20, 96, "LQFP48"),
+    ChipInfo("CH32L103F8P6", 64, 20, 96, "TSSOP20"),
+    ChipInfo("CH32L103F8U6", 64, 20, 96, "QFN20"),
+    ChipInfo("CH32L103G8R6", 64, 20, 96, "QSOP28"),
+    ChipInfo("CH32L103K8U6", 64, 20, 96, "QFN32"),
     ChipInfo("CH32L103C8T6", 64, 20, 96, "LQFP48"),
 ]
 
