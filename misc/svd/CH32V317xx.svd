@@ -3,7 +3,7 @@
 xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>WCH Ltd.</vendor>                                       <!-- device vendor name -->
   <vendorID>WCH</vendorID>                                        <!-- device vendor short name -->
-  <name>CH32V307xx</name>
+  <name>CH32V317xx</name>
   <version>1.2</version>
   <description>CH32V307xx View File</description>
   <!--Bus Interface Properties-->

@@ -2,9 +2,9 @@
 <device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>WCH Ltd.</vendor><!-- device vendor name -->
   <vendorID>WCH</vendorID><!-- device vendor short name -->
-  <name>CH32X035</name>
+  <name>CH643</name>
   <version>1.2</version>
-  <description>CH32X035 View File</description><!--Bus Interface Properties--><!--RISC-V is byte addressable-->
+  <description>CH643 View File</description><!--Bus Interface Properties--><!--RISC-V is byte addressable-->
   <addressUnitBits>8</addressUnitBits><!--the maximum data bit width accessible within a single transfer-->
   <width>32</width><!--Register Default Properties-->
   <size>0x20</size>
@@ -31,7 +31,8 @@
         <register>
           <name>CTLR</name>
           <displayName>CTLR</displayName>
-          <description>Power control register(PWR_CTLR)</description>
+          <description>Power control register
+          (PWR_CTLR)</description>
           <addressOffset>0x0</addressOffset>
           <size>0x20</size>
           <resetValue>0x00000400</resetValue>
@@ -64,6 +65,7 @@
               <bitWidth>2</bitWidth>
 			  <access>read-write</access>			  
             </field>
+            
           </fields>
         </register>
         <register>
@@ -75,6 +77,7 @@
           <size>0x20</size>
           <resetValue>0x00000000</resetValue>
           <fields>
+
             <field>
               <name>PVDO</name>
               <description>PVD Output</description>
@@ -103,6 +106,7 @@
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+
       <registers>
         <register>
           <name>CTLR</name>
@@ -114,14 +118,16 @@
           <fields>
             <field>
               <name>HSION</name>
-              <description>Internal High Speed clock enable</description>
+              <description>Internal High Speed clock
+              enable</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>HSIRDY</name>
-              <description>Internal High Speed clock ready flag</description>
+              <description>Internal High Speed clock ready
+              flag</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
@@ -136,11 +142,13 @@
             </field>
             <field>
               <name>HSICAL</name>
-              <description>Internal High Speed clock Calibration</description>
+              <description>Internal High Speed clock
+              Calibration</description>
               <bitOffset>8</bitOffset>
               <bitWidth>8</bitWidth>
               <access>read-only</access>
-            </field>   
+            </field>
+            
           </fields>
         </register>
         <register>
@@ -151,34 +159,41 @@
           <addressOffset>0x04</addressOffset>
           <size>0x20</size>
           <resetValue>0x00000000</resetValue>
-          <fields>          
+          <fields>
+            
             <field>
               <name>HPRE</name>
-              <description>HB prescaler</description>
+              <description>AHB prescaler</description>
               <bitOffset>4</bitOffset>
               <bitWidth>4</bitWidth>
               <access>read-write</access>
-            </field>           
+            </field>
+            
             <field>
               <name>MCO</name>
-              <description>Microcontroller clock output</description>
+              <description>Microcontroller clock
+              output</description>
               <bitOffset>24</bitOffset>
               <bitWidth>3</bitWidth>
               <access>read-write</access>
             </field>
+            
           </fields>
         </register>
+
         <register>
           <name>APB2PRSTR</name>
           <displayName>APB2PRSTR</displayName>
-          <description>PB2 peripheral reset register(RCC_APB2PRSTR)</description>
+          <description>PB2 peripheral reset register
+          (RCC_APB2PRSTR)</description>
           <addressOffset>0x0C</addressOffset>
           <size>0x20</size>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>AFIORST</name>
-              <description>Alternate function I/O reset</description>
+              <description>Alternate function I/O
+              reset</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>			  
@@ -210,7 +225,8 @@
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>           
+            </field>
+            
             <field>
               <name>TIM1RST</name>
               <description>TIM1 timer reset</description>
@@ -224,7 +240,8 @@
               <bitOffset>12</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>           
+            </field>
+           
             <field>
               <name>USART1RST</name>
               <description>USART1 reset</description>
@@ -256,14 +273,16 @@
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>           
+            </field>
+            
             <field>
               <name>WWDGRST</name>
               <description>Window watchdog reset</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>           
+            </field>
+            
             <field>
               <name>USART2RST</name>
               <description>USART 2 reset</description>
@@ -285,13 +304,15 @@
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
             </field>
+
             <field>
               <name>I2C1RST</name>
               <description>I2C1 reset</description>
               <bitOffset>21</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>          
+            </field>
+           
             <field>
               <name>PWRRST</name>
               <description>Power interface reset</description>
@@ -316,7 +337,8 @@
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>           
+            </field>
+            
             <field>
               <name>SRAMEN</name>
               <description>SRAM interface clock
@@ -324,7 +346,8 @@
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>            
+            </field>
+            
             <field>
               <name>USBFSEN</name>
               <description>USBFS clock enable</description>
@@ -332,13 +355,15 @@
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
             </field>
+
             <field>
               <name>USBPD</name>
               <description>USBPD clock enable</description>
               <bitOffset>17</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>            
+            </field>
+            
           </fields>
         </register>
         <register>
@@ -378,7 +403,8 @@
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>           
+            </field>
+            
             <field>
               <name>ADC1EN</name>
               <description>ADC1 interface clock
@@ -407,7 +433,8 @@
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>         
+            </field>
+            
           </fields>
         </register>
         <register>
@@ -432,7 +459,8 @@
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>          
+            </field>
+            
             <field>
               <name>WWDGEN</name>
               <description>Window watchdog clock
@@ -440,7 +468,8 @@
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>           
+            </field>
+            
             <field>
               <name>USART2EN</name>
               <description>USART 2 clock enable</description>
@@ -468,7 +497,8 @@
               <bitOffset>21</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
-            </field>           
+            </field>
+           
             <field>
               <name>PWREN</name>
               <description>Power interface clock
@@ -477,8 +507,10 @@
               <bitWidth>1</bitWidth>
 			  <access>read-write</access>
             </field>
+
           </fields>
-        </register>       
+        </register>
+        
         <register>
           <name>RSTSCKR</name>
           <displayName>RSTSCKR</displayName>
@@ -487,7 +519,8 @@
           <addressOffset>0x24</addressOffset>
           <size>0x20</size>
           <resetValue>0x0C000000</resetValue>
-          <fields>           
+          <fields>
+            
             <field>
               <name>RMVF</name>
               <description>Remove reset flag</description>
@@ -578,9 +611,11 @@
               <access>read-write</access>
             </field>
           </fields>
-        </register>       
+        </register>
+        
       </registers>
-    </peripheral>   
+    </peripheral>
+    
     <peripheral>
       <name>GPIOA</name>
       <description>General purpose I/O</description>
@@ -2087,6 +2122,7 @@
         <usage>registers</usage>
       </addressBlock>
       <registers>
+
         <register>
           <name>PCFR1</name>
           <displayName>PCFR1</displayName>
@@ -2159,6 +2195,7 @@
               <bitWidth>2</bitWidth>
               <access>read-write</access>
             </field>
+
             <field>
               <name>PLOC_RM</name>
               <description>IO2W_RM remapping</description>
@@ -2485,7 +2522,8 @@
         <offset>0x00</offset>
         <size>0x400</size>
         <usage>registers</usage>
-      </addressBlock>     
+      </addressBlock>
+      
       <interrupt>
         <name>EXTI7_0</name>
         <description>EXTI Line[7:0] interrupt</description>
@@ -3706,210 +3744,210 @@
           <fields>
             <field>
               <name>IF0</name>
-              <description>Interrupt flag bit 0</description>
+              <description>Interrupt flag  bit 0</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
             <field>
               <name>IF1</name>
-              <description>Interrupt flag bit 1</description>
+              <description>Interrupt flag  bit 1</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF2</name>
-              <description>Interrupt flag bit 2</description>
+              <description>Interrupt flag  bit 2</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF3</name>
-              <description>Interrupt flag bit 3</description>
+              <description>Interrupt flag  bit 3</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF4</name>
-              <description>Interrupt flag bit 4</description>
+              <description>Interrupt flag  bit 4</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF5</name>
-              <description>Interrupt flag bit 5</description>
+              <description>Interrupt flag  bit 5</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF6</name>
-              <description>Interrupt flag bit 6</description>
+              <description>Interrupt flag  bit 6</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF7</name>
-              <description>Interrupt flag bit 7</description>
+              <description>Interrupt flag  bit 7</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF8</name>
-              <description>Interrupt flag bit 8</description>
+              <description>Interrupt flag  bit 8</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF9</name>
-              <description>Interrupt flag bit 9</description>
+              <description>Interrupt flag  bit 9</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF10</name>
-              <description>Interrupt flag bit 10</description>
+              <description>Interrupt flag  bit 10</description>
               <bitOffset>10</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF11</name>
-              <description>Interrupt flag bit 11</description>
+              <description>Interrupt flag  bit 11</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF12</name>
-              <description>Interrupt flag bit 12</description>
+              <description>Interrupt flag  bit 12</description>
               <bitOffset>12</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF13</name>
-              <description>Interrupt flag bit 13</description>
+              <description>Interrupt flag  bit 13</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF14</name>
-              <description>Interrupt flag bit 14</description>
+              <description>Interrupt flag  bit 14</description>
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF15</name>
-              <description>Interrupt flag bit 15</description>
+              <description>Interrupt flag  bit 15</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF16</name>
-              <description>Interrupt flag bit 16</description>
+              <description>Interrupt flag  bit 16</description>
               <bitOffset>16</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF17</name>
-              <description>Interrupt flag bit 17</description>
+              <description>Interrupt flag  bit 17</description>
               <bitOffset>17</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF18</name>
-              <description>Interrupt flag bit 18</description>
+              <description>Interrupt flag  bit 18</description>
               <bitOffset>18</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF19</name>
-              <description>Interrupt flag bit 19</description>
+              <description>Interrupt flag  bit 19</description>
               <bitOffset>19</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF20</name>
-              <description>Interrupt flag bit 20</description>
+              <description>Interrupt flag  bit 20</description>
               <bitOffset>20</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF21</name>
-              <description>Interrupt flag bit 21</description>
+              <description>Interrupt flag  bit 21</description>
               <bitOffset>21</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF22</name>
-              <description>Interrupt flag bit 22</description>
+              <description>Interrupt flag  bit 22</description>
               <bitOffset>22</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF23</name>
-              <description>Interrupt flag bit 23</description>
+              <description>Interrupt flag  bit 23</description>
               <bitOffset>23</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF24</name>
-              <description>Interrupt flag bit 24</description>
+              <description>Interrupt flag  bit 24</description>
               <bitOffset>24</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF25</name>
-              <description>Interrupt flag bit 25</description>
+              <description>Interrupt flag  bit 25</description>
               <bitOffset>25</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF26</name>
-              <description>Interrupt flag bit 26</description>
+              <description>Interrupt flag  bit 26</description>
               <bitOffset>26</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF27</name>
-              <description>Interrupt flag bit 27</description>
+              <description>Interrupt flag  bit 27</description>
               <bitOffset>27</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF28</name>
-              <description>Interrupt flag bit 28</description>
+              <description>Interrupt flag  bit 28</description>
               <bitOffset>28</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
             </field>
 			<field>
               <name>IF29</name>
-              <description>Interrupt flag bit 29</description>
+              <description>Interrupt flag  bit 29</description>
               <bitOffset>29</bitOffset>
               <bitWidth>1</bitWidth>
 			  <access>read/clear</access>
@@ -11413,6 +11451,7 @@
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
+
             <field>
               <name>RST_MODE</name>
               <description>Config reset delay time</description>
@@ -13003,6 +13042,7 @@
       <description> AWU configuration</description>
       <groupName>AWU</groupName>
       <baseAddress>0x40026400</baseAddress>
+
       <interrupt>
         <name>AWU</name>
         <description>AWU global interrupt</description>
@@ -13031,6 +13071,7 @@
             </field>
           </fields>
         </register>
+
         <register>
           <name>R16_AWU_WR</name>
           <displayName>R16_AWU_WR</displayName>
@@ -13048,6 +13089,7 @@
             </field>
           </fields>
         </register>
+
         <register>
           <name>R16_AWU_PSC</name>
           <displayName>R16_AWU_PSC</displayName>
@@ -13351,7 +13393,6 @@
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
-
 			<field>
               <name>EN2</name>
               <description>CMP2 Enable</description>
@@ -13380,7 +13421,6 @@
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
-
             <field>
               <name>EN3</name>
               <description>CMP3 Enable</description>
@@ -13981,6 +14021,613 @@
             <field>
               <name>USBPD_DMA_ADDR</name>
               <description>USBPD_DMA_ADDR value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <peripheral>
+      <name>LEDPWM</name>
+      <description> LEDPWM configuration</description>
+      <groupName>LEDPWM</groupName>
+      <baseAddress>0x40026800</baseAddress>
+
+      <interrupt>
+        <name>LEDPWM</name>
+        <description>LEDPWM global interrupt</description>
+        <value>19</value>
+      </interrupt>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x200</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>LED_COM_SEL</name>
+          <displayName>LED_COM_SEL</displayName>
+          <description>LED row driver COM select register</description>
+          <addressOffset>0x0</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>COM_SEL</name>
+              <description>COM SEL</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>6</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_KEY_CTRL</name>
+          <displayName>LED_KEY_CTRL</displayName>
+          <description>LED keyboard control register</description>
+          <addressOffset>0x1</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+          <field>
+              <name>NKEY_MODE</name>
+              <description>NMOS diode key enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PKEY_MODE</name>
+              <description>PMOS diode key enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>COM_LVE</name>
+              <description>LOW Voltage enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>COM_PB_INV</name>
+              <description>PB invert enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_PWM_OE</name>
+          <displayName>LED_PWM_OE</displayName>
+          <description>The LED column drives the PWM global enable register</description>
+          <addressOffset>0x2</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>PWM_OE</name>
+              <description>LED PWM Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_DMA_CNT</name>
+          <displayName>LED_DMA_CNT</displayName>
+          <description>LED DMA data counter register</description>
+          <addressOffset>0x3</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>DMA_CNT</name>
+              <description>DMA Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LED_COM_E_PB_L</name>
+          <displayName>LED_COM_E_PB_L</displayName>
+          <description>PB[7:0] pin COM enable register</description>
+          <addressOffset>0x4</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>COM_E_PB_L</name>
+              <description>PB[7:0] COM Driver Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_COM_E_PB_M</name>
+          <displayName>LED_COM_E_PB_M</displayName>
+          <description>PB[15:8] pin COM enable register</description>
+          <addressOffset>0x5</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>COM_E_PB_M</name>
+              <description>PB[15:8] COM Driver Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_COM_E_PB_H</name>
+          <displayName>LED_COM_E_PB_H</displayName>
+          <description>PB[23:16] pin COM enable register</description>
+          <addressOffset>0x6</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>COM_E_PB_H</name>
+              <description>PB[23:16] COM Driver Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_COM_E_PAPC</name>
+          <displayName>LED_ECOM_E_PAPC</displayName>
+          <description>PA/PC pin COM enable register</description>
+          <addressOffset>0x7</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+			<field>
+              <name>COM_PA_EN</name>
+              <description>PA COM Driver enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>COM_PC_EN</name>
+              <description>PC COM Driver enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>       
+          </fields>
+        </register>
+        <register>
+          <name>LED_PWM_PIN_L</name>
+          <displayName>LED_PWM_PIN_L</displayName>
+          <description>The LED lower 8 columns drive the PWM enable register</description>
+          <addressOffset>0x8</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x01</resetValue>
+          <fields>
+            <field>
+              <name>PWM_EN_7_1</name>
+              <description>LED PWM[7:1] Enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>7</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PWM_EN</name>
+              <description>LED PWM_0 Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_PWM_PIN_H</name>
+          <displayName>LED_PWM_PIN_H</displayName>
+          <description>LED high 8 columns drive the PWM enable register</description>
+          <addressOffset>0x9</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>PWM_EN</name>
+              <description>LED[15:8] enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        
+
+        <register>
+          <name>LED_PWM_MOD</name>
+          <displayName>LED_PWM_MOD</displayName>
+          <description>LED PWM mode register</description>
+          <addressOffset>0xb</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>MATRIX_MODE</name>
+              <description>MATRIX_MODE Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PWM_RED_EN</name>
+              <description>RED PWM Enable</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PWM_GREEN_EN</name>
+              <description>Green PWM Enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PWM_BLUE_EN</name>
+              <description>BLUE PWM Enable</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+
+        <register>
+          <name>LED_FUNC_CTRL</name>
+          <displayName>LED_FUNC_CTRL</displayName>
+          <description>LED function control register</description>
+          <addressOffset>0xc</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>LED_ENABLE</name>
+              <description>LED_ENABLE</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+
+            <field>
+              <name>INTEN_FULL</name>
+              <description>Forced Output</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+
+            <field>
+              <name>PWM_OE_CLR</name>
+              <description>Automatic Clear PWM-Enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+
+            <field>
+              <name>COM_AHEAD</name>
+              <description>COM Output Select</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+
+            <field>
+              <name>REG_HALF</name>
+              <description>RED Brightness mode</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>IE_INHIBIT</name>
+              <description>interrupt Enable</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LED_ANA_CTRL</name>
+          <displayName>LED_ANA_CTRL</displayName>
+          <description>LED analog control register</description>
+          <addressOffset>0xd</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>PWM_REF</name>
+              <description>PWM Constant current mode enable</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PWM_PB_ISELN</name>
+              <description>PB NMOS Constant current mode enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PWM_PA_ISELP</name>
+              <description>PA PMOS Constant current mode enable</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PWM_PA_ISELN</name>
+              <description>PA NMOS Constant current mode enable</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LED_CYCLE_CFG</name>
+          <displayName>LED_CYCLE_CFG</displayName>
+          <description>LED cycle configuration register</description>
+          <addressOffset>0xe</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>CLK_FREQ</name>
+              <description>LED frequency select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>INTEN_CYC</name>
+              <description>PWM-Brightness cycle</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>COLOR_CYC</name>
+              <description>PWM-Color cycle</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_FRAME_CFG</name>
+          <displayName>LED_FRAME_CFG</displayName>
+          <description>LED frame configuration register</description>
+          <addressOffset>0xf</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>PWM_REPEAT</name>
+              <description>PWM_REPEAT times</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>INHIBIT</name>
+              <description>INHIBIT Window value</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_DISP_STAT</name>
+          <displayName>LED_DISP_STAT</displayName>
+          <description>LED display status register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x10</resetValue>
+          <fields>
+            <field>
+              <name>INHIBIT_CTRL</name>
+              <description>Forbidden Control</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+			<field>
+              <name>LED_IF_SET</name>
+              <description>LED_IF_SET</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>IF_INHIBIT</name>
+              <description>INHIBIT Interrupt Flag</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_INTEN_CNT</name>
+          <displayName>LED_INTEN_CNT</displayName>
+          <description>LED brightness PWM counting register</description>
+          <addressOffset>0x11</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>INTEN_CNT</name>
+              <description>PWM_Strength Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_COLOR_CNT</name>
+          <displayName>LED_COLOR_CNT</displayName>
+          <description>LED color PWM counting register</description>
+          <addressOffset>0x12</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>COLOR_CNT</name>
+              <description>PWM_Color Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-only</access>
+            </field>
+            
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_FRAME_STA</name>
+          <displayName>LED_FRAME_STA</displayName>
+          <description>LED frame status register</description>
+          <addressOffset>0x13</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>INHIBIT_CNT</name>
+              <description>Forbidden Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>REPEAT_CNT</name>
+              <description>PWM_REPEAT Counter</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_INTEN_ADJ</name>
+          <displayName>LED_INTEN_ADJ</displayName>
+          <description>LED brightness adjustment register</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>INTEN_ADJ</name>
+              <description>LED Strength adjust</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_RED_ADJ</name>
+          <displayName>LED_RED_ADJ</displayName>
+          <description>LED red adjustment register</description>
+          <addressOffset>0x15</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>RED_ADJ</name>
+              <description>Red LED Strength adjust</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_GREEN_ADJ</name>
+          <displayName>LED_GREEN_ADJ</displayName>
+          <description>LED green adjustment register</description>
+          <addressOffset>0x16</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>GREEN_ADJ</name>
+              <description>Green LED Strength adjust</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LED_BLUE_ADJ</name>
+          <displayName>LED_BLUE_ADJ</displayName>
+          <description>LED blue adjustment register</description>
+          <addressOffset>0x17</addressOffset>
+          <size>0x08</size>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>BLUE_ADJ_7_0</name>
+              <description>Blue LED Strength adjust</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LED_DMA</name>
+          <displayName>LED_DMA</displayName>
+          <description>DMA buffer current address register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x10</size>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>DMA</name>
+              <description>Cache DMA Address Buffer</description>
               <bitOffset>0</bitOffset>
               <bitWidth>16</bitWidth>
               <access>read-write</access>

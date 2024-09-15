@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.1" encoding="utf-8" standalone="no"?>
 <device schemaVersion="1.1"
 xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>WCH Ltd.</vendor>                                       <!-- device vendor name -->
   <vendorID>WCH</vendorID>                                        <!-- device vendor short name -->
-  <name>CH32V00xxx</name>
-  <version>1.2</version>
-  <description>CH32V00xxx View File</description>
+  <name>CH32V00Xxx</name>
+  <version>1.0</version>
+  <description>CH32V00Xxx View File</description>
   <!--Bus Interface Properties-->
   <!--RISC-V is byte addressable-->
 
@@ -48,13 +48,19 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <addressOffset>0x0</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <resetValue>0x00000408</resetValue>
           <fields>
             <field>
               <name>PDDS</name>
               <description>Power Down Deep Sleep</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LDO_MODE</name>
+              <description>LDO work mode Selection</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
             </field>
             <field>
               <name>PVDE</name>
@@ -67,7 +73,21 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>PLS</name>
               <description>PVD Level Selection</description>
               <bitOffset>5</bitOffset>
-              <bitWidth>3</bitWidth>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>FLASH_LP_REG</name>
+              <description>LP_REG enable</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>FLASH_LP</name>
+              <description>LP Config</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>2</bitWidth>
+			  <access>read-write</access>			  
             </field>
           </fields>
         </register>
@@ -186,6 +206,13 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <access>read-only</access>
             </field>
             <field>
+              <name>HSI_LP</name>
+              <description>Internal High Speed clock low-power mode enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
               <name>HSITRIM</name>
               <description>Internal High Speed clock
               trimming</description>
@@ -231,6 +258,27 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               enable</description>
               <bitOffset>19</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>HSE_LP</name>
+              <description>HSE_LP enable</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SYSCM_EN</name>
+              <description>System clock monitoring module enable</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>HSE_SI</name>
+              <description>HSE current supply regulation bit</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
               <access>read-write</access>
             </field>
             <field>
@@ -301,6 +349,20 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>3</bitWidth>
               <access>read-write</access>
             </field>
+            <field>
+              <name>ADC_CLK_ADJ</name>
+              <description>ADC clock duty cycle adjustment</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ADC_CLK_MODE</name>
+              <description>ADC clock mode</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
           </fields>
         </register>
         <register>
@@ -352,6 +414,13 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>LSIRDYIE</name>
               <description>LSI Ready Interrupt Enable</description>
               <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SYSCLK_FAILIE</name>
+              <description>System clock invalidation Interrupt Enable</description>
+              <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
@@ -415,10 +484,10 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           </fields>
         </register>
         <register>
-          <name>APB2PRSTR</name>
-          <displayName>APB2PRSTR</displayName>
+          <name>PB2PRSTR</name>
+          <displayName>PB2PRSTR</displayName>
           <description>PB2 peripheral reset register
-          (RCC_APB2PRSTR)</description>
+          (RCC_PB2PRSTR)</description>
           <addressOffset>0x0C</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -438,6 +507,12 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>IOPBRST</name>
+              <description>IO port B reset</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>IOPCRST</name>
               <description>IO port C reset</description>
               <bitOffset>4</bitOffset>
@@ -450,7 +525,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>ADC1RST</name>
+              <name>ADCRST</name>
               <description>ADC 1 interface reset</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
@@ -468,6 +543,12 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>USART2RST</name>
+              <description>USART2 reset</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>USART1RST</name>
               <description>USART1 reset</description>
               <bitOffset>14</bitOffset>
@@ -476,10 +557,10 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
 			</fields>
         </register>
         <register>
-          <name>APB1PRSTR</name>
-          <displayName>APB1PRSTR</displayName>
+          <name>PB1PRSTR</name>
+          <displayName>PB1PRSTR</displayName>
           <description>PB1 peripheral reset register
-          (RCC_APB1PRSTR)</description>
+          (RCC_PB1PRSTR)</description>
           <addressOffset>0x10</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -489,6 +570,12 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>TIM2RST</name>
               <description>TIM2 reset</description>
               <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+			<field>
+              <name>TIM3RST</name>
+              <description>TIM3 reset</description>
+              <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
@@ -512,10 +599,10 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           </fields>
         </register>
         <register>
-          <name>AHBPCENR</name>
-          <displayName>AHBPCENR</displayName>
+          <name>HBPCENR</name>
+          <displayName>HBPCENR</displayName>
           <description>HB Peripheral Clock enable register
-          (RCC_AHBPCENR)</description>
+          (RCC_HBPCENR)</description>
           <addressOffset>0x14</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -537,10 +624,10 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           </fields>
         </register>
         <register>
-          <name>APB2PCENR</name>
-          <displayName>APB2PCENR</displayName>
+          <name>PB2PCENR</name>
+          <displayName>PB2PCENR</displayName>
           <description>PB2 peripheral clock enable register
-          (RCC_APB2PCENR)</description>
+          (RCC_PB2PCENR)</description>
           <addressOffset>0x18</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -560,6 +647,12 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>IOPBEN</name>
+              <description>I/O port B clock enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>IOPCEN</name>
               <description>I/O port C clock enable</description>
               <bitOffset>4</bitOffset>
@@ -572,8 +665,8 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>ADC1EN</name>
-              <description>ADC1 interface clock
+              <name>ADCEN</name>
+              <description>ADC interface clock
               enable</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
@@ -591,6 +684,12 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>USART2EN</name>
+              <description>USART2 clock enable</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field> 
+            <field>
               <name>USART1EN</name>
               <description>USART1 clock enable</description>
               <bitOffset>14</bitOffset>
@@ -599,10 +698,10 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           </fields>
         </register>
         <register>
-          <name>APB1PCENR</name>
-          <displayName>APB1PCENR</displayName>
+          <name>PB1PCENR</name>
+          <displayName>PB1PCENR</displayName>
           <description>PB1 peripheral clock enable register
-          (RCC_APB1PCENR)</description>
+          (RCC_PB1PCENR)</description>
           <addressOffset>0x1C</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -614,6 +713,12 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
             </field>	
+            <field>
+              <name>TIM3EN</name>
+              <description>Timer 3 clock enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
             <field>
               <name>WWDGEN</name>
               <description>Window watchdog clock
@@ -662,9 +767,30 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <access>read-only</access>
             </field>
             <field>
+              <name>SYSCLK_FAILIF</name>
+              <description>System clock invalidation interrupt flag</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write0</access>
+            </field>
+            <field>
+              <name>ADCRSTF</name>
+              <description>ADC reset flag</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
               <name>RMVF</name>
               <description>Remove reset flag</description>
               <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>OPCMRSTF</name>
+              <description>OPA and CMP reset flag</description>
+              <bitOffset>25</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
@@ -704,13 +830,6 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
-            <field>
-              <name>LPWRRSTF</name>
-              <description>Low-power reset flag</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
           </fields>
         </register>
       </registers>
@@ -732,7 +851,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <description>Configure the extended control register</description>
           <addressOffset>0x00</addressOffset>
           <size>0x20</size>
-          <resetValue>0x00000400</resetValue>
+          <resetValue>0x00000040</resetValue>
           <fields> 
             <field>
               <name>LKUPEN</name>
@@ -749,32 +868,11 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <access>read/clear</access>
             </field>     
             <field>
-              <name>LDO_TRIM</name>
-              <description>LDO_TRIM</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>    
-            <field>
-                <name>OPAEN</name>
-                <description>OPA Enalbe</description>
-                <bitOffset>16</bitOffset>
-                <bitWidth>1</bitWidth>
-                <access>read-write</access>
-            </field> 
-            <field>
-                <name>OPANSEL</name>
-                <description>OPA negative end channel selection</description>
-                <bitOffset>17</bitOffset>
-                <bitWidth>1</bitWidth>
-                <access>read-write</access>
-            </field> 
-            <field>
-                <name>OPAPSEL</name>
-                <description>OPA positive end channel selection</description>
-                <bitOffset>18</bitOffset>
-                <bitWidth>1</bitWidth>
-                <access>read-write</access>
+               <name>TIM2_DMA_REMAP</name>
+               <description>TIN2 DMA multiplexing</description>
+               <bitOffset>16</bitOffset>
+               <bitWidth>1</bitWidth>
+               <access>read-write</access>
             </field> 
           </fields>
         </register>
@@ -805,7 +903,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>MODE0</name>
               <description>Port n.0 mode bits</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CNF0</name>
@@ -818,7 +916,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>MODE1</name>
               <description>Port n.1 mode bits</description>
               <bitOffset>4</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CNF1</name>
@@ -831,7 +929,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>MODE2</name>
               <description>Port n.2 mode bits</description>
               <bitOffset>8</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CNF2</name>
@@ -844,7 +942,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>MODE3</name>
               <description>Port n.3 mode bits</description>
               <bitOffset>12</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CNF3</name>
@@ -857,7 +955,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>MODE4</name>
               <description>Port n.4 mode bits</description>
               <bitOffset>16</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CNF4</name>
@@ -870,7 +968,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>MODE5</name>
               <description>Port n.5 mode bits</description>
               <bitOffset>20</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CNF5</name>
@@ -883,7 +981,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>MODE6</name>
               <description>Port n.6 mode bits</description>
               <bitOffset>24</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CNF6</name>
@@ -896,7 +994,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <name>MODE7</name>
               <description>Port n.7 mode bits</description>
               <bitOffset>28</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CNF7</name>
@@ -1264,6 +1362,10 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
       </registers>
     </peripheral>
     <peripheral derivedFrom="GPIOA">
+      <name>GPIOB</name>
+      <baseAddress>0x40010C00</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="GPIOA">
       <name>GPIOC</name>
       <baseAddress>0x40011000</baseAddress>
     </peripheral>
@@ -1282,103 +1384,6 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
         <usage>registers</usage>
       </addressBlock>
       <registers>
-        <register>
-          <name>PCFR1</name>
-          <displayName>PCFR1</displayName>
-          <description>AF remap and debug I/O configuration
-          register (AFIO_PCFR1)</description>
-          <addressOffset>0x4</addressOffset>
-          <size>0x20</size>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>SPI1_RM</name>
-              <description>SPI1 remapping</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>I2C1_RM</name>
-              <description>I2C1 remapping</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>USART1_RM</name>
-              <description>USART1 remapping</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>TIM1_RM</name>
-              <description>TIM1 remapping</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>TIM2_RM</name>
-              <description>TIM2 remapping</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PA12_RM</name>
-              <description>Port A1/Port A2 mapping on
-              OSCIN/OSCOUT</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>ADC1_ETRGINJ_RM</name>
-              <description>ADC 1 External trigger injected conversion remapping</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>ADC1_ETRGREG_RM</name>
-              <description>ADC 1 external trigger regular conversion remapping</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>USART1REMAP1</name>
-              <description>USART1 remapping</description>
-              <bitOffset>21</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>I2C1REMAP1</name>
-              <description>I2C1 remapping</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>TIM1_1_RM</name>
-              <description>TIM1_CH1 channel selection</description>
-              <bitOffset>23</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>SWCFG</name>
-              <description>Serial wire JTAG
-              configuration</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>3</bitWidth>
-              <access>write-only</access>
-            </field>
-          </fields>
-        </register>
         <register>
           <name>EXTICR</name>
           <displayName>EXTICR</displayName>
@@ -1437,6 +1442,88 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
                 <bitOffset>14</bitOffset>
                 <bitWidth>2</bitWidth>
             </field>
+          </fields>
+        </register>
+        <register>
+          <name>PCFR1</name>
+          <displayName>PCFR1</displayName>
+          <description>AF remap and debug I/O configuration
+          register (AFIO_PCFR1)</description>
+          <addressOffset>0xC</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SPI1_RM</name>
+              <description>SPI1 remapping</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>I2C1_RM</name>
+              <description>I2C1 remapping</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>USART1_RM</name>
+              <description>USART1 remapping</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>TIM1_RM</name>
+              <description>TIM1 remapping</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>TIM2_RM</name>
+              <description>TIM2 remapping</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PA1PA2_RM</name>
+              <description>Port A1/Port A2 mapping on
+              OSCIN/OSCOUT</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ADC_ETRGINJ_RM</name>
+              <description>ADC 1 External trigger injected conversion remapping</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ADC_ETRGREG_RM</name>
+              <description>ADC 1 external trigger regular conversion remapping</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>USART2_RM</name>
+              <description>USART2 remapping</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWCFG</name>
+              <description>configure the I/O port with the SW function and tracing function</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>			
           </fields>
         </register>
       </registers>
@@ -3607,26 +3694,30 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
                 enable</description>
                 <bitOffset>15</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>CAPOV</name>
                 <description>Timer capture value configuration
                 enable</description>
                 <bitOffset>14</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>CKD</name>
                 <description>Clock division</description>
                 <bitOffset>8</bitOffset>
                 <bitWidth>2</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>ARPE</name>
                 <description>Auto-reload preload enable</description>
                 <bitOffset>7</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>CMS</name>
                 <description>Center-aligned mode
@@ -3639,31 +3730,36 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
                 <description>Direction</description>
                 <bitOffset>4</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>OPM</name>
                 <description>One-pulse mode</description>
                 <bitOffset>3</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>URS</name>
                 <description>Update request source</description>
                 <bitOffset>2</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>UDIS</name>
                 <description>Update disable</description>
                 <bitOffset>1</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>CEN</name>
                 <description>Counter enable</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             </fields>
         </register>
         <register>
@@ -3680,76 +3776,88 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
                 <description>Output Idle state 4</description>
                 <bitOffset>14</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>OIS3N</name>
                 <description>Output Idle state 3</description>
                 <bitOffset>13</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>OIS3</name>
                 <description>Output Idle state 3</description>
                 <bitOffset>12</bitOffset>
                 <bitWidth>1</bitWidth>
+                <access>read-write</access>
             </field>
             <field>
                 <name>OIS2N</name>
                 <description>Output Idle state 2</description>
                 <bitOffset>11</bitOffset>
                 <bitWidth>1</bitWidth>
+                <access>read-write</access>
             </field>
             <field>
                 <name>OIS2</name>
                 <description>Output Idle state 2</description>
                 <bitOffset>10</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>OIS1N</name>
                 <description>Output Idle state 1</description>
                 <bitOffset>9</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>OIS1</name>
                 <description>Output Idle state 1</description>
                 <bitOffset>8</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>TI1S</name>
                 <description>TI1 selection</description>
                 <bitOffset>7</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>MMS</name>
                 <description>Master mode selection</description>
                 <bitOffset>4</bitOffset>
                 <bitWidth>3</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>CCDS</name>
                 <description>Capture/compare DMA
                 selection</description>
                 <bitOffset>3</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>CCUS</name>
                 <description>Capture/compare control update
                 selection</description>
                 <bitOffset>2</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+				</field>
             <field>
                 <name>CCPC</name>
                 <description>Capture/compare preloaded
                 control</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>1</bitWidth>
-            </field>
+                <access>read-write</access>
+			</field>
             </fields>
         </register>
         <register>
@@ -4488,7 +4596,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <addressOffset>0x2C</addressOffset>
             <size>0x20</size>
             <access>read-write</access>
-            <resetValue>0xFFFF</resetValue>
+            <resetValue>0x0000</resetValue>
             <fields>
             <field>
                 <name>ATRLR</name>
@@ -4521,7 +4629,6 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <description>capture/compare register 1</description>
             <addressOffset>0x34</addressOffset>
             <size>0x20</size>
-            <access>read-write</access>
             <resetValue>0x0000</resetValue>
             <fields>
             <field>
@@ -4529,6 +4636,14 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
                 <description>Capture/Compare 1 value</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>16</bitWidth>
+                <access>read-write</access>
+            </field>
+            <field>
+              <name>LEVEL1</name>
+              <description>Level indicating bit</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-only</access>
             </field>
             </fields>
         </register>
@@ -4538,7 +4653,6 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <description>capture/compare register 2</description>
             <addressOffset>0x38</addressOffset>
             <size>0x20</size>
-            <access>read-write</access>
             <resetValue>0x0000</resetValue>
             <fields>
             <field>
@@ -4546,6 +4660,14 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
                 <description>Capture/Compare 2 value</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>16</bitWidth>
+                <access>read-write</access>
+            </field>
+            <field>
+              <name>LEVEL2</name>
+              <description>Level indicating bit</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-only</access>
             </field>
             </fields>
         </register>
@@ -4555,7 +4677,6 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <description>capture/compare register 3</description>
             <addressOffset>0x3C</addressOffset>
             <size>0x20</size>
-            <access>read-write</access>
             <resetValue>0x0000</resetValue>
             <fields>
             <field>
@@ -4563,6 +4684,14 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
                 <description>Capture/Compare value</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>16</bitWidth>
+                <access>read-write</access>
+            </field>
+            <field>
+              <name>LEVEL3</name>
+              <description>Level indicating bit</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-only</access>
             </field>
             </fields>
         </register>
@@ -4572,7 +4701,6 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <description>capture/compare register 4</description>
             <addressOffset>0x40</addressOffset>
             <size>0x20</size>
-            <access>read-write</access>
             <resetValue>0x0000</resetValue>
             <fields>
             <field>
@@ -4580,6 +4708,14 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
                 <description>Capture/Compare value</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>16</bitWidth>
+                <access>read-write</access>
+            </field>
+            <field>
+              <name>LEVEL4</name>
+              <description>Level indicating bit</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-only</access>
             </field>
             </fields>
         </register>
@@ -4677,7 +4813,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <resetValue>0x0000</resetValue>
             <fields>
             <field>
-                <name>DMAB</name>
+                <name>DMAADR</name>
                 <description>DMA register for burst
                 accesses</description>
                 <bitOffset>0</bitOffset>
@@ -4957,7 +5093,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <description>status register</description>
             <addressOffset>0x10</addressOffset>
             <size>0x20</size>
-            <access>read-write</access>
+            <access>write-only</access>
             <resetValue>0x0000</resetValue>
             <fields>
             <field>
@@ -5452,7 +5588,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <addressOffset>0x2C</addressOffset>
             <size>0x20</size>
             <access>read-write</access>
-            <resetValue>0xFFFF</resetValue>
+            <resetValue>0x0000</resetValue>
             <fields>
             <field>
                 <name>ATRLR</name>
@@ -5468,14 +5604,21 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <description>capture/compare register 1</description>
             <addressOffset>0x34</addressOffset>
             <size>0x20</size>
-            <access>read-write</access>
-            <resetValue>0x0000</resetValue>
+            <resetValue>0x00000000</resetValue>
             <fields>
             <field>
                 <name>CH1CVR</name>
                 <description>Capture/Compare 1 value</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>16</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>LEVEL1</name>
+              <description>Level indicating bit</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-only</access>
             </field>
             </fields>
         </register>
@@ -5485,14 +5628,21 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <description>capture/compare register 2</description>
             <addressOffset>0x38</addressOffset>
             <size>0x20</size>
-            <access>read-write</access>
-            <resetValue>0x0000</resetValue>
+            <resetValue>0x00000000</resetValue>
             <fields>
             <field>
                 <name>CH2CVR</name>
                 <description>Capture/Compare 2 value</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>16</bitWidth>
+			    <access>read-write</access>
+            </field>
+            <field>
+              <name>LEVEL2</name>
+              <description>Level indicating bit</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-only</access>
             </field>
             </fields>
         </register>
@@ -5502,14 +5652,21 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <description>capture/compare register 3</description>
             <addressOffset>0x3C</addressOffset>
             <size>0x20</size>
-            <access>read-write</access>
-            <resetValue>0x0000</resetValue>
+            <resetValue>0x00000000</resetValue>
             <fields>
             <field>
                 <name>CH3CVR</name>
                 <description>Capture/Compare 3 value</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>16</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>LEVEL3</name>
+              <description>Level indicating bit</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-only</access>
             </field>
             </fields>
         </register>
@@ -5519,14 +5676,87 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <description>capture/compare register 4</description>
             <addressOffset>0x40</addressOffset>
             <size>0x20</size>
-            <access>read-write</access>
-            <resetValue>0x0000</resetValue>
+            <resetValue>0x00000000</resetValue>
             <fields>
             <field>
                 <name>CH4CVR</name>
                 <description>Capture/Compare 4 value</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>16</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>LEVEL4</name>
+              <description>Level indicating bit</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-only</access>
+            </field>
+            </fields>
+        </register>
+        <register>
+            <name>DTCR</name>
+            <displayName>DTCR</displayName>
+            <description>Dead zone function configures the register</description>
+            <addressOffset>0x44</addressOffset>
+            <size>0x20</size>
+            <resetValue>0x00000000</resetValue>
+            <fields>
+            <field>
+                <name>DT2</name>
+                <description>TIMER2 channel2 dead-time setting</description>
+                <bitOffset>12</bitOffset>
+                <bitWidth>4</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>DT1</name>
+              <description>TIMER2 channel1 dead-time setting</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>DT2N_P</name>
+              <description>Channel2 complements the channel output polarity setting bit</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>DT2_P</name>
+              <description>Channel2 output polarity setting bit</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>DT1N_P</name>
+              <description>Channel1 complements the channel output polarity setting bit</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>DT1_P</name>
+              <description>Channel1 output polarity setting bit</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>OC2N_EN</name>
+              <description>Channel2 and complementary channels output tne enable bit</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+            <field>
+              <name>OC1N_EN</name>
+              <description>Channel1 and complementary channels output tne enable bit</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
             </field>
             </fields>
         </register>
@@ -5571,6 +5801,221 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             </field>
             </fields>
         </register>
+        </registers>
+    </peripheral>
+    <peripheral>
+        <name>TIM3</name>
+        <description>General reduced timer</description>
+        <groupName>TIM</groupName>
+        <baseAddress>0x40000800</baseAddress>
+        <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+        </addressBlock>
+        <registers>
+        <register>
+            <name>CTLR</name>
+            <displayName>CTLR</displayName>
+            <description>control register</description>
+            <addressOffset>0x0</addressOffset>
+            <size>0x10</size>
+            <access>read-write</access>
+            <resetValue>0x0000</resetValue>
+            <fields>
+            <field>
+                <name>SMS</name>
+                <description>mode selection</description>
+                <bitOffset>8</bitOffset>
+                <bitWidth>3</bitWidth>
+            </field>
+            <field>
+                <name>ARPE</name>
+                <description>Auto-reload preload enable</description>
+                <bitOffset>7</bitOffset>
+                <bitWidth>1</bitWidth>
+            </field>
+            <field>
+                <name>CMS</name>
+                <description>Center-aligned mode
+                selection</description>
+                <bitOffset>5</bitOffset>
+                <bitWidth>2</bitWidth>
+            </field>
+            <field>
+                <name>DIR</name>
+                <description>Direction</description>
+                <bitOffset>4</bitOffset>
+                <bitWidth>1</bitWidth>
+            </field>
+            <field>
+                <name>UDIS</name>
+                <description>Update disable</description>
+                <bitOffset>1</bitOffset>
+                <bitWidth>1</bitWidth>
+            </field>
+            <field>
+                <name>CEN</name>
+                <description>Counter enable</description>
+                <bitOffset>0</bitOffset>
+                <bitWidth>1</bitWidth>
+            </field>
+            </fields>
+        </register>
+        <register>
+          <name>DMAINTENR</name>
+          <displayName>DMAINTENR</displayName>
+          <description>DMA enable register</description>
+          <addressOffset>0x4</addressOffset>
+          <size>0x10</size>
+          <resetValue>0x0000</resetValue>
+          <fields>
+			<field>
+              <name>CC4DE</name>
+              <description>Compare channel4 DMA request enable</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+			<field>
+              <name>CC3DE</name>
+              <description>Compare channel3 DMA request enable</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+			<field>
+              <name>OC4PE</name>
+              <description>Compare register 4 preload enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+			<field>
+              <name>OC3PE</name>
+              <description>Compare register 3 preload enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+			<field>
+              <name>OC2PE</name>
+              <description>Compare register 2 preload enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+			<field>
+              <name>OC1PE</name>
+              <description>Compare register 1 preload enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+            </fields>
+        </register>
+        <register>
+          <name>CNT</name>
+          <displayName>CNT</displayName>
+          <description>counter</description>
+          <addressOffset>0x8</addressOffset>
+          <size>0x10</size>
+          <resetValue>0x0000</resetValue>
+          <fields>
+			<field>
+              <name>CNT</name>
+              <description>counter value</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+			  <access>read-write</access>
+            </field>
+          </fields>
+        </register>		
+        <register>
+          <name>ATRLR</name>
+          <displayName>ATRLR</displayName>
+          <description>auto-reload register</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>0x10</size>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>ATRLR</name>
+              <description>Auto-reload value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+			  <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CH1CVR</name>
+          <displayName>CH1CVR</displayName>
+          <description>compare register 1</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x10</size>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>CH1CVR</name>
+              <description>Capture/Compare 1 value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+			  <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CH2CVR</name>
+          <displayName>CH2CVR</displayName>
+          <description>compare register 2</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x10</size>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>CH2CVR</name>
+              <description>Capture/Compare 2 value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+			  <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CH3CVR</name>
+          <displayName>CH3CVR</displayName>
+          <description>compare register 3</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x10</size>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>CH3CVR</name>
+              <description>Compare 3 value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+			  <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CH4CVR</name>
+          <displayName>CH4CVR</displayName>
+          <description>compare register 4</description>
+          <addressOffset>0x1C</addressOffset>
+          <size>0x10</size>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>CH4CVR</name>
+              <description>Compare 4 value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+			  <access>read-write</access>
+            </field>
+          </fields>
+        </register>		
         </registers>
     </peripheral>
     <peripheral>
@@ -6211,7 +6656,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <resetValue>0x0000</resetValue>
             <fields>
             <field>
-                <name>DATAR</name>
+                <name>DR</name>
                 <description>Data register</description>
                 <bitOffset>0</bitOffset>
                 <bitWidth>16</bitWidth>
@@ -6287,7 +6732,480 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
         </fields>
       </register>
       </registers>
-    </peripheral>   
+    </peripheral>
+    <peripheral>
+        <name>OPA</name>
+        <description>OPA and CMP</description>
+        <groupName>SPI</groupName>
+        <baseAddress>0x40024000</baseAddress>
+        <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+        </addressBlock>
+        <interrupt>
+        <name>OPCM</name>
+        <description>OPA and CMP global interrupt</description>
+        <value>40</value>
+        </interrupt>
+        <registers>		
+        <register>
+        <name>OPA_CFGR1</name>
+        <displayName>CFGR</displayName>
+        <description>OPA configuration register</description>
+        <addressOffset>0x0</addressOffset>
+        <size>0x20</size>
+        <resetValue>0x00000000</resetValue>
+        <fields>
+        <field>
+            <name>POLL_LOCK</name>
+            <description>POLL LOCK</description>
+            <bitOffset>31</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-only</access>
+        </field>
+        <field>
+            <name>POLL_SEL</name>
+            <description>POLL polling trigger events selection</description>
+            <bitOffset>25</bitOffset>
+            <bitWidth>3</bitWidth>
+            <access>read-write</access>
+        </field>	
+		<field>
+            <name>POLL_SWSTRT</name>
+            <description>Start POLL polling</description>
+            <bitOffset>24</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>write-only</access>
+        </field>	
+        <field>
+            <name>POLL_CH3</name>
+            <description>POLL polling trigger events selection</description>
+            <bitOffset>20</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>		
+        <field>
+            <name>POLL_CH2</name>
+            <description>POLL polling trigger events selection</description>
+            <bitOffset>18</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>		
+        <field>
+            <name>POLL_CH1</name>
+            <description>POLL polling trigger events selection</description>
+            <bitOffset>16</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>IF_OUT_POLL_CH3</name>
+            <description>Interrupt flag is polled until the OPA1 output is high</description>
+            <bitOffset>14</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>IF_OUT_POLL_CH2</name>
+            <description>Interrupt flag is polled until the OPA1 output is high</description>
+            <bitOffset>13</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>		
+        <field>
+            <name>IF_OUT_POLL_CH1</name>
+            <description>Interrupt flag is polled until the OPA1 output is high</description>
+            <bitOffset>12</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>NMI_EN</name>
+            <description>OPA connection NMI interrupt enabled</description>
+            <bitOffset>10</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>IE_OUT1</name>
+            <description>OPA1 interrupt enable</description>
+            <bitOffset>8</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>AUTO_ADC_CFG</name>
+            <description>OPA automatically polls</description>
+            <bitOffset>7</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>SETUP_CFG</name>
+            <description>OPA establishes the time configuration</description>
+            <bitOffset>5</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>RST_EN1</name>
+            <description>OPA1 reset system enable</description>
+            <bitOffset>4</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>POLL1_NUM</name>
+            <description>configure the number of positive for OPA1 polling</description>
+            <bitOffset>2</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>POLL_EN</name>
+            <description>OPA1 positive end is enable by polling</description>
+            <bitOffset>0</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>	
+        </fields>
+      </register>
+        <register>
+        <name>OPA_CTLR1</name>
+        <displayName>CTLR</displayName>
+        <description>OPA control register</description>
+        <addressOffset>0x04</addressOffset>
+        <size>0x20</size>
+        <resetValue>0x800C0736</resetValue>
+        <fields>
+        <field>
+            <name>OPA_LOCK</name>
+            <description>OPA LOCK</description>
+            <bitOffset>31</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>OPA_HS1</name>
+            <description>OPA1 high-speed mode enabled</description>
+            <bitOffset>20</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>VBCMPSEL</name>
+            <description>Reference voltage at the negative end of CMP2 is given</description>
+            <bitOffset>18</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>VBSEL</name>
+            <description>Reference voltage selection at the positive end in PGA mode</description>
+            <bitOffset>17</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>VBEN</name>
+            <description>Positive terminal reference voltage is enable in PGA mode</description>
+            <bitOffset>16</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>PGADIF</name>
+            <description>Linked switch</description>
+            <bitOffset>12</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>FB_EN1</name>
+            <description>OPA1 is enable by internal feedback resistor</description>
+            <bitOffset>11</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>NSEL1</name>
+            <description>OPA1 minus end input channel and gain selection when used as PGA</description>
+            <bitOffset>8</bitOffset>
+            <bitWidth>3</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>PSEL1</name>
+            <description>OPA1 positive input channel selection</description>
+            <bitOffset>4</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>MODE1</name>
+            <description>OPA1 output channel selection</description>
+            <bitOffset>1</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>OPA_EN1</name>
+            <description>OPA1 enable</description>
+            <bitOffset>0</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+		</fields>
+      </register>
+        <register>
+        <name>OPA_CFGR2</name>
+        <displayName>CFGR</displayName>
+        <description>CMP configuration register</description>
+        <addressOffset>0x08</addressOffset>
+        <size>0x20</size>
+        <resetValue>0x00000000</resetValue>
+        <fields>		
+        <field>
+            <name>POLL_CH3</name>
+            <description>POLL polling trigger events selection</description>
+            <bitOffset>29</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>		
+        <field>
+            <name>POLL_CH2</name>
+            <description>POLL polling trigger events selection</description>
+            <bitOffset>27</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>		
+        <field>
+            <name>POLL_CH1</name>
+            <description>POLL polling trigger events selection</description>
+            <bitOffset>25</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>POLL_VLU</name>
+            <description>Configure CMP1 positive end polling  interval</description>
+            <bitOffset>16</bitOffset>
+            <bitWidth>9</bitWidth>
+            <access>read-write</access>
+        </field>		
+        <field>
+            <name>IF_CNT</name>
+            <description>Interrupt flag at end of polling interval for CMP1</description>
+            <bitOffset>15</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>IF_OUT_POLL_CH3</name>
+            <description>Interrupt flag is polled until the CMP1 output is high</description>
+            <bitOffset>14</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>IF_OUT_POLL_CH2</name>
+            <description>Interrupt flag is polled until the CMP1 output is high</description>
+            <bitOffset>13</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>IF_OUT_POLL_CH1</name>
+            <description>Interrupt flag is polled until the CMP1 output is high</description>
+            <bitOffset>12</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>IE_CNT</name>
+            <description>Interrupt at end of CMP1 polling interval is enabled</description>
+            <bitOffset>9</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>IE_OUT1</name>
+            <description>CMP1 interrupt enable</description>
+            <bitOffset>8</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>RST_EN2</name>
+            <description>CMP2 reset system enable</description>
+            <bitOffset>5</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>RST_EN1</name>
+            <description>CMP1 reset system enable</description>
+            <bitOffset>4</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>POLL1_NUM</name>
+            <description>configure the number of positive for CMP1 polling</description>
+            <bitOffset>2</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>POLL_EN</name>
+            <description>CMP1 positive end is enable by polling</description>
+            <bitOffset>0</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>	
+        </fields>
+      </register>	  
+        <register>
+        <name>OPA_CTLR2</name>
+        <displayName>CFGR</displayName>
+        <description>OPA configuration register 2</description>
+        <addressOffset>0x0C</addressOffset>
+        <size>0x20</size>
+        <resetValue>0x80000078</resetValue>
+        <fields>		
+        <field>
+            <name>CMP_LOCK</name>
+            <description>CMP LOCK</description>
+            <bitOffset>31</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>	  
+        <field>
+            <name>BKIN_CFG</name>
+            <description>TIM1 break source configuration</description>
+            <bitOffset>26</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>FILT_SEL</name>
+            <description>CMP output digital filter length selection</description>
+            <bitOffset>25</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>FILT_EN</name>
+            <description>CMP digital filter enable</description>
+            <bitOffset>24</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>CMP_EN2</name>
+            <description>CMP2 enable</description>
+            <bitOffset>16</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>RMID1</name>
+            <description>CMP1 positive input channel virtual center point enable</description>
+            <bitOffset>8</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>HYEN1</name>
+            <description>CMP1 hysteresis comparator switch</description>
+            <bitOffset>7</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>PSEL1</name>
+            <description>Input channel selection at the positive end of CMP1</description>
+            <bitOffset>5</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>NSEL1</name>
+            <description>Input channel selection at the negative end of CMP1</description>
+            <bitOffset>3</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>MODE1</name>
+            <description>CMP1 output mode selection</description>
+            <bitOffset>1</bitOffset>
+            <bitWidth>2</bitWidth>
+            <access>read-write</access>
+        </field>
+        <field>
+            <name>CMP_EN1</name>
+            <description>CMP1 enable</description>
+            <bitOffset>0</bitOffset>
+            <bitWidth>1</bitWidth>
+            <access>read-write</access>
+        </field>		
+        </fields>
+      </register>
+        <register>
+          <name>OPA_KEY</name>
+          <displayName>OPA_KEY</displayName>
+          <description>OPA unlock key register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>OPA_KEY</name>
+              <description>OPA_KEY value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CMP_KEY</name>
+          <displayName>CMP_KEY</displayName>
+          <description>CMP unlock key register</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CMP_KEY</name>
+              <description>CMP_KEY value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>POLL_KEY</name>
+          <displayName>POLL_KEY</displayName>
+          <description>POLL unlock key register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>POLL_KEY</name>
+              <description>POLL_KEY value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>	  
+      </registers> 
+    </peripheral>
     <peripheral>
         <name>USART1</name>
         <description>Universal synchronous asynchronous receiver
@@ -6545,30 +7463,6 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
                 <bitWidth>2</bitWidth>
             </field>
             <field>
-                <name>CLKEN</name>
-                <description>Clock enable</description>
-                <bitOffset>11</bitOffset>
-                <bitWidth>1</bitWidth>
-            </field>
-            <field>
-                <name>CPOL</name>
-                <description>Clock polarity</description>
-                <bitOffset>10</bitOffset>
-                <bitWidth>1</bitWidth>
-            </field>
-            <field>
-                <name>CPHA</name>
-                <description>Clock phase</description>
-                <bitOffset>9</bitOffset>
-                <bitWidth>1</bitWidth>
-            </field>
-            <field>
-                <name>LBCL</name>
-                <description>Last bit clock pulse</description>
-                <bitOffset>8</bitOffset>
-                <bitWidth>1</bitWidth>
-            </field>
-            <field>
                 <name>LBDIE</name>
                 <description>LIN break detection interrupt
                 enable</description>
@@ -6629,18 +7523,6 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
                 <bitWidth>1</bitWidth>
             </field>
             <field>
-                <name>SCEN</name>
-                <description>Smartcard mode enable</description>
-                <bitOffset>5</bitOffset>
-                <bitWidth>1</bitWidth>
-            </field>
-            <field>
-                <name>NACK</name>
-                <description>Smartcard NACK enable</description>
-                <bitOffset>4</bitOffset>
-                <bitWidth>1</bitWidth>
-            </field>
-            <field>
                 <name>HDSEL</name>
                 <description>Half-duplex selection</description>
                 <bitOffset>3</bitOffset>
@@ -6677,12 +7559,6 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <resetValue>0x00000000</resetValue>
             <fields>
             <field>
-                <name>GT</name>
-                <description>Guard time value</description>
-                <bitOffset>8</bitOffset>
-                <bitWidth>8</bitWidth>
-            </field>
-            <field>
                 <name>PSC</name>
                 <description>Prescaler value</description>
                 <bitOffset>0</bitOffset>
@@ -6692,10 +7568,19 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
         </register>
         </registers>
     </peripheral>
+    <peripheral derivedFrom="USART1">
+      <name>USART2</name>
+      <baseAddress>0x40004400</baseAddress>
+      <interrupt>
+        <name>USART2</name>
+        <description>USART2 global interrupt</description>
+        <value>39</value>
+      </interrupt>
+    </peripheral>	
     <peripheral>
-      <name>ADC1</name>
+      <name>ADC_TKEY</name>
       <description>Analog to digital converter</description>
-      <groupName>ADC1</groupName>
+      <groupName>ADC</groupName>
       <baseAddress>0x40012400</baseAddress>
       <addressBlock>
         <offset>0x0</offset>
@@ -6762,10 +7647,22 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>CALVOL</name>
-              <description>ADC Calibration voltage selection</description>
+              <name>BUFEN</name>
+              <description>ADC buffer enable</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>		  
+            <field>
+              <name>TKITUNE</name>
+              <description>Touchkey current regulation</description>
               <bitOffset>25</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TKENABLE</name>
+              <description>Touchkey module enable control</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>AWDEN</name>
@@ -6915,6 +7812,18 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>TGINJE</name>
+              <description>External trigger events that inject transitions</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TGREGU</name>
+              <description>External firing events for regular channel transitions</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>			
+            <field>
               <name>RSTCAL</name>
               <description>Reset calibration</description>
               <bitOffset>3</bitOffset>
@@ -6942,7 +7851,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
         </register>
         <register>
           <name>SAMPTR1</name>
-          <displayName>SAMPTR1_CHARGE1</displayName>
+          <displayName>SAMPTR1</displayName>
           <description>sample time register 1</description>
           <addressOffset>0xC</addressOffset>
           <size>0x20</size>
@@ -6956,46 +7865,11 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitOffset>0</bitOffset>
               <bitWidth>3</bitWidth>
             </field>
-            <field>
-              <name>SMP11</name>
-              <description>Channel 11 sample time
-              selection</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>3</bitWidth>
-            </field>
-            <field>
-              <name>SMP12_TKCG12</name>
-              <description>Channel 12 sample time
-              selection</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>3</bitWidth>
-            </field>
-            <field>
-              <name>SMP13</name>
-              <description>Channel 13 sample time
-              selection</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>3</bitWidth>
-            </field>
-            <field>
-              <name>SMP14</name>
-              <description>Channel 14 sample time
-              selection</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>3</bitWidth>
-            </field>
-            <field>
-              <name>SMP15</name>
-              <description>Channel 15 sample time
-              selection</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>3</bitWidth>
-            </field>
           </fields>
         </register>
         <register>
           <name>SAMPTR2</name>
-          <displayName>SAMPTR2_CHARGE2</displayName>
+          <displayName>SAMPTR2</displayName>
           <description>sample time register 2</description>
           <addressOffset>0x10</addressOffset>
           <size>0x20</size>
@@ -7045,7 +7919,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>3</bitWidth>
             </field>
             <field>
-              <name>SMP6_TKCG6</name>
+              <name>SMP6</name>
               <description>Channel 6 sample time
               selection</description>
               <bitOffset>18</bitOffset>
@@ -7078,7 +7952,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <name>IOFR1</name>
           <displayName>IOFR1</displayName>
           <description>injected channel data offset register
-          x</description>
+          1</description>
           <addressOffset>0x14</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -7087,9 +7961,9 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <field>
               <name>JOFFSET1</name>
               <description>Data offset for injected channel
-              x</description>
+              1</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>10</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
           </fields>
         </register>
@@ -7097,7 +7971,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <name>IOFR2</name>
           <displayName>IOFR2</displayName>
           <description>injected channel data offset register
-          x</description>
+          2</description>
           <addressOffset>0x18</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -7106,9 +7980,9 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <field>
               <name>JOFFSET2</name>
               <description>Data offset for injected channel
-              x</description>
+              2</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>10</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
           </fields>
         </register>
@@ -7116,7 +7990,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <name>IOFR3</name>
           <displayName>IOFR3</displayName>
           <description>injected channel data offset register
-          x</description>
+          3</description>
           <addressOffset>0x1C</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -7125,9 +7999,9 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <field>
               <name>JOFFSET3</name>
               <description>Data offset for injected channel
-              x</description>
+              3</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>10</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
           </fields>
         </register>
@@ -7135,7 +8009,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <name>IOFR4</name>
           <displayName>IOFR4</displayName>
           <description>injected channel data offset register
-          x</description>
+          4</description>
           <addressOffset>0x20</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -7144,9 +8018,9 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             <field>
               <name>JOFFSET4</name>
               <description>Data offset for injected channel
-              x</description>
+              4</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>10</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
           </fields>
         </register>
@@ -7158,14 +8032,14 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <addressOffset>0x24</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
-          <resetValue>0x000003FF</resetValue>
+          <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>HT</name>
               <description>Analog watchdog higher
               threshold</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>10</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
           </fields>
         </register>
@@ -7184,7 +8058,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <description>Analog watchdog lower
               threshold</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>10</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
           </fields>
         </register>
@@ -7386,19 +8260,26 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           </fields>
         </register>
         <register>
-          <name>IDATAR1</name>
-          <displayName>IDATAR1</displayName>
-          <description>injected data register 1</description>
+          <name>IDATAR1_TKEY_CHG</name>
+          <displayName>IDATAR1_TKEY_CHG</displayName>
+          <description>injected data register 1_Charge time configuration register</description>
           <addressOffset>0x3C</addressOffset>
           <size>0x20</size>
-          <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>IDATA</name>
-              <description>Injected data</description>
+              <name>JDATA0_10_TKCHARGE</name>
+              <description>Injected data_Touch key charge data offset for injected channel x</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>16</bitWidth>
+              <bitWidth>11</bitWidth>
+              <access>read-only_write-only</access>
+            </field>
+            <field>
+              <name>JDATA11_15</name>
+              <description>Injected data</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>5</bitWidth>
+              <access>read-only</access>			  
             </field>
           </fields>
         </register>
@@ -7454,192 +8335,193 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           </fields>
         </register>
         <register>
-          <name>RDATAR</name>
-          <displayName>RDATAR</displayName>
-          <description>regular data register</description>
+          <name>RDATAR_TKEY_DISCHG_TKEY_DR</name>
+          <displayName>RDATAR_TKEY_DISCHG_TKEY_DR</displayName>
+          <description>regular data register_start and discharge time register_tkey data register</description>
           <addressOffset>0x4C</addressOffset>
           <size>0x20</size>
-          <access>read-only</access>
+          <access>read-only_write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
-			<field>
-              <name>DATA</name>
-              <description>Regular data</description>
+            <field>
+              <name>DATA0_10_TKACT_DCG_DATA</name>
+              <description>Regular data_converted data</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
+              <bitWidth>11</bitWidth>
+            </field>
+            <field>
+              <name>DATA11_15_DATA</name>
+              <description>Regular data_converted data</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>5</bitWidth>
             </field>
           </fields>
         </register>
         <register>
-            <name>DLYR</name>
-            <displayName>DLYR</displayName>
-            <description>delay data register</description>
+            <name>CTLR3</name>
+            <displayName>CTLR3</displayName>
+            <description>Control register 3</description>
             <addressOffset>0x50</addressOffset>
             <size>0x20</size>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
-                <name>DLYVLU</name>
-                <description>External trigger data delay time configuration</description>
-                <bitOffset>0</bitOffset>
-                <bitWidth>9</bitWidth>
-              </field>
-              <field>
-                <name>DLYSRC</name>
-                <description>External trigger source delay selection</description>
-                <bitOffset>9</bitOffset>
+                <name>DRV_OUTEN_7</name>
+                <description>Touchkey channel 7 masking enable</description>
+                <bitOffset>23</bitOffset>
                 <bitWidth>1</bitWidth>
               </field>
+              <field>
+                <name>DRV_OUTEN_6</name>
+                <description>Touchkey channel 6 masking enable</description>
+                <bitOffset>22</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>DRV_OUTEN_5</name>
+                <description>Touchkey channel 5 masking enable</description>
+                <bitOffset>21</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>DRV_OUTEN_4</name>
+                <description>Touchkey channel 4 masking enable</description>
+                <bitOffset>20</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>DRV_OUTEN_3</name>
+                <description>Touchkey channel 3 masking enable</description>
+                <bitOffset>19</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>DRV_OUTEN_2</name>
+                <description>Touchkey channel 2 masking enable</description>
+                <bitOffset>18</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>DRV_OUTEN_1</name>
+                <description>Touchkey channel 1 masking enable</description>
+                <bitOffset>17</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>DRV_OUTEN_0</name>
+                <description>Touchkey channel 0 masking enable</description>
+                <bitOffset>16</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>AWD2_RES</name>
+                <description>Analog Watchdog 2 compares the results</description>
+                <bitOffset>10</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>AWD1_RES</name>
+                <description>Analog Watchdog 1 compares the results</description>
+                <bitOffset>9</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>			  
+              <field>
+                <name>AWD0_RES</name>
+                <description>Analog Watchdog 0 compares the results</description>
+                <bitOffset>8</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>			  
+              <field>
+                <name>AWD2_RST_EN</name>
+                <description>Analog Watchdog 2 output reset enable bit</description>
+                <bitOffset>6</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>AWD1_RST_EN</name>
+                <description>Analog Watchdog 1 output reset enable bit</description>
+                <bitOffset>5</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>			  
+              <field>
+                <name>AWD0_RST_EN</name>
+                <description>Analog Watchdog 0 output reset enable bit</description>
+                <bitOffset>4</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>AWD_SCAN</name>
+                <description>Analog Watchdog sans the enable</description>
+                <bitOffset>3</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>DRVEN</name>
+                <description>Touchkey multiple masking enable bit</description>
+                <bitOffset>2</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>DUTYEN</name>
+                <description>ADC clock duty control bit</description>
+                <bitOffset>1</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>
+              <field>
+                <name>ADC_LP</name>
+                <description>ADC low-power mode control bit</description>
+                <bitOffset>0</bitOffset>
+                <bitWidth>1</bitWidth>
+              </field>			  
             </fields>
           </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>DBG</name>
-      <description>Debug support</description>
-      <groupName>DBG</groupName>
-      <baseAddress>0xE000D000</baseAddress>
-      <addressBlock>
-        <offset>0x0</offset>
-        <size>0x400</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
         <register>
-          <name>CR</name>
-          <displayName>CR</displayName>
-          <description>DBGMCU_CFGR1</description>
-          <addressOffset>0x0</addressOffset>
+          <name>WDTR1</name>
+          <displayName>WDTR1</displayName>
+          <description>ADC watchdog 1 threshold register</description>
+          <addressOffset>0x54</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
-          <resetValue>0x0</resetValue>
+          <resetValue>0x0FFF0000</resetValue>
           <fields>
             <field>
-              <name>SLEEP</name>
-              <description>Debug Sleep mode</description>
+              <name>HTR1</name>
+              <description>Analog watchdog higher threshold setting value</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+            <field>
+              <name>LTR1</name>
+              <description>Analog watchdog lower threshold setting value</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>STOP</name>
-              <description>Debug stop mode</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>STANDBY</name>
-              <description>Debug standby mode</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>IWDG_STOP</name>
-              <description>IWDG_STOP</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>                            
-            <field>
-              <name>WWDG_STOP</name>
-              <description>WWDG_STOP</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-			<field>
-              <name>TIM1_STOP</name>
-              <description>TIM1_STOP</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TIM2_STOP</name>
-              <description>TIM2_STOP</description>
-              <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>ESIG</name>
-      <description>Device electronic signature</description>
-      <groupName>ESIG</groupName>
-      <baseAddress>0x1FFFF7E0</baseAddress>
-      <addressBlock>
-        <offset>0x0</offset>
-        <size>0x14</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>FLACAP</name>
-          <displayName>FLACAP</displayName>
-          <description>Flash capacity register</description>
-          <addressOffset>0x0</addressOffset>
-          <size>0x10</size>
-          <access>read-only</access>
-          <resetValue>0x0000</resetValue>
-          <fields>
-            <field>
-              <name>F_SIZE_15_0</name>
-              <description>Flash size</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>16</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
           </fields>
         </register>
         <register>
-          <name>UNIID1</name>
-          <displayName>UNIID1</displayName>
-          <description>Unique identity 1</description>
-          <addressOffset>0x8</addressOffset>
+          <name>WDTR2</name>
+          <displayName>WDTR2</displayName>
+          <description>ADC watchdog 2 threshold register</description>
+          <addressOffset>0x58</addressOffset>
           <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
+          <access>read-write</access>
+          <resetValue>0x0FFF0000</resetValue>
           <fields>
             <field>
-              <name>U_ID</name>
-              <description>Unique identity[31:0]</description>
+              <name>HTR2</name>
+              <description>Analog watchdog higher threshold setting value</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+            <field>
+              <name>LTR2</name>
+              <description>Analog watchdog lower threshold setting value</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
           </fields>
         </register>
-        <register>
-            <name>UNIID2</name>
-            <displayName>UNIID2</displayName>
-            <description>Unique identity 2</description>
-            <addressOffset>0xC</addressOffset>
-            <size>0x20</size>
-            <access>read-only</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>U_ID</name>
-                <description>Unique identity[63:32]</description>
-                <bitOffset>0</bitOffset>
-                <bitWidth>32</bitWidth>
-              </field>
-            </fields>
-          </register> 
-          <register>
-            <name>UNIID3</name>
-            <displayName>UNIID3</displayName>
-            <description>Unique identity 3</description>
-            <addressOffset>0x10</addressOffset>
-            <size>0x20</size>
-            <access>read-only</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>U_ID</name>
-                <description>Unique identity[95:64]</description>
-                <bitOffset>0</bitOffset>
-                <bitWidth>32</bitWidth>
-              </field>
-            </fields>
-          </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -7702,7 +8584,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>OPTKEY</name>
+              <name>OBKEYR</name>
               <description>Option byte key</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
@@ -7731,6 +8613,34 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
+            <field>
+              <name>BOOT_STATUS</name>
+              <description>BOOT_STATUS</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>BOOT_AVA</name>
+              <description>BOOT_AVA</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>TURBO</name>
+              <description>TURBO mode start</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>FWAKE_FLAG</name>
+              <description>FWAKE_FLAG mode start</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>			
             <field>
               <name>EOP</name>
               <description>End of operation</description>
@@ -7763,12 +8673,6 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <access>read-write</access>
           <resetValue>0x00008080</resetValue>
           <fields>
-            <field>
-              <name>PG</name>
-              <description>Programming</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
             <field>
               <name>PER</name>
               <description>Page Erase</description>
@@ -7854,6 +8758,12 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
               <bitOffset>19</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
+			<field>
+              <name>BER32</name>
+              <description>block erase 32KB</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
           </fields>
         </register>
         <register>
@@ -7880,7 +8790,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <addressOffset>0x1C</addressOffset>
           <size>0x20</size>
           <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
+          <resetValue>0x0000000E</resetValue>
           <fields>
             <field>
               <name>OBERR</name>
@@ -7914,7 +8824,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
             </field>
 			<field>
               <name>STATR_MODE</name>
-              <description>STATR MODE</description>
+              <description>Start mode</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
@@ -7939,13 +8849,13 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
           <addressOffset>0x20</addressOffset>
           <size>0x20</size>
           <access>read-only</access>
-          <resetValue>0xFFFFFFFF</resetValue>
+          <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>WRP</name>
               <description>Write protect</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>16</bitWidth>
+              <bitWidth>32</bitWidth>
             </field>
           </fields>
         </register>
@@ -9231,5 +10141,86 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocatio
         </register>           
 		</registers>
 	</peripheral>
+    <peripheral>
+      <name>ESIG</name>
+      <description>Device electronic signature</description>
+      <groupName>ESIG</groupName>
+      <baseAddress>0x1FFFF7E0</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x14</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>FLACAP</name>
+          <displayName>FLACAP</displayName>
+          <description>Flash capacity register</description>
+          <addressOffset>0x0</addressOffset>
+          <size>0x10</size>
+          <access>read-only</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>F_SIZE_15_0</name>
+              <description>Flash size</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>UNIID1</name>
+          <displayName>UNIID1</displayName>
+          <description>Unique identity 1</description>
+          <addressOffset>0x8</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>U_ID</name>
+              <description>Unique identity[31:0]</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+            <name>UNIID2</name>
+            <displayName>UNIID2</displayName>
+            <description>Unique identity 2</description>
+            <addressOffset>0xC</addressOffset>
+            <size>0x20</size>
+            <access>read-only</access>
+            <resetValue>0x00000000</resetValue>
+            <fields>
+              <field>
+                <name>U_ID</name>
+                <description>Unique identity[63:32]</description>
+                <bitOffset>0</bitOffset>
+                <bitWidth>32</bitWidth>
+              </field>
+            </fields>
+          </register> 
+          <register>
+            <name>UNIID3</name>
+            <displayName>UNIID3</displayName>
+            <description>Unique identity 3</description>
+            <addressOffset>0x10</addressOffset>
+            <size>0x20</size>
+            <access>read-only</access>
+            <resetValue>0x00000000</resetValue>
+            <fields>
+              <field>
+                <name>U_ID</name>
+                <description>Unique identity[95:64]</description>
+                <bitOffset>0</bitOffset>
+                <bitWidth>32</bitWidth>
+              </field>
+            </fields>
+          </register>
+      </registers>
+    </peripheral>
 	</peripherals>
  </device>
