@@ -12,7 +12,11 @@
 #define BLINKY_GPIO_PORT GPIOC
 #define BLINKY_GPIO_PIN_1 GPIO_Pin_0
 #define BLINKY_GPIO_PIN_2 GPIO_Pin_1
+#if defined(CH32L10X)
+#define BLINKY_CLOCK_ENABLE RCC_PB2PeriphClockCmd(RCC_PB2Periph_GPIOC, ENABLE)
+#else
 #define BLINKY_CLOCK_ENABLE RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE)
+#endif
 
 /* Global Variable */
 TaskHandle_t Task1Task_Handler;

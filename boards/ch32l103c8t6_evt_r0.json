@@ -1,0 +1,53 @@
+{
+  "build": {
+    "arduino": {
+      "openwch": {
+        "variant": "CH32L10x/CH32L103C8T6",
+        "variant_h": "variant_CH32L103C8T6.h"
+      }
+    },
+    "core": "openwch",
+    "extra_flags": "-DCH32L103C8 -DCH32L10X -DCH32L10x -DCH32L103",
+    "f_cpu": "96000000L",
+    "hwids": [
+      [
+        "0x1A86",
+        "0x8010"
+      ]
+    ],
+    "mabi": "ilp32",
+    "march": "rv32imacxw",
+    "mcu": "ch32l103c8t6",
+    "series": "ch32l103",
+    "variant": "ch32l103_evt"
+  },
+  "debug": {
+    "onboard_tools": [
+      "wch-link"
+    ],
+    "openocd_config": "wch-riscv.cfg",
+    "svd_path": "CH32L103xx.svd"
+  },
+  "frameworks": [
+    "noneos-sdk",
+    "freertos",
+    "harmony-liteos",
+    "rt-thread",
+    "tencent-os",
+    "arduino"
+  ],
+  "name": "CH32L103C8T6-EVT-R0",
+  "upload": {
+    "maximum_ram_size": 20480,
+    "maximum_size": 65536,
+    "protocol": "wch-link",
+    "protocols": [
+      "wch-link",
+      "minichlink",
+      "isp",
+      "wlink"
+    ]
+  },
+  "url": "https://ja.aliexpress.com/item/1005006671545123.html",
+  "vendor": "W.CH"
+}

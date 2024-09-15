@@ -33,7 +33,7 @@ jobs:
           - "examples/ble-hid-ch32v208"
           - "examples/ble-usb-cdc-ch58x"
           - "examples/ble-hid-ch59x"
-          - "examples/usb-pd-ch32x035"
+          - "examples/usb-pd-none-os"
           - "examples/zephyr-blink"
     runs-on: ${{ matrix.os }}
     steps:

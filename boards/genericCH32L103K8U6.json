@@ -1,0 +1,45 @@
+{
+  "build": {
+    "extra_flags": "-DCH32L103K8 -DCH32L10X -DCH32L10x -DCH32L103",
+    "f_cpu": "96000000L",
+    "hwids": [
+      [
+        "0x1A86",
+        "0x8010"
+      ]
+    ],
+    "mabi": "ilp32",
+    "march": "rv32imacxw",
+    "mcu": "ch32l103k8u6",
+    "series": "ch32l103",
+    "variant": "ch32l103_evt"
+  },
+  "debug": {
+    "onboard_tools": [
+      "wch-link"
+    ],
+    "openocd_config": "wch-riscv.cfg",
+    "svd_path": "CH32L103xx.svd"
+  },
+  "frameworks": [
+    "noneos-sdk",
+    "freertos",
+    "harmony-liteos",
+    "rt-thread",
+    "tencent-os"
+  ],
+  "name": "Generic CH32L103K8U6",
+  "upload": {
+    "maximum_ram_size": 20480,
+    "maximum_size": 65536,
+    "protocol": "wch-link",
+    "protocols": [
+      "wch-link",
+      "minichlink",
+      "isp",
+      "wlink"
+    ]
+  },
+  "url": "http://www.wch-ic.com/products/CH32L103.html",
+  "vendor": "W.CH"
+}

@@ -39,7 +39,8 @@ class ChipInfo:
                 name_upper.startswith("CH57"),
                 name_upper.startswith("CH58"),
                 name_upper.startswith("CH59"),
-                name_upper.startswith("CH32X03")
+                name_upper.startswith("CH32X03"),
+                name_upper.startswith("CH32L10")
                 ]):
             return None
         print("ERROR: UNKNOWN CHIP / NO CLASSIFICATION KNOWN FOR " + self.name)
@@ -48,7 +49,7 @@ class ChipInfo:
     def get_riscv_arch_and_abi(self) -> Tuple[str, str]:
         # ch32v30x is capable of rv32imafcxw
         # but SDK uses rv32imacxw (no floating point)
-        # ch32v208 is rv32imacxw (QingKe V4C)
+        # ch32v208 and ch32l103 is rv32imacxw (QingKe V4C)
         # other ch32v20x is rv32imacxw (QingKe V4B)
         # ch32v10x only rv32imac (RISC-V3A)
         # ch32v00x only rv32ecxw (RISC-V2A)
@@ -65,6 +66,8 @@ class ChipInfo:
         elif name_lower.startswith("ch5"):
             return ("rv32imac", "ilp32")
         elif name_lower.startswith("ch32x03"):
+            return ("rv32imacxw", "ilp32")
+        elif name_lower.startswith("ch32l1"):
             return ("rv32imacxw", "ilp32")
         else:
             print("ERROR: UNKNOWN CHIP ABI/ARCH FOR " + self.name)
@@ -152,6 +155,12 @@ chip_db: List[ChipInfo] = [
     ChipInfo("CH32X035F8U6", 62, 20, 48, "QFN20"),
     ChipInfo("CH32X035F7P6", 62, 20, 48, "TSSOP20"),
     ChipInfo("CH32X033F8P6", 62, 20, 48, "TSSOP20"),
+    # CH32L10x
+    ChipInfo("CH32L103F8P6", 64, 20, 96, "TSSOP20"),
+    ChipInfo("CH32L103F8U6", 64, 20, 96, "QFN20"),
+    ChipInfo("CH32L103G8R6", 64, 20, 96, "QSOP28"),
+    ChipInfo("CH32L103K8U6", 64, 20, 96, "QFN32"),
+    ChipInfo("CH32L103C8T6", 64, 20, 96, "LQFP48"),
 ]
 
 def get_chip(name: str) -> Optional[ChipInfo]:
@@ -191,6 +200,8 @@ known_boards: List[KnownBoard] = [
                "https://www.aliexpress.com/item/1005005793197807.html", "W.CH"),
     KnownBoard("usb_pdmon_ch32x035g8u6", "USB PDMon", get_chip("CH32X035G8U6"), 
                "https://github.com/dragonlock2/kicadboards/tree/main/breakouts/usb_pdmon", "Matthew Tran"),
+    KnownBoard("ch32l103c8t6_evt_r0", "CH32L103C8T6-EVT-R0", get_chip("CH32L103C8T6"), 
+               "https://ja.aliexpress.com/item/1005006671545123.html", "W.CH"),
 ]
 
 # Describe known OpenWCH Arduino variants so that we can auto-add them
@@ -209,7 +220,8 @@ known_openwchcore_variants: List[OpenWCHVariant] = [
     OpenWCHVariant("ch32v203g8", "CH32V20x/CH32V203G8", "variant_CH32V203G8.h"),
     OpenWCHVariant("ch32v203rb", "CH32V20x/CH32V203RB", "variant_CH32V203RB.h"),
     OpenWCHVariant("ch32v307vct6", "CH32V30x/CH32V307VCT6", "variant_CH32V307VCT6.h", "-DCH32V30x_C"),
-    OpenWCHVariant("ch32x035g8u", "CH32X035/CH32X035G8U", "variant_CH32X035G8U.h")
+    OpenWCHVariant("ch32x035g8u", "CH32X035/CH32X035G8U", "variant_CH32X035G8U.h"),
+    OpenWCHVariant("ch32l103c8t6", "CH32L10x/CH32L103C8T6", "variant_CH32L103C8T6.h")
 ]
 
 def add_openwch_arduino_info(base_json: dict[str, Any], patch_info: dict[str, Any], info:ChipInfo, board_name: str):
@@ -303,6 +315,8 @@ def create_board_json(info: ChipInfo, board_name:str, output_path: str, patch_in
         base_json["frameworks"].append("arduino")
         base_json["build"]["core"] = "ch32v"
         base_json["build"]["variant"] = "ch32v307_evt"
+    if chip_l.startswith("ch32l103"):
+        base_json["build"]["variant"] = "ch32l103_evt"
     if board_name == "USB PDMon":
         # experiment
         base_json["frameworks"].append("zephyr")

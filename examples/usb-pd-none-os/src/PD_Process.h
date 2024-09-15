@@ -18,6 +18,12 @@
  extern "C" {
 #endif
 
+#if defined(CH32X035)
+#include <ch32x035_usbpd.h>
+#elif defined(CH32L10X)
+#include <ch32l103_usbpd.h>
+#endif
+
 /******************************************************************************/
 /* Variable extents */
 extern UINT8  Tmr_Ms_Cnt_Last;

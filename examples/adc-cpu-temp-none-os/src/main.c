@@ -18,8 +18,13 @@ void ADC_Function_Init(void)
     ADC_InitTypeDef ADC_InitStructure = {0};
     GPIO_InitTypeDef GPIO_InitStructure = {0};
 
+#if defined(CH32L10X)
+    RCC_PB2PeriphClockCmd(RCC_PB2Periph_GPIOA, ENABLE);
+    RCC_PB2PeriphClockCmd(RCC_PB2Periph_ADC1, ENABLE);
+#else
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+#endif
     RCC_ADCCLKConfig(RCC_PCLK2_Div8);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
@@ -59,7 +64,11 @@ u16 Get_ADC_Val(u8 ch)
 {
     u16 val;
 
+#if defined(CH32L10X)
+    ADC_RegularChannelConfig(ADC1, ch, 1, ADC_SampleTime_CyclesMode7);
+#else
     ADC_RegularChannelConfig(ADC1, ch, 1, ADC_SampleTime_239Cycles5);
+#endif
     ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 
     while (!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC))
