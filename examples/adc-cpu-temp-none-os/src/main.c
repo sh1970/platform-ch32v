@@ -4,7 +4,7 @@
 #include <ch32v10x.h>
 #elif defined(CH32V20X)
 #include <ch32v20x.h>
-#elif defined(CH32V30X)
+#elif defined(CH32V30X) || defined(CH32V31X)
 #include <ch32v30x.h>
 #endif
 #include <stdio.h>

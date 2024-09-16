@@ -47,7 +47,7 @@ extern "C" {
 #include <ch32v10x.h>
 #elif defined(CH32V20X)
 #include <ch32v20x.h>
-#elif defined(CH32V30X)
+#elif defined(CH32V30X) || defined(CH32V31X)
 #include <ch32v30x.h>
 #elif defined(CH32X035) || defined(CH32X033)
 #include <ch32x035.h>

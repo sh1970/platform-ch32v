@@ -25,7 +25,7 @@ class ChipInfo:
             "CH32V20x_D8": ["CH32V203RB"],
             "CH32V20x_D8W": ["CH32V208GB", "CH32V208CB", "CH32V208RB", "CH32V208WB"],
             "CH32V30x_D8": ["CH32V303CB", "CH32V303RB", "CH32V303RC", "CH32V303VC"],
-            "CH32V30x_D8C": ["CH32V305FB", "CH32V305RB", "CH32V307RC", "CH32V307WC", "CH32V307VC"]
+            "CH32V30x_D8C": ["CH32V305FB", "CH32V305RB", "CH32V307RC", "CH32V307WC", "CH32V307VC", "CH32V317"]
         }
         for dev_class, devs in dev_classes.items():
             if any([self.name.upper().startswith(chip) for chip in devs]):
@@ -54,6 +54,7 @@ class ChipInfo:
         # ch32v10x only rv32imac (RISC-V3A)
         # ch32v00x only rv32ecxw (RISC-V2A)
         name_lower = self.name.lower() 
+        # applies to ch32v307 and ch32v317
         if name_lower.startswith("ch32v3"):
             return ("rv32imacxw", "ilp32")
         elif name_lower.startswith("ch32v2"):
@@ -85,6 +86,9 @@ class ChipInfo:
         # FreeRTOS.
         if self.name.lower().startswith("ch32x03"):
             return "ch32x035"
+        # Hack: A ch32v317 uses the same SDK as the ch32v307.
+        if self.name.lower().startswith("ch32v317"):
+            return "ch32v307"
         return self.name[0:len("ch32vxxx")]
 
 chip_db: List[ChipInfo] = [
@@ -147,6 +151,10 @@ chip_db: List[ChipInfo] = [
     ChipInfo("CH32V307RCT6", 256, 64, 144, "LQFP64M"),
     ChipInfo("CH32V307WCU6", 256, 64, 144, "QFN64X8"),
     ChipInfo("CH32V307VCT6", 256, 64, 144, "LQFP100"),
+    # CH32V317
+    ChipInfo("CH32V317TCU6", 256, 64, 144, "QFN36C4"),
+    ChipInfo("CH32V317WCU6", 256, 64, 144, "QFN68"),
+    ChipInfo("CH32V317VCT6", 256, 64, 144, "LQFP100"),
     # CH32X035/3
     ChipInfo("CH32X035R8T6", 62, 20, 48, "LQFP64M"),
     ChipInfo("CH32X035C8T6", 62, 20, 48, "LQFP48"),
