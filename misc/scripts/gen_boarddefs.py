@@ -90,6 +90,11 @@ class ChipInfo:
         if self.name.lower().startswith("ch32v317"):
             return "ch32v307"
         return self.name[0:len("ch32vxxx")]
+    
+    def get_svd_file(self) -> str:
+        if self.name.lower().startswith("ch32v317"):
+            return "CH32V317xx.svd"
+        return self.exact_series().upper() + "xx.svd"
 
 chip_db: List[ChipInfo] = [
     # CH56x (configurable SRAM size, data flash)
@@ -281,7 +286,7 @@ def create_board_json(info: ChipInfo, board_name:str, output_path: str, patch_in
                 "wch-link"
             ],
             "openocd_config": "wch-riscv.cfg",
-            "svd_path": info.exact_series().upper() + "xx.svd"
+            "svd_path": info.get_svd_file()
         },
         "frameworks": [
             "noneos-sdk"
