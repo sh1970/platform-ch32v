@@ -15,7 +15,7 @@
 #include "sw_udisk.h"
 #include "spi_flash.h"
 #include "usbfs_device.h"
-#include "Internal_Flash.h"
+#include "internal_flash.h"
 #include "pdfFile.h"
 #include "peripheral.h"
 

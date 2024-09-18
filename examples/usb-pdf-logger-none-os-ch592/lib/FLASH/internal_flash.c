@@ -9,7 +9,7 @@
 * Attention: This software (modified or not) and binary are used for 
 * microcontroller manufactured by Nanjing Qinheng Microelectronics.
 *******************************************************************************/
-#include "Internal_Flash.h"
+#include "internal_flash.h"
 #include "CH59x_common.h"
 #include "pdfFile.h"
 #include "sw_udisk.h"

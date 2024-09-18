@@ -1,7 +1,7 @@
 #include "string.h"
 #include "pdfFile.h"
-#include "SW_UDISK.h"
-#include "Internal_Flash.h"
+#include "sw_udisk.h"
+#include "internal_flash.h"
 #include "CHRV3UFI.h"
 #include "usbfs_device.h"
 #include "spi_flash.h"
@@ -185,9 +185,9 @@ void write_file( uint8_t *pData )
 #if FUN_FILE_CREATE
     uint8_t s;
 
-    mCmdParam.Write.mSectorCount = 1;       //Ð´ÈëËùÓÐÉÈÇøµÄÊý¾Ý
-    mCmdParam.Write.mDataBuffer = pData;    //Ö¸ÏòÎÄ¼þÊý¾Ý»º³åÇøµÄÆðÊ¼µØÖ·
-    s = CHRV3FileWrite( );                  //ÏòÎÄ¼þÐ´ÈëÊý¾Ý
+    mCmdParam.Write.mSectorCount = 1;       //Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    mCmdParam.Write.mDataBuffer = pData;    //Ö¸ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ö·
+    s = CHRV3FileWrite( );                  //ï¿½ï¿½ï¿½Ä¼ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     mStopIfError( s );
 #endif
 }

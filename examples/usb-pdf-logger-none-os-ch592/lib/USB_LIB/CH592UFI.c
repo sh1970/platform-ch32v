@@ -7,51 +7,51 @@
 **  KEIL423, gcc 8.20          **
 *****************************************
 */
-/* CHRV3 UÅÌÖ÷»úÎÄ¼þÏµÍ³½Ó¿Ú, Ö§³Ö: FAT12/FAT16/FAT32 */
+/* CHRV3 Uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ÏµÍ³ï¿½Ó¿ï¿½, Ö§ï¿½ï¿½: FAT12/FAT16/FAT32 */
 
-//#define DISK_BASE_BUF_LEN		512	/* Ä¬ÈÏµÄ´ÅÅÌÊý¾Ý»º³åÇø´óÐ¡Îª512×Ö½Ú(¿ÉÒÔÑ¡ÔñÎª2048ÉõÖÁ4096ÒÔÖ§³ÖÄ³Ð©´óÉÈÇøµÄUÅÌ),Îª0Ôò½ûÖ¹ÔÚ±¾ÎÄ¼þÖÐ¶¨Òå»º³åÇø²¢ÓÉÓ¦ÓÃ³ÌÐòÔÚpDISK_BASE_BUFÖÐÖ¸¶¨ */
-/* Èç¹ûÐèÒª¸´ÓÃ´ÅÅÌÊý¾Ý»º³åÇøÒÔ½ÚÔ¼RAM,ÄÇÃ´¿É½«DISK_BASE_BUF_LEN¶¨ÒåÎª0ÒÔ½ûÖ¹ÔÚ±¾ÎÄ¼þÖÐ¶¨Òå»º³åÇø,¶øÓÉÓ¦ÓÃ³ÌÐòÔÚµ÷ÓÃCHRV3LibInitÖ®Ç°½«ÓëÆäËü³ÌÐòºÏÓÃµÄ»º³åÇøÆðÊ¼µØÖ·ÖÃÈëpDISK_BASE_BUF±äÁ¿ */
+//#define DISK_BASE_BUF_LEN		512	/* Ä¬ï¿½ÏµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Îª512ï¿½Ö½ï¿½(ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Îª2048ï¿½ï¿½ï¿½ï¿½4096ï¿½ï¿½Ö§ï¿½ï¿½Ä³Ð©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½),Îª0ï¿½ï¿½ï¿½Ö¹ï¿½Ú±ï¿½ï¿½Ä¼ï¿½ï¿½Ð¶ï¿½ï¿½å»ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½pDISK_BASE_BUFï¿½ï¿½Ö¸ï¿½ï¿½ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½Ô¼RAM,ï¿½ï¿½Ã´ï¿½É½ï¿½DISK_BASE_BUF_LENï¿½ï¿½ï¿½ï¿½Îª0ï¿½Ô½ï¿½Ö¹ï¿½Ú±ï¿½ï¿½Ä¼ï¿½ï¿½Ð¶ï¿½ï¿½å»ºï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½CHRV3LibInitÖ®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÃµÄ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½pDISK_BASE_BUFï¿½ï¿½ï¿½ï¿½ */
 
-#define NO_DEFAULT_ACCESS_SECTOR	1		/* ½ûÖ¹Ä¬ÈÏµÄ´ÅÅÌÉÈÇø¶ÁÐ´×Ó³ÌÐò,ÏÂÃæÓÃ×ÔÐÐ±àÐ´µÄ³ÌÐò´úÌæËü */
-//#define NO_DEFAULT_DISK_CONNECT		1		/* ½ûÖ¹Ä¬ÈÏµÄ¼ì²é´ÅÅÌÁ¬½Ó×Ó³ÌÐò,ÏÂÃæÓÃ×ÔÐÐ±àÐ´µÄ³ÌÐò´úÌæËü */
-//#define NO_DEFAULT_FILE_ENUMER		1		/* ½ûÖ¹Ä¬ÈÏµÄÎÄ¼þÃûÃ¶¾Ù»Øµ÷³ÌÐò,ÏÂÃæÓÃ×ÔÐÐ±àÐ´µÄ³ÌÐò´úÌæËü */
+#define NO_DEFAULT_ACCESS_SECTOR	1		/* ï¿½ï¿½Ö¹Ä¬ï¿½ÏµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ó³ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ð´ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+//#define NO_DEFAULT_DISK_CONNECT		1		/* ï¿½ï¿½Ö¹Ä¬ï¿½ÏµÄ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ð´ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+//#define NO_DEFAULT_FILE_ENUMER		1		/* ï¿½ï¿½Ö¹Ä¬ï¿½Ïµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ã¶ï¿½Ù»Øµï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ð´ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
 #include "CH59x_common.h"
 #include "CHRV3UFI.h"
-#include "Internal_Flash.h"
-#include "SW_UDISK.h"
+#include "internal_flash.h"
+#include "sw_udisk.h"
 #include "pdfFile.h"
 #include "spi_flash.h"
 #include "peripheral.h"
 
-UINT8 CtrlGetConfigDescrTB(void) // »ñÈ¡ÅäÖÃÃèÊö·û,·µ»ØÔÚTxBufferÖÐ
+UINT8 CtrlGetConfigDescrTB(void) // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TxBufferï¿½ï¿½
 {
     return (CtrlGetConfigDescr());
 }
 
-CMD_PARAM_I mCmdParam; /* ÃüÁî²ÎÊý */
+CMD_PARAM_I mCmdParam; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 #if DISK_BASE_BUF_LEN > 0
-//UINT8	DISK_BASE_BUF[ DISK_BASE_BUF_LEN ] __attribute__((at(BA_RAM+SZ_RAM/2)));	/* Íâ²¿RAMµÄ´ÅÅÌÊý¾Ý»º³åÇø,»º³åÇø³¤¶ÈÎªÒ»¸öÉÈÇøµÄ³¤¶È */
-//UINT8 DISK_BASE_BUF[DISK_BASE_BUF_LEN] __attribute__((aligned(4))); /* Íâ²¿RAMµÄ´ÅÅÌÊý¾Ý»º³åÇø,»º³åÇø³¤¶ÈÎªÒ»¸öÉÈÇøµÄ³¤¶È */
-//UINT8	DISK_FAT_BUF[ DISK_BASE_BUF_LEN ] __attribute__((aligned (4)));	/* Íâ²¿RAMµÄ´ÅÅÌFATÊý¾Ý»º³åÇø,»º³åÇø³¤¶ÈÎªÒ»¸öÉÈÇøµÄ³¤¶È */
+//UINT8	DISK_BASE_BUF[ DISK_BASE_BUF_LEN ] __attribute__((at(BA_RAM+SZ_RAM/2)));	/* ï¿½â²¿RAMï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÒ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ */
+//UINT8 DISK_BASE_BUF[DISK_BASE_BUF_LEN] __attribute__((aligned(4))); /* ï¿½â²¿RAMï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÒ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ */
+//UINT8	DISK_FAT_BUF[ DISK_BASE_BUF_LEN ] __attribute__((aligned (4)));	/* ï¿½â²¿RAMï¿½Ä´ï¿½ï¿½ï¿½FATï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÒ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ */
 #endif
 
-/* ÒÔÏÂ³ÌÐò¿ÉÒÔ¸ù¾ÝÐèÒªÐÞ¸Ä */
+/* ï¿½ï¿½ï¿½Â³ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Þ¸ï¿½ */
 
-#ifndef NO_DEFAULT_ACCESS_SECTOR /* ÔÚÓ¦ÓÃ³ÌÐòÖÐ¶¨ÒåNO_DEFAULT_ACCESS_SECTOR¿ÉÒÔ½ûÖ¹Ä¬ÈÏµÄ´ÅÅÌÉÈÇø¶ÁÐ´×Ó³ÌÐò,È»ºóÓÃ×ÔÐÐ±àÐ´µÄ³ÌÐò´úÌæËü */
-//if ( use_external_interface ) {  // Ìæ»»UÅÌÉÈÇøµ×²ã¶ÁÐ´×Ó³ÌÐò
-//    CHRV3vSectorSize=512;  // ÉèÖÃÊµ¼ÊµÄÉÈÇø´óÐ¡,±ØÐëÊÇ512µÄ±¶Êý,¸ÃÖµÊÇ´ÅÅÌµÄÉÈÇø´óÐ¡
-//    CHRV3vSectorSizeB=9;   // ÉèÖÃÊµ¼ÊµÄÉÈÇø´óÐ¡µÄÎ»ÒÆÊý,512Ôò¶ÔÓ¦9,1024¶ÔÓ¦10,2048¶ÔÓ¦11
-//    CHRV3DiskStatus=DISK_MOUNTED;  // Ç¿ÖÆ¿éÉè±¸Á¬½Ó³É¹¦(Ö»²î·ÖÎöÎÄ¼þÏµÍ³)
+#ifndef NO_DEFAULT_ACCESS_SECTOR /* ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½NO_DEFAULT_ACCESS_SECTORï¿½ï¿½ï¿½Ô½ï¿½Ö¹Ä¬ï¿½ÏµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ó³ï¿½ï¿½ï¿½,È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ð´ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+//if ( use_external_interface ) {  // ï¿½æ»»Uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Ð´ï¿½Ó³ï¿½ï¿½ï¿½
+//    CHRV3vSectorSize=512;  // ï¿½ï¿½ï¿½ï¿½Êµï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½512ï¿½Ä±ï¿½ï¿½ï¿½,ï¿½ï¿½Öµï¿½Ç´ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡
+//    CHRV3vSectorSizeB=9;   // ï¿½ï¿½ï¿½ï¿½Êµï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½,512ï¿½ï¿½ï¿½Ó¦9,1024ï¿½ï¿½Ó¦10,2048ï¿½ï¿½Ó¦11
+//    CHRV3DiskStatus=DISK_MOUNTED;  // Ç¿ï¿½Æ¿ï¿½ï¿½è±¸ï¿½ï¿½ï¿½Ó³É¹ï¿½(Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ÏµÍ³)
 //}
 
-UINT8 CHRV3ReadSector(UINT8 SectCount, PUINT8 DataBuf) /* ´Ó´ÅÅÌ¶ÁÈ¡¶à¸öÉÈÇøµÄÊý¾Ýµ½»º³åÇøÖÐ */
+UINT8 CHRV3ReadSector(UINT8 SectCount, PUINT8 DataBuf) /* ï¿½Ó´ï¿½ï¿½Ì¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 {
     UINT8 retry;
-    //	if ( use_external_interface ) return( extReadSector( CHRV3vLbaCurrent, SectCount, DataBuf ) );  /* Íâ²¿½Ó¿Ú */
+    //	if ( use_external_interface ) return( extReadSector( CHRV3vLbaCurrent, SectCount, DataBuf ) );  /* ï¿½â²¿ï¿½Ó¿ï¿½ */
     for(retry = 0; retry < 3; retry++)
-    {                                                                /* ´íÎóÖØÊÔ */
-        pCBW->mCBW_DataLen = (UINT32)SectCount << CHRV3vSectorSizeB; /* Êý¾Ý´«Êä³¤¶È */
+    {                                                                /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+        pCBW->mCBW_DataLen = (UINT32)SectCount << CHRV3vSectorSizeB; /* ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ä³¤ï¿½ï¿½ */
         pCBW->mCBW_Flag = 0x80;
         pCBW->mCBW_LUN = CHRV3vCurrentLun;
         pCBW->mCBW_CB_Len = 10;
@@ -65,7 +65,7 @@ UINT8 CHRV3ReadSector(UINT8 SectCount, PUINT8 DataBuf) /* ´Ó´ÅÅÌ¶ÁÈ¡¶à¸öÉÈÇøµÄÊý
         pCBW->mCBW_CB_Buf[7] = 0x00;
         pCBW->mCBW_CB_Buf[8] = SectCount;
         pCBW->mCBW_CB_Buf[9] = 0x00;
-        CHRV3BulkOnlyCmd(DataBuf); /* Ö´ÐÐ»ùÓÚBulkOnlyÐ­ÒéµÄÃüÁî */
+        CHRV3BulkOnlyCmd(DataBuf); /* Ö´ï¿½Ð»ï¿½ï¿½ï¿½BulkOnlyÐ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
         if(CHRV3IntStatus == ERR_SUCCESS)
         {
             return (ERR_SUCCESS);
@@ -76,17 +76,17 @@ UINT8 CHRV3ReadSector(UINT8 SectCount, PUINT8 DataBuf) /* ´Ó´ÅÅÌ¶ÁÈ¡¶à¸öÉÈÇøµÄÊý
             return (CHRV3IntStatus);
         }
     }
-    return (CHRV3IntStatus = ERR_USB_DISK_ERR); /* ´ÅÅÌ²Ù×÷´íÎó */
+    return (CHRV3IntStatus = ERR_USB_DISK_ERR); /* ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 }
 
   #ifdef EN_DISK_WRITE
-UINT8 CHRV3WriteSector(UINT8 SectCount, PUINT8 DataBuf) /* ½«»º³åÇøÖÐµÄ¶à¸öÉÈÇøµÄÊý¾Ý¿éÐ´Èë´ÅÅÌ */
+UINT8 CHRV3WriteSector(UINT8 SectCount, PUINT8 DataBuf) /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ */
 {
     UINT8 retry;
-    //	if ( use_external_interface ) return( extWriteSector( CHRV3vLbaCurrent, SectCount, DataBuf ) );  /* Íâ²¿½Ó¿Ú */
+    //	if ( use_external_interface ) return( extWriteSector( CHRV3vLbaCurrent, SectCount, DataBuf ) );  /* ï¿½â²¿ï¿½Ó¿ï¿½ */
     for(retry = 0; retry < 3; retry++)
-    {                                                                /* ´íÎóÖØÊÔ */
-        pCBW->mCBW_DataLen = (UINT32)SectCount << CHRV3vSectorSizeB; /* Êý¾Ý´«Êä³¤¶È */
+    {                                                                /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+        pCBW->mCBW_DataLen = (UINT32)SectCount << CHRV3vSectorSizeB; /* ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ä³¤ï¿½ï¿½ */
         pCBW->mCBW_Flag = 0x00;
         pCBW->mCBW_LUN = CHRV3vCurrentLun;
         pCBW->mCBW_CB_Len = 10;
@@ -100,10 +100,10 @@ UINT8 CHRV3WriteSector(UINT8 SectCount, PUINT8 DataBuf) /* ½«»º³åÇøÖÐµÄ¶à¸öÉÈÇøµ
         pCBW->mCBW_CB_Buf[7] = 0x00;
         pCBW->mCBW_CB_Buf[8] = SectCount;
         pCBW->mCBW_CB_Buf[9] = 0x00;
-        CHRV3BulkOnlyCmd(DataBuf); /* Ö´ÐÐ»ùÓÚBulkOnlyÐ­ÒéµÄÃüÁî */
+        CHRV3BulkOnlyCmd(DataBuf); /* Ö´ï¿½Ð»ï¿½ï¿½ï¿½BulkOnlyÐ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
         if(CHRV3IntStatus == ERR_SUCCESS)
         {
-            mDelayuS(200); /* Ð´²Ù×÷ºóÑÓÊ± */
+            mDelayuS(200); /* Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê± */
             return (ERR_SUCCESS);
         }
         CHRV3IntStatus = CHRV3AnalyzeError(retry);
@@ -112,7 +112,7 @@ UINT8 CHRV3WriteSector(UINT8 SectCount, PUINT8 DataBuf) /* ½«»º³åÇøÖÐµÄ¶à¸öÉÈÇøµ
             return (CHRV3IntStatus);
         }
     }
-    return (CHRV3IntStatus = ERR_USB_DISK_ERR); /* ´ÅÅÌ²Ù×÷´íÎó */
+    return (CHRV3IntStatus = ERR_USB_DISK_ERR); /* ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 }
   #endif
 #else
@@ -150,15 +150,15 @@ UINT8 CHRV3WriteSector(UINT8 SectCount, PUINT8 DataBuf) /* Write data blocks of 
 }
 #endif // NO_DEFAULT_ACCESS_SECTOR
 
-#ifndef NO_DEFAULT_DISK_CONNECT /* ÔÚÓ¦ÓÃ³ÌÐòÖÐ¶¨ÒåNO_DEFAULT_DISK_CONNECT¿ÉÒÔ½ûÖ¹Ä¬ÈÏµÄ¼ì²é´ÅÅÌÁ¬½Ó×Ó³ÌÐò,È»ºóÓÃ×ÔÐÐ±àÐ´µÄ³ÌÐò´úÌæËü */
+#ifndef NO_DEFAULT_DISK_CONNECT /* ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½NO_DEFAULT_DISK_CONNECTï¿½ï¿½ï¿½Ô½ï¿½Ö¹Ä¬ï¿½ÏµÄ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½,È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ð´ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
 /*
-Ô¼¶¨: USBÉè±¸µØÖ··ÖÅä¹æÔò(²Î¿¼USB_DEVICE_ADDR)
-µØÖ·Öµ  Éè±¸Î»ÖÃ
-0x02    ÄÚÖÃRoot-HUB0ÏÂµÄUSBÉè±¸»òÍâ²¿HUB
-0x03    ÄÚÖÃRoot-HUB1ÏÂµÄUSBÉè±¸»òÍâ²¿HUB
-0x1x    ÄÚÖÃRoot-HUB0ÏÂµÄÍâ²¿HUBµÄ¶Ë¿ÚxÏÂµÄUSBÉè±¸,xÎª1~n
-0x2x    ÄÚÖÃRoot-HUB1ÏÂµÄÍâ²¿HUBµÄ¶Ë¿ÚxÏÂµÄUSBÉè±¸,xÎª1~n
+Ô¼ï¿½ï¿½: USBï¿½è±¸ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½Î¿ï¿½USB_DEVICE_ADDR)
+ï¿½ï¿½Ö·Öµ  ï¿½è±¸Î»ï¿½ï¿½
+0x02    ï¿½ï¿½ï¿½ï¿½Root-HUB0ï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½â²¿HUB
+0x03    ï¿½ï¿½ï¿½ï¿½Root-HUB1ï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½â²¿HUB
+0x1x    ï¿½ï¿½ï¿½ï¿½Root-HUB0ï¿½Âµï¿½ï¿½â²¿HUBï¿½Ä¶Ë¿ï¿½xï¿½Âµï¿½USBï¿½è±¸,xÎª1~n
+0x2x    ï¿½ï¿½ï¿½ï¿½Root-HUB1ï¿½Âµï¿½ï¿½â²¿HUBï¿½Ä¶Ë¿ï¿½xï¿½Âµï¿½USBï¿½è±¸,xÎª1~n
 */
 
 //#define		UHUB_DEV_ADDR	( CHRV3vRootPort ? R8_USB1_DEV_AD : R8_USB0_DEV_AD )
@@ -172,7 +172,7 @@ UINT8 CHRV3WriteSector(UINT8 SectCount, PUINT8 DataBuf) /* Write data blocks of 
 #define bUMS_ATTACH       RB_UMS_DEV_ATTACH
 #define bUMS_SUSPEND      RB_UMS_SUSPEND
 
-/* ¼ì²é´ÅÅÌÊÇ·ñÁ¬½Ó */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ */
 UINT8 CHRV3DiskConnect(void)
 {
     UINT8 ums, devaddr;
@@ -180,24 +180,24 @@ UINT8 CHRV3DiskConnect(void)
     ums = UHUB_MIS_STAT;
     devaddr = UHUB_DEV_ADDR;
     if(devaddr == USB_DEVICE_ADDR)
-    {   /* ÄÚÖÃRoot-HUBÏÂµÄUSBÉè±¸ */
-        //		if ( UHUB_HOST_CTRL & RB_UH_PORT_EN ) {  /* ÄÚÖÃRoot-HUBÏÂµÄUSBÉè±¸´æÔÚÇÒÎ´²å°Î */
+    {   /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½USBï¿½è±¸ */
+        //		if ( UHUB_HOST_CTRL & RB_UH_PORT_EN ) {  /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ */
         if(ums & bUMS_ATTACH)
-        {   /* ÄÚÖÃRoot-HUBÏÂµÄUSBÉè±¸´æÔÚ */
-            //			if ( ( UHUB_INT_FLAG & UIF_DETECT ) == 0 ) {  /* ÄÚÖÃRoot-HUBÏÂµÄUSBÉè±¸´æÔÚÇÒÎ´²å°Î */
+        {   /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½ï¿½ */
+            //			if ( ( UHUB_INT_FLAG & UIF_DETECT ) == 0 ) {  /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ */
             if((ums & bUMS_SUSPEND) == 0)
-            {                         /* ÄÚÖÃRoot-HUBÏÂµÄUSBÉè±¸´æÔÚÇÒÎ´²å°Î */
-                return (ERR_SUCCESS); /* USBÉè±¸ÒÑ¾­Á¬½ÓÇÒÎ´²å°Î */
+            {                         /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ */
+                return (ERR_SUCCESS); /* USBï¿½è±¸ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ */
             }
             else
-            { /* ÄÚÖÃRoot-HUBÏÂµÄUSBÉè±¸´æÔÚ */
+            { /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½ï¿½ */
             mDiskConnect:
-                CHRV3DiskStatus = DISK_CONNECT; /* Ôø¾­¶Ï¿ª¹ý */
-                return (ERR_SUCCESS);           /* Íâ²¿HUB»òUSBÉè±¸ÒÑ¾­Á¬½Ó»òÕß¶Ï¿ªºóÖØÐÂÁ¬½Ó */
+                CHRV3DiskStatus = DISK_CONNECT; /* ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ */
+                return (ERR_SUCCESS);           /* ï¿½â²¿HUBï¿½ï¿½USBï¿½è±¸ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ß¶Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
             }
         }
         else
-        { /* USBÉè±¸¶Ï¿ª */
+        { /* USBï¿½è±¸ï¿½Ï¿ï¿½ */
         mDiskDisconn:
             CHRV3DiskStatus = DISK_DISCONNECT;
             return (ERR_USB_DISCON);
@@ -205,43 +205,43 @@ UINT8 CHRV3DiskConnect(void)
     }
   #ifndef FOR_ROOT_UDISK_ONLY
     else if(devaddr > 0x10 && devaddr <= 0x14)
-    {   /* Íâ²¿HUBµÄ¶Ë¿ÚÏÂµÄUSBÉè±¸ */
-        //		if ( UHUB_HOST_CTRL & RB_UH_PORT_EN ) {  /* ÄÚÖÃRoot-HUBÏÂµÄÍâ²¿HUB´æÔÚÇÒÎ´²å°Î */
+    {   /* ï¿½â²¿HUBï¿½Ä¶Ë¿ï¿½ï¿½Âµï¿½USBï¿½è±¸ */
+        //		if ( UHUB_HOST_CTRL & RB_UH_PORT_EN ) {  /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½ï¿½â²¿HUBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ */
         if(ums & bUMS_ATTACH)
-        {   /* ÄÚÖÃRoot-HUBÏÂµÄUSBÉè±¸´æÔÚ */
-            //			if ( ( UHUB_INT_FLAG & UIF_DETECT ) == 0 ) {  /* ÄÚÖÃRoot-HUBÏÂµÄUSBÉè±¸´æÔÚÇÒÎ´²å°Î */
+        {   /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½ï¿½ */
+            //			if ( ( UHUB_INT_FLAG & UIF_DETECT ) == 0 ) {  /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ */
             if((ums & bUMS_SUSPEND) == 0)
-            {                                                                            /* ÄÚÖÃRoot-HUBÏÂµÄUSBÉè±¸´æÔÚÇÒÎ´²å°Î */
-                TxBuffer[MAX_PACKET_SIZE - 1] = devaddr;                                 /* ±¸·Ý */
-                UHUB_DEV_ADDR = USB_DEVICE_ADDR - 1 + (UHUB_DEV_ADDR >> 4);              /* ÉèÖÃUSBÖ÷»ú¶ËµÄUSBµØÖ·Ö¸ÏòHUB */
-                CHRV3IntStatus = HubGetPortStatus(TxBuffer[MAX_PACKET_SIZE - 1] & 0x0F); /* ²éÑ¯HUB¶Ë¿Ú×´Ì¬,·µ»ØÔÚTxBufferÖÐ */
+            {                                                                            /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ */
+                TxBuffer[MAX_PACKET_SIZE - 1] = devaddr;                                 /* ï¿½ï¿½ï¿½ï¿½ */
+                UHUB_DEV_ADDR = USB_DEVICE_ADDR - 1 + (UHUB_DEV_ADDR >> 4);              /* ï¿½ï¿½ï¿½ï¿½USBï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½USBï¿½ï¿½Ö·Ö¸ï¿½ï¿½HUB */
+                CHRV3IntStatus = HubGetPortStatus(TxBuffer[MAX_PACKET_SIZE - 1] & 0x0F); /* ï¿½ï¿½Ñ¯HUBï¿½Ë¿ï¿½×´Ì¬,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TxBufferï¿½ï¿½ */
                 if(CHRV3IntStatus == ERR_SUCCESS)
                 {
                     if(TxBuffer[2] & (1 << (HUB_C_PORT_CONNECTION - 0x10)))
-                    {                                                                                     /* ¼ì²âµ½HUB¶Ë¿ÚÉÏµÄ²å°ÎÊÂ¼þ */
-                        CHRV3DiskStatus = DISK_DISCONNECT;                                                /* ¼Ù¶¨ÎªHUB¶Ë¿ÚÉÏµÄUSBÉè±¸¶Ï¿ª */
-                        HubClearPortFeature(TxBuffer[MAX_PACKET_SIZE - 1] & 0x0F, HUB_C_PORT_CONNECTION); /* Çå³ýHUB¶Ë¿ÚÁ¬½ÓÊÂ¼þ×´Ì¬ */
+                    {                                                                                     /* ï¿½ï¿½âµ½HUBï¿½Ë¿ï¿½ï¿½ÏµÄ²ï¿½ï¿½ï¿½Â¼ï¿½ */
+                        CHRV3DiskStatus = DISK_DISCONNECT;                                                /* ï¿½Ù¶ï¿½ÎªHUBï¿½Ë¿ï¿½ï¿½Ïµï¿½USBï¿½è±¸ï¿½Ï¿ï¿½ */
+                        HubClearPortFeature(TxBuffer[MAX_PACKET_SIZE - 1] & 0x0F, HUB_C_PORT_CONNECTION); /* ï¿½ï¿½ï¿½HUBï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½×´Ì¬ */
                     }
-                    UHUB_DEV_ADDR = TxBuffer[MAX_PACKET_SIZE - 1]; /* ÉèÖÃUSBÖ÷»ú¶ËµÄUSBµØÖ·Ö¸ÏòUSBÉè±¸ */
+                    UHUB_DEV_ADDR = TxBuffer[MAX_PACKET_SIZE - 1]; /* ï¿½ï¿½ï¿½ï¿½USBï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½USBï¿½ï¿½Ö·Ö¸ï¿½ï¿½USBï¿½è±¸ */
                     if(TxBuffer[0] & (1 << HUB_PORT_CONNECTION))
-                    { /* Á¬½Ó×´Ì¬ */
+                    { /* ï¿½ï¿½ï¿½ï¿½×´Ì¬ */
                         if(CHRV3DiskStatus < DISK_CONNECT)
                         {
-                            CHRV3DiskStatus = DISK_CONNECT; /* Ôø¾­¶Ï¿ª¹ý */
+                            CHRV3DiskStatus = DISK_CONNECT; /* ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ */
                         }
-                        return (ERR_SUCCESS); /* USBÉè±¸ÒÑ¾­Á¬½Ó»òÕß¶Ï¿ªºóÖØÐÂÁ¬½Ó */
+                        return (ERR_SUCCESS); /* USBï¿½è±¸ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ß¶Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
                     }
                     else
                     {
                         //						CHRV3DiskStatus = DISK_DISCONNECT;
                         //						return( ERR_USB_DISCON );
                         CHRV3DiskStatus = DISK_CONNECT;
-                        return (ERR_HUB_PORT_FREE); /* HUBÒÑ¾­Á¬½Óµ«ÊÇHUB¶Ë¿ÚÉÐÎ´Á¬½Ó´ÅÅÌ */
+                        return (ERR_HUB_PORT_FREE); /* HUBï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½HUBï¿½Ë¿ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½ */
                     }
                 }
                 else
                 {
-                    UHUB_DEV_ADDR = TxBuffer[MAX_PACKET_SIZE - 1]; /* ÉèÖÃUSBÖ÷»ú¶ËµÄUSBµØÖ·Ö¸ÏòUSBÉè±¸ */
+                    UHUB_DEV_ADDR = TxBuffer[MAX_PACKET_SIZE - 1]; /* ï¿½ï¿½ï¿½ï¿½USBï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½USBï¿½ï¿½Ö·Ö¸ï¿½ï¿½USBï¿½è±¸ */
                     if(CHRV3IntStatus == ERR_USB_DISCON)
                     {
                         //						CHRV3DiskStatus = DISK_DISCONNECT;
@@ -250,20 +250,20 @@ UINT8 CHRV3DiskConnect(void)
                     }
                     else
                     {
-                        CHRV3DiskStatus = DISK_CONNECT; /* HUB²Ù×÷Ê§°Ü */
+                        CHRV3DiskStatus = DISK_CONNECT; /* HUBï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ */
                         return (CHRV3IntStatus);
                     }
                 }
             }
             else
-            {   /* ÄÚÖÃRoot-HUBÏÂµÄUSBÉè±¸´æÔÚ,Íâ²¿HUB»òUSBÉè±¸ÒÑ¾­Á¬½Ó»òÕß¶Ï¿ªºóÖØÐÂÁ¬½Ó */
-                //				CHRV3DiskStatus = DISK_CONNECT;  /* Ôø¾­¶Ï¿ª¹ý */
-                //				return( ERR_SUCCESS );  /* Íâ²¿HUB»òUSBÉè±¸ÒÑ¾­Á¬½Ó»òÕß¶Ï¿ªºóÖØÐÂÁ¬½Ó */
+            {   /* ï¿½ï¿½ï¿½ï¿½Root-HUBï¿½Âµï¿½USBï¿½è±¸ï¿½ï¿½ï¿½ï¿½,ï¿½â²¿HUBï¿½ï¿½USBï¿½è±¸ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ß¶Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+                //				CHRV3DiskStatus = DISK_CONNECT;  /* ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ */
+                //				return( ERR_SUCCESS );  /* ï¿½â²¿HUBï¿½ï¿½USBï¿½è±¸ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ß¶Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
                 goto mDiskConnect;
             }
         }
         else
-        { /* Íâ²¿HUB¶Ï¿ª */
+        { /* ï¿½â²¿HUBï¿½Ï¿ï¿½ */
             CHRV3DiskStatus = DISK_DISCONNECT;
         }
     }
@@ -277,54 +277,54 @@ UINT8 CHRV3DiskConnect(void)
 }
 #endif // NO_DEFAULT_DISK_CONNECT
 
-#ifndef NO_DEFAULT_FILE_ENUMER /* ÔÚÓ¦ÓÃ³ÌÐòÖÐ¶¨ÒåNO_DEFAULT_FILE_ENUMER¿ÉÒÔ½ûÖ¹Ä¬ÈÏµÄÎÄ¼þÃûÃ¶¾Ù»Øµ÷³ÌÐò,È»ºóÓÃ×ÔÐÐ±àÐ´µÄ³ÌÐò´úÌæËü */
-void xFileNameEnumer(void)     /* ÎÄ¼þÃûÃ¶¾Ù»Øµ÷×Ó³ÌÐò */
+#ifndef NO_DEFAULT_FILE_ENUMER /* ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½NO_DEFAULT_FILE_ENUMERï¿½ï¿½ï¿½Ô½ï¿½Ö¹Ä¬ï¿½Ïµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ã¶ï¿½Ù»Øµï¿½ï¿½ï¿½ï¿½ï¿½,È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ð´ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+void xFileNameEnumer(void)     /* ï¿½Ä¼ï¿½ï¿½ï¿½Ã¶ï¿½Ù»Øµï¿½ï¿½Ó³ï¿½ï¿½ï¿½ */
 {
-    /* Èç¹ûÖ¸¶¨Ã¶¾ÙÐòºÅCHRV3vFileSizeÎª0xFFFFFFFFºóµ÷ÓÃFileOpen£¬ÄÇÃ´Ã¿ËÑË÷µ½Ò»¸öÎÄ¼þFileOpen¶¼»áµ÷ÓÃ±¾»Øµ÷³ÌÐò£¬
-       »Øµ÷³ÌÐòxFileNameEnumer·µ»Øºó£¬FileOpenµÝ¼õCHRV3vFileSize²¢¼ÌÐøÃ¶¾ÙÖ±µ½ËÑË÷²»µ½ÎÄ¼þ»òÕßÄ¿Â¼¡£½¨Òé×ö·¨ÊÇ£¬
-       ÔÚµ÷ÓÃFileOpenÖ®Ç°¶¨ÒåÒ»¸öÈ«¾Ö±äÁ¿Îª0£¬µ±FileOpen»Øµ÷±¾³ÌÐòºó£¬±¾³ÌÐòÓÉCHRV3vFdtOffsetµÃµ½½á¹¹FAT_DIR_INFO£¬
-       ·ÖÎö½á¹¹ÖÐµÄDIR_AttrÒÔ¼°DIR_NameÅÐ¶ÏÊÇ·ñÎªËùÐèÎÄ¼þÃû»òÕßÄ¿Â¼Ãû£¬¼ÇÂ¼Ïà¹ØÐÅÏ¢£¬²¢½«È«¾Ö±äÁ¿¼ÆÊýÔöÁ¿£¬
-       µ±FileOpen·µ»Øºó£¬ÅÐ¶Ï·µ»ØÖµÈç¹ûÊÇERR_MISS_FILE»òERR_FOUND_NAME¶¼ÊÓÎª²Ù×÷³É¹¦£¬È«¾Ö±äÁ¿ÎªËÑË÷µ½µÄÓÐÐ§ÎÄ¼þÊý¡£
-       Èç¹ûÔÚ±¾»Øµ÷³ÌÐòxFileNameEnumerÖÐ½«CHRV3vFileSizeÖÃÎª1£¬ÄÇÃ´¿ÉÒÔÍ¨ÖªFileOpenÌáÇ°½áÊøËÑË÷¡£ÒÔÏÂÊÇ»Øµ÷³ÌÐòÀý×Ó */
+    /* ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½CHRV3vFileSizeÎª0xFFFFFFFFï¿½ï¿½ï¿½ï¿½ï¿½FileOpenï¿½ï¿½ï¿½ï¿½Ã´Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä¼ï¿½FileOpenï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã±ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
+       ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½xFileNameEnumerï¿½ï¿½ï¿½Øºï¿½FileOpenï¿½Ý¼ï¿½CHRV3vFileSizeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½
+       ï¿½Úµï¿½ï¿½ï¿½FileOpenÖ®Ç°ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½È«ï¿½Ö±ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½FileOpenï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½CHRV3vFdtOffsetï¿½Ãµï¿½ï¿½á¹¹FAT_DIR_INFOï¿½ï¿½
+       ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹ï¿½Ðµï¿½DIR_Attrï¿½Ô¼ï¿½DIR_Nameï¿½Ð¶ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+       ï¿½ï¿½FileOpenï¿½ï¿½ï¿½Øºï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ERR_MISS_FILEï¿½ï¿½ERR_FOUND_NAMEï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½È«ï¿½Ö±ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
+       ï¿½ï¿½ï¿½ï¿½Ú±ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½xFileNameEnumerï¿½Ð½ï¿½CHRV3vFileSizeï¿½ï¿½Îª1ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½Í¨ÖªFileOpenï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç»Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
   #if 0
     UINT8           i;
     UINT16          FileCount;
     PX_FAT_DIR_INFO pFileDir;
     PUINT8          NameBuf;
-    pFileDir = (PX_FAT_DIR_INFO)(pDISK_BASE_BUF + CHRV3vFdtOffset); /* µ±Ç°FDTµÄÆðÊ¼µØÖ· */
-    FileCount = (UINT16)(0xFFFFFFFF - CHRV3vFileSize);              /* µ±Ç°ÎÄ¼þÃûµÄÃ¶¾ÙÐòºÅ,CHRV3vFileSize³õÖµÊÇ0xFFFFFFFF,ÕÒµ½ÎÄ¼þÃûºóµÝ¼õ */
+    pFileDir = (PX_FAT_DIR_INFO)(pDISK_BASE_BUF + CHRV3vFdtOffset); /* ï¿½ï¿½Ç°FDTï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ö· */
+    FileCount = (UINT16)(0xFFFFFFFF - CHRV3vFileSize);              /* ï¿½ï¿½Ç°ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½,CHRV3vFileSizeï¿½ï¿½Öµï¿½ï¿½0xFFFFFFFF,ï¿½Òµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½ */
     if(FileCount < sizeof(FILE_DATA_BUF) / 12)
-    {                                             /* ¼ì²é»º³åÇøÊÇ·ñ×ã¹»´æ·Å,¼Ù¶¨Ã¿¸öÎÄ¼þÃûÐèÕ¼ÓÃ12¸ö×Ö½Ú´æ·Å */
-        NameBuf = &FILE_DATA_BUF[FileCount * 12]; /* ¼ÆËã±£´æµ±Ç°ÎÄ¼þÃûµÄ»º³åÇøµØÖ· */
+    {                                             /* ï¿½ï¿½é»ºï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ã¹»ï¿½ï¿½ï¿½,ï¿½Ù¶ï¿½Ã¿ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½12ï¿½ï¿½ï¿½Ö½Ú´ï¿½ï¿½ */
+        NameBuf = &FILE_DATA_BUF[FileCount * 12]; /* ï¿½ï¿½ï¿½ã±£ï¿½æµ±Ç°ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö· */
         for(i = 0; i < 11; i++)
-            NameBuf[i] = pFileDir->DIR_Name[i]; /* ¸´ÖÆÎÄ¼þÃû,³¤¶ÈÎª11¸ö×Ö·û,Î´´¦Àí¿Õ¸ñ */
-                                                //		if ( pFileDir -> DIR_Attr & ATTR_DIRECTORY ) NameBuf[ i ] = 1;  /* ÅÐ¶ÏÊÇÄ¿Â¼Ãû */
-        NameBuf[i] = 0;                         /* ÎÄ¼þÃû½áÊø·û */
+            NameBuf[i] = pFileDir->DIR_Name[i]; /* ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Îª11ï¿½ï¿½ï¿½Ö·ï¿½,Î´ï¿½ï¿½ï¿½ï¿½ï¿½Õ¸ï¿½ */
+                                                //		if ( pFileDir -> DIR_Attr & ATTR_DIRECTORY ) NameBuf[ i ] = 1;  /* ï¿½Ð¶ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ */
+        NameBuf[i] = 0;                         /* ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
     }
   #endif
 }
 #endif // NO_DEFAULT_FILE_ENUMER
 
-UINT8 CHRV3LibInit(void) /* ³õÊ¼»¯CHRV3³ÌÐò¿â,²Ù×÷³É¹¦·µ»Ø0 */
+UINT8 CHRV3LibInit(void) /* ï¿½ï¿½Ê¼ï¿½ï¿½CHRV3ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½0 */
 {
     if(CHRV3GetVer() < CHRV3_LIB_VER)
-        return (0xFF); /* »ñÈ¡µ±Ç°×Ó³ÌÐò¿âµÄ°æ±¾ºÅ,°æ±¾Ì«µÍÔò·µ»Ø´íÎó */
+        return (0xFF); /* ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½Ó³ï¿½ï¿½ï¿½ï¿½Ä°æ±¾ï¿½ï¿½,ï¿½æ±¾Ì«ï¿½ï¿½ï¿½ò·µ»Ø´ï¿½ï¿½ï¿½ */
 #if DISK_BASE_BUF_LEN > 0
-    pDISK_BASE_BUF = &RAM_BUFFER.PDF_BUFFER.DISK_BASE_BUF[0]; /* Ö¸ÏòÍâ²¿RAMµÄ´ÅÅÌÊý¾Ý»º³åÇø */
-//    pDISK_FAT_BUF = &DISK_BASE_BUF[0];  /* Ö¸ÏòÍâ²¿RAMµÄ´ÅÅÌFATÊý¾Ý»º³åÇø,¿ÉÒÔÓëpDISK_BASE_BUFºÏÓÃÒÔ½ÚÔ¼RAM */
-	pDISK_FAT_BUF = &RAM_BUFFER.PDF_BUFFER.DISK_FAT_BUF[0];  /* Ö¸ÏòÍâ²¿RAMµÄ´ÅÅÌFATÊý¾Ý»º³åÇø,¶ÀÁ¢ÓÚpDISK_BASE_BUFÒÔÌá¸ßËÙ¶È */
-/* Èç¹ûÏ£ÍûÌá¸ßÎÄ¼þ´æÈ¡ËÙ¶È,ÄÇÃ´¿ÉÒÔÔÚÖ÷³ÌÐòÖÐµ÷ÓÃCHRV3LibInitÖ®ºó,½«pDISK_FAT_BUFÖØÐÂÖ¸ÏòÁíÒ»¸ö¶ÀÁ¢·ÖÅäµÄÓëpDISK_BASE_BUFÍ¬Ñù´óÐ¡µÄ»º³åÇø */
+    pDISK_BASE_BUF = &RAM_BUFFER.PDF_BUFFER.DISK_BASE_BUF[0]; /* Ö¸ï¿½ï¿½ï¿½â²¿RAMï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½ */
+//    pDISK_FAT_BUF = &DISK_BASE_BUF[0];  /* Ö¸ï¿½ï¿½ï¿½â²¿RAMï¿½Ä´ï¿½ï¿½ï¿½FATï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pDISK_BASE_BUFï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½Ô¼RAM */
+	pDISK_FAT_BUF = &RAM_BUFFER.PDF_BUFFER.DISK_FAT_BUF[0];  /* Ö¸ï¿½ï¿½ï¿½â²¿RAMï¿½Ä´ï¿½ï¿½ï¿½FATï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pDISK_BASE_BUFï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ */
+/* ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½È¡ï¿½Ù¶ï¿½,ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½CHRV3LibInitÖ®ï¿½ï¿½,ï¿½ï¿½pDISK_FAT_BUFï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pDISK_BASE_BUFÍ¬ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ */
 #endif
     CHRV3DiskStatus = DISK_UNKNOWN;          /* Î´Öª×´Ì¬ */
-    CHRV3vSectorSizeB = 9;                  /* Ä¬ÈÏµÄÎïÀí´ÅÅÌµÄÉÈÇøÊÇ512B */
-    CHRV3vSectorSize = 512;                 // Ä¬ÈÏµÄÎïÀí´ÅÅÌµÄÉÈÇøÊÇ512B,¸ÃÖµÊÇ´ÅÅÌµÄÉÈÇø´óÐ¡
-    CHRV3vStartLba = 0;                      /* Ä¬ÈÏÎª×Ô¶¯·ÖÎöFDDºÍHDD */
-    CHRV3vPacketSize = 64;                   /* USB´æ´¢ÀàÉè±¸µÄ×î´ó°ü³¤¶È:64@FS,512@HS/SS,ÓÉÓ¦ÓÃ³ÌÐò³õÊ¼»¯,Ã¶¾ÙUÅÌºóÈç¹ûÊÇ¸ßËÙ»òÕß³¬ËÙÄÇÃ´¼°Ê±¸üÐÂÎª512 */
-    pTX_DMA_A_REG = (PUINT32)&R16_UH_TX_DMA; /* Ö¸Ïò·¢ËÍDMAµØÖ·¼Ä´æÆ÷,ÓÉÓ¦ÓÃ³ÌÐò³õÊ¼»¯ */
-    pRX_DMA_A_REG = (PUINT32)&R16_UH_RX_DMA; /* Ö¸Ïò½ÓÊÕDMAµØÖ·¼Ä´æÆ÷,ÓÉÓ¦ÓÃ³ÌÐò³õÊ¼»¯ */
-    pTX_LEN_REG = (PUINT16)&R8_UH_TX_LEN;    /* Ö¸Ïò·¢ËÍ³¤¶È¼Ä´æÆ÷,ÓÉÓ¦ÓÃ³ÌÐò³õÊ¼»¯ */
-    pRX_LEN_REG = (PUINT16)&R8_USB_RX_LEN;   /* Ö¸Ïò½ÓÊÕ³¤¶È¼Ä´æÆ÷,ÓÉÓ¦ÓÃ³ÌÐò³õÊ¼»¯ */
+    CHRV3vSectorSizeB = 9;                  /* Ä¬ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½512B */
+    CHRV3vSectorSize = 512;                 // Ä¬ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½512B,ï¿½ï¿½Öµï¿½Ç´ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡
+    CHRV3vStartLba = 0;                      /* Ä¬ï¿½ï¿½Îªï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½FDDï¿½ï¿½HDD */
+    CHRV3vPacketSize = 64;                   /* USBï¿½æ´¢ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:64@FS,512@HS/SS,ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½,Ã¶ï¿½ï¿½Uï¿½Ìºï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½Ù»ï¿½ï¿½ß³ï¿½ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Îª512 */
+    pTX_DMA_A_REG = (PUINT32)&R16_UH_TX_DMA; /* Ö¸ï¿½ï¿½ï¿½ï¿½DMAï¿½ï¿½Ö·ï¿½Ä´ï¿½ï¿½ï¿½,ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ */
+    pRX_DMA_A_REG = (PUINT32)&R16_UH_RX_DMA; /* Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½DMAï¿½ï¿½Ö·ï¿½Ä´ï¿½ï¿½ï¿½,ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ */
+    pTX_LEN_REG = (PUINT16)&R8_UH_TX_LEN;    /* Ö¸ï¿½ï¿½ï¿½Í³ï¿½ï¿½È¼Ä´ï¿½ï¿½ï¿½,ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ */
+    pRX_LEN_REG = (PUINT16)&R8_USB_RX_LEN;   /* Ö¸ï¿½ï¿½ï¿½ï¿½Õ³ï¿½ï¿½È¼Ä´ï¿½ï¿½ï¿½,ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ */
 
-    //CHRV3vRootPort = 0;  /* USBÖ÷»úÑ¡Ôñ(ÀàËÆRoot-hub¸ù¼¯ÏßÆ÷Ñ¡¶Ë¿Ú) */
+    //CHRV3vRootPort = 0;  /* USBï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½Root-hubï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½Ë¿ï¿½) */
     return (ERR_SUCCESS);
 }

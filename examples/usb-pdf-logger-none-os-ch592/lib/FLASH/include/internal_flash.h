@@ -1,5 +1,5 @@
 /********************************** (C) COPYRIGHT *******************************
- * File Name          : Internal_Flash.h
+ * File Name          : internal_flash.h
  * Author             : WCH
  * Version            : V1.0.0
  * Date               : 2022/08/08

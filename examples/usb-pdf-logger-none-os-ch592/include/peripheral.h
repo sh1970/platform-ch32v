@@ -58,8 +58,8 @@ typedef struct
     uint8_t pdf_data_buf[PDF_TMP_BUF_LEN_MAX+PDF_TMP_BUF_LEN_EXT];
     uint8_t UDisk_Down_Buffer[DEF_FLASH_SECTOR_SIZE];
     uint8_t UDisk_Pack_Buffer[DEF_UDISK_PACK_64];
-    uint8_t DISK_BASE_BUF[DISK_BASE_BUF_LEN]; /* 外部RAM的磁盘数据缓冲区,缓冲区长度为一个扇区的长度 */
-    uint8_t DISK_FAT_BUF[ DISK_BASE_BUF_LEN ]; /* 外部RAM的磁盘FAT数据缓冲区,缓冲区长度为一个扇区的长度 */
+    uint8_t DISK_BASE_BUF[DISK_BASE_BUF_LEN]; /* 锟解部RAM锟侥达拷锟斤拷锟斤拷锟捷伙拷锟斤拷锟斤拷,锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷为一锟斤拷锟斤拷锟斤拷锟侥筹拷锟斤拷 */
+    uint8_t DISK_FAT_BUF[ DISK_BASE_BUF_LEN ]; /* 锟解部RAM锟侥达拷锟斤拷FAT锟斤拷锟捷伙拷锟斤拷锟斤拷,锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷为一锟斤拷锟斤拷锟斤拷锟侥筹拷锟斤拷 */
 }PDF_BUFFER_t;
 
 
