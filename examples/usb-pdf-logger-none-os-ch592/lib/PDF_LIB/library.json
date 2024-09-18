@@ -1,0 +1,11 @@
+{
+    "name": "PDF_LIB",
+    "version": "1.0.0",
+    "build": {
+        "includeDir": ".",
+        "flags": [
+            "-L.",
+            "-lpdf"
+        ]
+    }
+}
