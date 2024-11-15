@@ -217,6 +217,8 @@ class Ch32vPlatform(PlatformBase):
                         "package": "tool-minichlink",
                         "executable": "minichlink",
                         "arguments": [
+                            "-b", # Reboot out of Halt
+                            "-a", # Reboot into Halt
                             "-G"  # "Terminal + GDB"
                         ]
                     },
