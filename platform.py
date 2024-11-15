@@ -157,6 +157,8 @@ class Ch32vPlatform(PlatformBase):
         init_cmds = [
             "set mem inaccessible-by-default off",
             "set arch riscv:rv32",
+            # compatible with only WCH's gdb version, decodes code generated with "xw" correctly
+            "set disassembler-options xw",
             "set remotetimeout unlimited",
             "target extended-remote $DEBUG_PORT",
             "$INIT_BREAK",
