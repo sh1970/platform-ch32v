@@ -93,9 +93,6 @@ def get_startup_filename(board):
         env.Exit(-1)
     return startup_file
 
-if get_flag_value("use_lto", False):
-    env.Append(LINKFLAGS=["-flto"], CCFLAGS=["-flto"])
-
 env.Append(
     CPPPATH=[
         join(FRAMEWORK_DIR, "Core", chip_series),

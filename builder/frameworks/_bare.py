@@ -11,6 +11,15 @@ data_limit = 0 if mcu.startswith("ch32v0") else 8
 
 machine_arch = str(board.get("build.march"))
 
+def get_flag_value(flag_name:str, default_val:bool):
+    flag_val = board.get("build.%s" % flag_name, default_val)
+    flag_val = str(flag_val).lower() in ("1", "yes", "true")
+    return flag_val
+
+lto_flag = ""
+if get_flag_value("use_lto", False):
+    lto_flag = "-flto"
+
 env.Append(
     ASFLAGS=[
         "-march=%s" % machine_arch,
@@ -48,6 +57,7 @@ env.Append(
         "-Wunused",
         "-Wuninitialized",
         "-Wno-comment",
+        lto_flag,
         "-march=%s" % machine_arch,
         "-mabi=%s" % board.get("build.mabi"),
     ],
@@ -68,8 +78,10 @@ env.Append(
         "-nostartfiles",
         '-Wl,-Map="%s"' % os.path.join(
             "$BUILD_DIR", os.path.basename(env.subst("${PROJECT_DIR}.map"))),
+        lto_flag,
     ]
 )
 # copy general C/C++ flags to assembler with cpp flags too, except
 # would-be-duplicate last two elements
 env["ASPPFLAGS"].extend(env["CCFLAGS"][:-2]) 
+
