@@ -320,13 +320,15 @@ elif upload_protocol == "isp":
         ], "Restting Device"),
         "Reset (ISP)"
     )
-if upload_protocol == "minichlink":
+# make minichlink SDI printf monitor show up even when it's not the selected upload protocol
+if upload_protocol == "minichlink" or "ch32v003fun" in frameworks or len(frameworks) == 0:
     env.AddPlatformTarget(
         "sdi_printf_monitor", None, generate_minichlink_action([
             "-T"
         ], "Starting SDI Printf Monitor"),
-        "Minichlink Monitor SDI Printf"
+        "Monitor SDI Printf (ch32v003fun)"
     )
+if upload_protocol == "minichlink":
     env.AddPlatformTarget(
         "enable_flash_protection", None, generate_minichlink_action([
             "-P"
@@ -346,13 +348,13 @@ if upload_protocol == "wlink" or platform.get_package_dir("tool-wlink") != "":
         "sdi_printf", None, generate_wlink_action([
             "sdi-print enable"
         ], "Enabling SDI Printf"),
-        "Enable SDI Printf"
+        "Enable SDI Printf (NoneSDK)"
     )
     env.AddPlatformTarget(
         "disable_sdi_printf", None, generate_wlink_action([
             "sdi-print disable"
         ], "Disabling SDI Printf"),
-        "Disable SDI Printf"
+        "Disable SDI Printf (NoneSDK)"
     )
 
 #

@@ -82,13 +82,13 @@ class Ch32vPlatform(PlatformBase):
         sys_type = util.get_systype()
         # until toolchain is not yet approved in PIO registry: redirect packages at will here
         # (temporary)
-        selected_frameworks = variables.get("pioframework", [])
+        frameworks = variables.get("pioframework", [])
         gcc_branch = "#gcc12"
         # Mac toolchain is broken.
         # Linux toolchain misses libprintf.a.
         # Force usage of GCC8 again until they fix their stuff.
         FORCE_DOWNGRADE_TO_GCC8 = True
-        if "arduino" in selected_frameworks or FORCE_DOWNGRADE_TO_GCC8:
+        if "arduino" in frameworks or FORCE_DOWNGRADE_TO_GCC8:
             # we downgrade the GCC version to just 8 because with 12, there are build errors.
             gcc_branch = ""
         self.packages["toolchain-riscv"]["version"] = Ch32vPlatform.riscv_toolchain[sys_type] + gcc_branch
@@ -96,7 +96,7 @@ class Ch32vPlatform(PlatformBase):
             return super().configure_default_packages(variables, targets)
         # The FreeRTOS, Harmony LiteOS and RT-Thread package needs the 
         # NoneSDK as a base package
-        if any([framework in selected_frameworks for framework in ("freertos", "harmony-liteos", "rt-thread", "tencent-os")]):
+        if any([framework in frameworks for framework in ("freertos", "harmony-liteos", "rt-thread", "tencent-os")]):
             self.packages["framework-wch-noneos-sdk"]["optional"] = False
         # upload via USB bootloader wanted? (called "isp" in our platform)
         # then activate package
@@ -105,14 +105,13 @@ class Ch32vPlatform(PlatformBase):
         default_protocol = board_config.get("upload.protocol") or ""
         if variables.get("upload_protocol", default_protocol) == "isp":
             self.packages["tool-wchisp"]["optional"] = False
-        elif variables.get("upload_protocol", default_protocol) == "minichlink":
+        if variables.get("upload_protocol", default_protocol) == "minichlink" or  "ch32v003fun" in frameworks or len(frameworks) == 0:
             self.packages["tool-minichlink"]["optional"] = False
             self.packages["tool-minichlink"]["version"] = Ch32vPlatform.minichlink_tool[sys_type]
         #elif variables.get("upload_protocol", default_protocol) == "wlink":
         # Always update the link to the tool-wlink tool, because for all uploads we want to have the "Enable SDI Print" available
         self.packages["tool-wlink"]["optional"] = False        
         self.packages["tool-wlink"]["version"] = Ch32vPlatform.wlink_tool[sys_type]
-        frameworks = variables.get("pioframework", [])
         build_core = variables.get("board_build.core", board_config.get("build.core", "arduino"))
         if "arduino" in frameworks:
             if build_core == "ch32v003":
