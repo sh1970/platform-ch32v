@@ -327,6 +327,18 @@ if upload_protocol == "minichlink":
         ], "Starting SDI Printf Monitor"),
         "Minichlink Monitor SDI Printf"
     )
+    env.AddPlatformTarget(
+        "enable_flash_protection", None, generate_minichlink_action([
+            "-P"
+        ], "Enabling Flash Protection"),
+        "Enable Flash Protection"
+    )
+    env.AddPlatformTarget(
+        "disable_flash_protection", None, generate_minichlink_action([
+            "-p"
+        ], "Disabling Flash Protection"),
+        "Disable Flash Protection"
+    )
 
 # Enable WLink options if tool installed or protocol selected.
 if upload_protocol == "wlink" or platform.get_package_dir("tool-wlink") != "":
