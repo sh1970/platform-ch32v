@@ -49,7 +49,7 @@ class Ch32vPlatform(PlatformBase):
         #"linux_armv6l": "",
         # Mac (Intel and ARM are separate)
         "darwin_x86_64": "https://github.com/Community-PIO-CH32V/tool-minichlink.git#mac",
-        "darwin_arm64": "https://github.com/Community-PIO-CH32V/tool-minichlink.git#mac"
+        "darwin_arm64": "https://github.com/Community-PIO-CH32V/tool-minichlink.git#mac_arm64"
     }
     wlink_tool = {
         # Windows
