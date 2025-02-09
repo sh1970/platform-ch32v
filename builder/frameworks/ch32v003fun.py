@@ -1,4 +1,4 @@
-from os.path import join
+from os.path import join, isdir
 import sys
 from SCons.Script import DefaultEnvironment
 
@@ -17,11 +17,12 @@ if "-std=gnu99" in env["CFLAGS"]:
 
 # get framework directory
 FRAMEWORK_DIR = platform.get_package_dir("framework-ch32v003fun")
+MAIN_FUN_DIR = "ch32v003fun" if isdir(join(FRAMEWORK_DIR, "ch32v003fun")) else "ch32fun"
 
 # Add include paths and defines
 env.Append(
     CPPPATH=[
-        join(FRAMEWORK_DIR, "ch32v003fun"),
+        join(FRAMEWORK_DIR, MAIN_FUN_DIR),
         join(FRAMEWORK_DIR, "extralibs"),
         # user will likely have the funconfig.h located in the src/ or include/ directory, so include it for the build too
         "$PROJECT_SRC_DIR",
@@ -153,7 +154,7 @@ env.AddPreAction(
         "-DTARGET_MCU=%s" % target_mcu,
         "-DMCU_PACKAGE=%d" % mcu_package,
         "-DTARGET_MCU_LD=%d" % target_mcu_ld,
-        join(FRAMEWORK_DIR, "ch32v003fun", "ch32v003fun.ld"),
+        join(FRAMEWORK_DIR, MAIN_FUN_DIR, "ch32v003fun.ld"),
         ">",
         join("$BUILD_DIR", "ldscript.ld")
     ]), "Building %s" % join("$BUILD_DIR", "ldscript.ld"))
@@ -164,5 +165,5 @@ env.Replace(LDSCRIPT_PATH=join("$BUILD_DIR", "ldscript.ld"))
 # build actual ch32v003fun source file
 env.BuildSources(
     join("$BUILD_DIR", "FrameworkCh32v003fun"),
-    join(FRAMEWORK_DIR, "ch32v003fun")
+    join(FRAMEWORK_DIR, MAIN_FUN_DIR)
 )
