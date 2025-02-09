@@ -18,6 +18,7 @@ if "-std=gnu99" in env["CFLAGS"]:
 # get framework directory
 FRAMEWORK_DIR = platform.get_package_dir("framework-ch32v003fun")
 MAIN_FUN_DIR = "ch32v003fun" if isdir(join(FRAMEWORK_DIR, "ch32v003fun")) else "ch32fun"
+CH32FUN_LDSCRIPT = "ch32v003fun.ld" if isdir(join(FRAMEWORK_DIR, "ch32v003fun")) else "ch32fun.ld"
 
 # Add include paths and defines
 env.Append(
@@ -154,7 +155,7 @@ env.AddPreAction(
         "-DTARGET_MCU=%s" % target_mcu,
         "-DMCU_PACKAGE=%d" % mcu_package,
         "-DTARGET_MCU_LD=%d" % target_mcu_ld,
-        join(FRAMEWORK_DIR, MAIN_FUN_DIR, "ch32v003fun.ld"),
+        join(FRAMEWORK_DIR, MAIN_FUN_DIR, CH32FUN_LDSCRIPT),
         ">",
         join("$BUILD_DIR", "ldscript.ld")
     ]), "Building %s" % join("$BUILD_DIR", "ldscript.ld"))
