@@ -76,11 +76,18 @@ env.Append(
         "--specs=nano.specs",
         "--specs=nosys.specs",
         "-nostartfiles",
-        '-Wl,-Map="%s"' % os.path.join(
-            "$BUILD_DIR", os.path.basename(env.subst("${PROJECT_DIR}.map"))),
         lto_flag,
     ]
 )
+
+# Automatically create map file, unless user already creates a map file at a different place
+# using their own build_flags.
+if not any("-Wl,-Map" in f for f in env.get("LINKFLAGS", [])):
+    env.Append(LINKFLAGS=[
+        '-Wl,-Map="%s"' % os.path.join(
+            "$BUILD_DIR", os.path.basename(env.subst("${PROJECT_DIR}.map")))
+    ])
+
 # copy general C/C++ flags to assembler with cpp flags too, except
 # would-be-duplicate last two elements
 env["ASPPFLAGS"].extend(env["CCFLAGS"][:-2]) 
