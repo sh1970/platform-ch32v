@@ -23,8 +23,9 @@ env.Append(
     CPPPATH=[
         join(FRAMEWORK_DIR, "ch32v003fun"),
         join(FRAMEWORK_DIR, "extralibs"),
-        # user will likely have the funconfig.h located in the main source directory, so include it for the build too
-        "$PROJECT_SRC_DIR"
+        # user will likely have the funconfig.h located in the src/ or include/ directory, so include it for the build too
+        "$PROJECT_SRC_DIR",
+        "$PROJECT_INCLUDE_DIR"
     ],
     CPPDEFINES=[
         # not yet used for anything, just identification

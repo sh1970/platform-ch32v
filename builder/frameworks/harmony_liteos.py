@@ -35,7 +35,8 @@ env.Append(
         join(FRAMEWORK_DIR, liteos_subseries, "third_party", "bounds_checking_function", "include"),
         join(FRAMEWORK_DIR, liteos_subseries, "third_party", "bounds_checking_function", "src"),
         # user will likely have the target_config.h located in the main source directory, so include it for the build too
-        "$PROJECT_SRC_DIR"
+        "$PROJECT_SRC_DIR",
+        "$PROJECT_INCLUDE_DIR"
     ],
     CPPDEFINES=[
         # the startup.S file needs very nifty different code if Harmony LiteOS is running

@@ -32,7 +32,8 @@ env.Append(
         join(FRAMEWORK_DIR, freertos_subseries, "portable", "MemMang"),
         join(FRAMEWORK_DIR, freertos_subseries),
         # user will likely have the FreeRTOSConfig.h located in the main source directory, so include it for the build too
-        "$PROJECT_SRC_DIR"
+        "$PROJECT_SRC_DIR",
+        "$PROJECT_INCLUDE_DIR"
     ],
     CPPDEFINES=[
         # the startup.S file needs very nifty different code if FreeRTOS is running

@@ -34,7 +34,8 @@ env.Append(
         join(FRAMEWORK_DIR, rtthread_subseries, "components", "finsh"),
         # ch32v_it.h is mandatory for RT-Thread to build, this will likely be included
         # in the user's directory.
-        "$PROJECT_SRC_DIR"
+        "$PROJECT_SRC_DIR",
+        "$PROJECT_INCLUDE_DIR"
     ],
     CPPDEFINES=[
         # the startup.S file needs very nifty different code if Harmony LiteOS is running
